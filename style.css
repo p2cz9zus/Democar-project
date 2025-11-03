@@ -11,7 +11,7 @@ body {
 /* ヒーローセクション */
 .hero {
     /* 背景画像パスを修正: './' を追加して読み込みを確実にする */
-    background-image: url('./hero-background.jpg'); 
+    background-image: url('./hero-background.JPG'); 
     background-size: cover; /* セクション全体を覆う */
     background-position: center; /* 中央に配置 */
     background-repeat: no-repeat;
@@ -238,3 +238,4 @@ footer {
         padding-left: 20px;
     }
 }
+
