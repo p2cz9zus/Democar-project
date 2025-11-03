@@ -1,17 +1,79 @@
+/*
+ * ファイル名: style.css
+ * 目的: 元のCSSセレクタを維持しつつ、CSS変数で管理性を向上
+ */
+
+/* ==========================================================================
+   1. カスタムプロパティ (変数) 定義
+   ========================================================================== */
+:root {
+    /* カラーパレット */
+    --color-primary: #007aff; /* Blue */
+    --color-primary-hover: #006ddf;
+    --color-text-dark: #1d1d1f;
+    --color-text-light: #ffffff;
+    --color-background-light: #ffffff;
+    --color-background-dark: #000000;
+    --color-background-footer: #f5f5f7;
+    --color-secondary-text: #6e6e73;
+    --color-card-dark: #1d1d1f;
+    --color-placeholder-bg: #e5e5e5;
+    --color-hero-overlay: rgba(0, 0, 0, 0.4);
+    --color-hero-text-secondary: rgba(255, 255, 255, 0.8);
+    --color-dark-bg-heading: #f5f5f7;
+
+    /* スペーシング */
+    --space-section-padding: 80px;
+    --space-page-padding-horizontal: 5%;
+    --space-title-margin-bottom: 60px;
+    --space-grid-gap: 30px;
+}
+
+/* ==========================================================================
+   2. ベーススタイル
+   ========================================================================== */
+
 /* 基本リセットとフォント設定 */
 body {
     font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    color: #1d1d1f;
-    background-color: #ffffff;
+    color: var(--color-text-dark);
+    background-color: var(--color-background-light);
 }
 
-/* ヒーローセクション */
+/* --- セクション共通スタイル --- */
+.section {
+    padding: var(--space-section-padding) var(--space-page-padding-horizontal);
+    text-align: center;
+}
+
+.section h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-title-margin-bottom);
+}
+
+.light-bg {
+    background-color: var(--color-background-light);
+}
+
+.dark-bg {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+}
+
+.dark-bg h3 {
+    color: var(--color-dark-bg-heading);
+}
+
+/* ==========================================================================
+   3. ヒーローセクション
+   ========================================================================== */
 .hero {
-    /* 修正点: 拡張子を大文字の .JPG に合わせました */
-    background-image: url('./hero-background.JPG'); 
+    /* ★ 背景画像を '3.jpg' に変更済み ★ */
+    background-image: url('./3.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,13 +93,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--color-hero-overlay);
     z-index: 1;
 }
 
 /* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
 .hero h1, .hero h2, .hero p, .hero .cta-button {
-    color: white;
+    color: var(--color-text-light);
     position: relative;
     z-index: 2;
 }
@@ -57,14 +119,14 @@ body {
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 40px;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-hero-text-secondary);
 }
 
 /* CTAボタン */
 .cta-button {
     display: inline-block;
-    background-color: #007aff;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
     padding: 12px 30px;
     text-decoration: none;
     border-radius: 999px;
@@ -73,39 +135,16 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #006ddf;
+    background-color: var(--color-primary-hover);
 }
 
-/* --- セクション共通スタイル --- */
-.section {
-    padding: 80px 5%;
-    text-align: center;
-}
-
-.section h3 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 60px;
-}
-
-.light-bg {
-    background-color: #ffffff;
-}
-
-.dark-bg {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-.dark-bg h3 {
-    color: #f5f5f7;
-}
-
-/* プロジェクト目標グリッド */
+/* ==========================================================================
+   4. プロジェクト目標グリッド
+   ========================================================================== */
 .goal-grid {
     display: flex;
     justify-content: space-around;
-    gap: 30px;
+    gap: var(--space-grid-gap);
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -114,18 +153,18 @@ body {
     flex: 1;
     max-width: 300px;
     text-align: left;
-    padding: 30px;
+    padding: var(--space-grid-gap);
     border-radius: 12px;
 }
 
 .dark-bg .goal-item {
-    background-color: #1d1d1f;
+    background-color: var(--color-card-dark);
 }
 
 .goal-number {
     font-size: 2.5rem;
     font-weight: 300;
-    color: #007aff;
+    color: var(--color-primary);
     display: block;
     margin-bottom: 15px;
 }
@@ -136,7 +175,9 @@ body {
     margin-bottom: 10px;
 }
 
-/* 技術概要セクション */
+/* ==========================================================================
+   5. 技術概要セクション
+   ========================================================================== */
 .overview-content {
     display: flex;
     justify-content: center;
@@ -171,17 +212,19 @@ body {
 
 .diagram-placeholder {
     height: 250px;
-    background-color: #e5e5e5;
+    background-color: var(--color-placeholder-bg);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6e6e73;
+    color: var(--color-secondary-text);
     font-style: italic;
     margin-top: 20px;
 }
 
-/* 製作プロセス */
+/* ==========================================================================
+   6. 製作プロセス
+   ========================================================================== */
 .process-container {
     display: flex;
     gap: 40px;
@@ -193,7 +236,7 @@ body {
 .process-container .step {
     flex: 1;
     padding: 20px;
-    border-top: 3px solid #007aff;
+    border-top: 3px solid var(--color-primary);
 }
 
 .process-container h4 {
@@ -201,16 +244,20 @@ body {
     margin-bottom: 15px;
 }
 
-/* フッター */
+/* ==========================================================================
+   7. フッター
+   ========================================================================== */
 footer {
-    padding: 20px 5%;
-    background-color: #f5f5f7;
-    color: #6e6e73;
+    padding: 20px var(--space-page-padding-horizontal);
+    background-color: var(--color-background-footer);
+    color: var(--color-secondary-text);
     text-align: center;
     font-size: 0.9rem;
 }
 
-/* --- レスポンシブ対応 (モバイルフレンドリー) --- */
+/* ==========================================================================
+   8. レスポンシブ対応 (モバイルフレンドリー)
+   ========================================================================== */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -234,7 +281,7 @@ footer {
     /* 縦積みに合わせてプロセスステップの強調表示を変更 */
     .process-container .step {
         border-top: none;
-        border-left: 3px solid #007aff;
+        border-left: 3px solid var(--color-primary);
         padding-left: 20px;
     }
 }
