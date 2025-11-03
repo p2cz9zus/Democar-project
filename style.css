@@ -10,8 +10,8 @@ body {
 
 /* ヒーローセクション */
 .hero {
-    /* 背景画像の設定 */
-    background-image: url('hero-background.jpg'); 
+    /* 背景画像パスを修正: './' を追加して読み込みを確実にする */
+    background-image: url('./hero-background.jpg'); 
     background-size: cover; /* セクション全体を覆う */
     background-position: center; /* 中央に配置 */
     background-repeat: no-repeat;
@@ -167,7 +167,6 @@ body {
 .tech-spec li {
     font-size: 1.1rem;
     padding: 8px 0;
-    /* 必要に応じて境界線を維持: border-bottom: 1px solid #e5e5e5; */
 }
 
 .diagram-placeholder {
