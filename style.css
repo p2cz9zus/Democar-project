@@ -122,7 +122,7 @@ body {
     color: var(--color-hero-text-secondary);
 }
 
-/* --- 新規：ヒーロータブナビゲーション --- */
+/* --- ヒーロータブナビゲーション (青枠の近代的なデザイン) --- */
 .hero-tabs-container {
     display: flex;
     justify-content: center;
@@ -137,68 +137,68 @@ body {
 .hero-tab-button {
     flex: 1;
     min-width: 120px;
-    background-color: rgba(255, 255, 255, 0.15); /* 半透明の背景 */
+    /* 背景を透明にし、青い枠線を強調 */
+    background-color: rgba(255, 255, 255, 0.05); /* ほとんど透明な背景 */
     backdrop-filter: blur(5px);
     color: var(--color-text-light);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* 青枠に変更 */
+    border: 2px solid var(--color-primary); 
     padding: 12px 15px;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 500;
     font-size: 0.95rem;
-    transition: background-color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s; /* ホバー時に変化をつける */
 }
 
 .hero-tab-button:hover {
-    background-color: var(--color-primary); /* ホバーでプライマリカラーに */
-    border-color: var(--color-primary);
+    background-color: var(--color-primary); /* ホバーで青で塗りつぶす */
+    transform: translateY(-2px); /* 少し浮き上がるエフェクト */
 }
 
 
 /* ==========================================================================
-    4. プロジェクト目標グリッド
+    4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
     ========================================================================== */
-.goal-grid {
-    display: flex;
-    justify-content: space-around;
-    gap: var(--space-grid-gap);
+/* 元のgoal-gridは削除し、目標7項目のための新しいコンテナを用意 */
+.goal-list-container {
+    display: grid;
+    /* PCでは3列のグリッドにする */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    text-align: left;
 }
 
-.goal-item {
-    flex: 1;
-    max-width: 300px;
-    text-align: left;
+.goal-item-small {
     padding: var(--space-grid-gap);
     border-radius: 12px;
-}
-
-.dark-bg .goal-item {
     background-color: var(--color-card-dark);
 }
 
-.goal-number {
-    font-size: 2.5rem;
-    font-weight: 300;
+.goal-number-small {
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--color-primary);
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.goal-item h4 {
-    font-size: 1.4rem;
+.goal-item-small h4 {
+    font-size: 1.2rem;
     margin-top: 0;
     margin-bottom: 10px;
 }
-/* 新しい目標リストの箇条書きスタイルを調整 */
-.goal-item p {
-    margin: 0;
+
+.goal-item-small p {
+    font-size: 0.95rem;
+    color: var(--color-hero-text-secondary); /* 見やすいように薄い白に */
 }
-/* 箇条書き風の表示 */
-.goal-item p * {
-    list-style: disc outside;
-    margin-left: 15px;
+
+/* 旧 goal-grid に依存していたスタイルを削除 */
+.goal-grid {
+    display: none;
 }
 
 
@@ -347,6 +347,13 @@ footer {
 /* ==========================================================================
     8. レスポンシブ対応 (モバイルフレンドリー)
     ========================================================================== */
+@media (max-width: 900px) {
+    /* 900px以下で目標グリッドを2列にする */
+    .goal-list-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -361,20 +368,25 @@ footer {
         flex-direction: column;
         gap: 10px;
     }
+    
+    /* 目標グリッドは1列にする */
+    .goal-list-container {
+        grid-template-columns: 1fr;
+    }
 
     /* グリッドレイアウトを縦積みに変更 */
     .goal-grid, .overview-content {
         flex-direction: column;
     }
 
-    .goal-item, .process-container .step {
+    .goal-item-small, .process-container .step {
         max-width: none;
         margin-bottom: 20px;
-        text-align: left; /* ヒストリーは左揃えを維持 */
+        text-align: left;
     }
 
     /* プロセスステップの強調表示はPCと共通 (左ボーダー) */
     .process-container .step {
-        padding-left: 30px; /* モバイルではパディングを少し減らす */
+        padding-left: 30px;
     }
 }
