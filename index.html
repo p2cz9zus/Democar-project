@@ -79,7 +79,7 @@
             <div class="tech-detail">
                 <h4>核心技術: マイコン制御による高精度な反転・旋回</h4>
                 <p>車体の安定動作と複雑な反転・旋回機構を、マイクロコンピュータ制御で実現しています。サーボモータを駆動し車体を正確に180°回転させることが、成功の鍵となります。当初の車体1はファン駆動でしたが、ファン駆動では十分な推力が得ることが難しく、二輪駆動タイヤ方式へと方針を変更しました。</p>
-                <div class="diagram-placeholder"></div>
+                <div class="diagram-placeholder">最終仕様のイメージ図</div>
             </div>
         </div>
     </section>
@@ -93,20 +93,25 @@
                 <span class="step-number">初期フェーズ</span>
                 <h4>① 車体の設計：台車部分及び全体図</h4>
                 <p>プロジェクト開始にあたり、車体構造の基礎設計を行い、台車部分と全体の構成図を作成しました。</p>
-                <div class="media-placeholder">図・動画挿入予定 (車体の設計図)</div>
+                <img src="./img/daisya.jpg" alt="台車部分の設計図" class="process-media">
+                <img src="./img/zenntaizu.JPG" alt="車体全体の設計図" class="process-media">
             </div>
 
             <div class="step">
                 <span class="step-number">初期フェーズ</span>
                 <h4>② 部品の強度計算</h4>
                 <p>設計した各部品の強度計算を実施し、ファン駆動における動作環境での耐久性を検証しました。</p>
-                <div class="media-placeholder">図・動画挿入予定 (強度計算結果)</div>
+                <img src="./img/kyoudo.jpg" alt="強度計算結果" class="process-media">
             </div>
             
             <div class="step">
                 <span class="step-number">初期フェーズ</span>
                 <h4>③ ファン部分の確認と問題発覚</h4>
                 <p>ファン駆動に必要な推力を確保できるかを確認するテストを実施しました。</p>
+                <video controls class="process-media">
+                    <source src="./img/fan.MP4" type="video/mp4">
+                    申し訳ありませんが、動画を再生できません。
+                </video>
                 <p class="major-change-note">**ここで大きく方針転換**</p>
                 <p class="major-change-reason">→ ファン駆動では**十分な推進力が得ることが難しく**、**タイヤ駆動に変更**</p>
             </div>
@@ -115,14 +120,18 @@
                 <span class="step-number">方針転換後</span>
                 <h4>④ 回路の設計</h4>
                 <p>タイヤ駆動に対応するため、モータードライバを含む新しい回路の設計と配線を行いました。</p>
-                <div class="media-placeholder">図・動画挿入予定 (回路図)</div>
+                <img src="./img/kairo.jpeg" alt="回路図" class="process-media">
             </div>
 
             <div class="step">
                 <span class="step-number">最終フェーズ</span>
                 <h4>⑤ マイクロコンピュータによるサーボモータ制御</h4>
                 <p>C言語プログラムを核として、マイクロコンピュータを用いてサーボモータの正確な旋回と反転動作を制御するプログラムの実装と調整を進めています。</p>
-                <div class="media-placeholder">図・動画挿入予定 (プログラム画面や動作デモ)</div>
+                <video controls class="process-media">
+                    <source src="./img/sa-bomo-ta-seigyo.mov" type="video/quicktime"> 
+                    <source src="./img/sa-bomo-ta-seigyo.mp4" type="video/mp4">
+                    申し訳ありませんが、動画を再生できません。
+                </video>
             </div>
 
         </div>
@@ -134,4 +143,3 @@
 
 </body>
 </html>
-
