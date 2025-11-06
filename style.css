@@ -345,19 +345,43 @@ body {
 }
 
 /* ----------------------------------------------------
- * ★追加：挿入された画像/動画のスタイル★
+ * ★修正：挿入された画像/動画のスタイル★
  * ---------------------------------------------------- */
 .process-media {
-    max-width: 100%; /* 親要素の幅を超えないようにする */
+    /* 汎用の画像/動画は親要素の幅を最大限に利用 */
+    max-width: 100%; 
     height: auto;
     display: block;
     margin-top: 20px;
-    margin-bottom: 20px; /* 画像間のスペース確保 */
+    margin-bottom: 20px; 
     border-radius: 10px;
-    /* 画像と動画に影をつけて、コンテンツとして目立たせる */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
-    /* video要素の幅を確保 */
     width: 100%; 
+}
+
+/* ----------------------------------------------------
+ * ★修正：ステップ1の横並び画像グループのスタイル★
+ * ---------------------------------------------------- */
+.process-media-group {
+    /* 親の .step の幅をはみ出さないように調整 */
+    max-width: 100%; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.process-media-small {
+    /* 2枚が横並びになるように、親の幅からgapを引いた値を設定 */
+    width: calc(50% - 10px); 
+    max-width: 300px; 
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    object-fit: contain; 
 }
 
 
@@ -370,6 +394,63 @@ footer {
     color: var(--color-secondary-text);
     text-align: center;
     font-size: 0.9rem;
+}
+
+/* ==========================================================================
+    9. 問題点分析リストのスタイル (ステップ ⑥ 用)
+    ========================================================================== */
+.problem-analysis-container {
+    /* 親の .step の幅をはみ出さないように調整 */
+    max-width: 100%; 
+    display: grid;
+    /* PCでは2x2のグリッドで表示 */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; /* 少し間隔を狭く */
+    margin-top: 30px;
+    padding: 20px; /* パディングを増やす */
+    background-color: var(--color-card-dark); 
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.problem-category {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.problem-category h5 {
+    font-size: 1.2rem;
+    color: var(--color-primary); 
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.problem-category ul {
+    list-style-type: none; 
+    padding-left: 0;
+    margin: 0;
+}
+
+.problem-category li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--color-hero-text-secondary); 
+}
+
+.problem-category li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary); 
+    font-weight: 900;
 }
 
 /* ==========================================================================
@@ -399,7 +480,6 @@ footer {
     
     /* ヒーロータブのモバイルでのデザイン調整 */
     .hero-tab-button {
-        /* モバイルでは枠を少し細くしても良い */
         border-width: 1px;
     }
     
@@ -419,81 +499,30 @@ footer {
         padding-left: 30px;
     }
 
-    /* ★★★ 追加: 技術概要セクションのモバイル対応 ★★★ */
+    /* 技術概要セクションのモバイル対応 (縦並び) */
     .overview-content {
-        flex-direction: column; /* 要素を縦並びにする */
-        gap: 30px; /* 縦のスペースを調整 */
+        flex-direction: column; 
+        gap: 30px; 
     }
     
-    /* flexプロパティをリセットし、縦並びで幅100%にする */
     .tech-spec, .tech-detail {
-        flex: none; /* flex: 1; や flex: 2; を解除 */
+        flex: none; 
         width: 100%;
     }
-  /* ==========================================================================
-    9. 問題点分析リストのスタイル (ステップ ⑥ 用)
-    ========================================================================== */
 
-/* 問題点分析コンテナ: カテゴリを並べる */
-.problem-analysis-container {
-    display: grid;
-    /* PCでは2x2のグリッドで表示 */
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 30px;
-    margin-top: 30px;
-    padding: 10px;
-    background-color: var(--color-card-dark); /* 暗い背景色 */
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
+    /* モバイルでの画像グループのレイアウト調整 */
+    .process-media-group {
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .process-media-small {
+        width: 100%; /* 親要素（.step）の幅いっぱいに広げる */
+        max-width: 400px; 
+    }
 
-/* 各カテゴリのスタイル */
-.problem-category {
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.problem-category h5 {
-    font-size: 1.2rem;
-    color: var(--color-primary); /* カテゴリタイトルは青色で強調 */
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 5px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.problem-category ul {
-    list-style-type: none; /* リストの点を削除 */
-    padding-left: 0;
-    margin: 0;
-}
-
-.problem-category li {
-    position: relative;
-    padding-left: 15px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: var(--color-hero-text-secondary); /* 薄い文字色 */
-}
-
-/* カスタムリストマーカー (小さな点) */
-.problem-category li:before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary); /* マーカーを青色にする */
-    font-weight: 900;
-}
-
-/* レスポンシブ対応: モバイルではカテゴリを縦積みにする */
-@media (max-width: 768px) {
+    /* モバイルでの問題点分析を1列にする */
     .problem-analysis-container {
-        grid-template-columns: 1fr; /* 1列にする */
+        grid-template-columns: 1fr; 
+        gap: 15px;
     }
 }
-}
-
