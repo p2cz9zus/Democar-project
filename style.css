@@ -231,12 +231,19 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     text-align: left;
+    
+    /* ★★★ デスクトップでも縦並びに変更 ★★★ */
+    flex-direction: column; 
 }
 
 .process-container .step {
     flex: 1;
     padding: 20px;
-    border-top: 3px solid var(--color-primary);
+    
+    /* ★★★ 縦並びにあわせて、PCでも左ボーダーに変更 ★★★ */
+    border-top: none;
+    border-left: 3px solid var(--color-primary);
+    padding-left: 20px;
 }
 
 .process-container h4 {
@@ -268,7 +275,8 @@ footer {
     }
 
     /* グリッドレイアウトを縦積みに変更 */
-    .goal-grid, .overview-content, .process-container {
+    /* .process-container はすでに column なので削除または無視 */
+    .goal-grid, .overview-content {
         flex-direction: column;
     }
 
@@ -278,7 +286,7 @@ footer {
         text-align: center;
     }
 
-    /* 縦積みに合わせてプロセスステップの強調表示を変更 */
+    /* 縦積みに合わせてプロセスステップの強調表示を変更 (すでにPC側で対応済み) */
     .process-container .step {
         border-top: none;
         border-left: 3px solid var(--color-primary);
