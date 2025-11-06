@@ -430,4 +430,70 @@ footer {
         flex: none; /* flex: 1; や flex: 2; を解除 */
         width: 100%;
     }
+  /* ==========================================================================
+    9. 問題点分析リストのスタイル (ステップ ⑥ 用)
+    ========================================================================== */
+
+/* 問題点分析コンテナ: カテゴリを並べる */
+.problem-analysis-container {
+    display: grid;
+    /* PCでは2x2のグリッドで表示 */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: var(--color-card-dark); /* 暗い背景色 */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
+
+/* 各カテゴリのスタイル */
+.problem-category {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.problem-category h5 {
+    font-size: 1.2rem;
+    color: var(--color-primary); /* カテゴリタイトルは青色で強調 */
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.problem-category ul {
+    list-style-type: none; /* リストの点を削除 */
+    padding-left: 0;
+    margin: 0;
+}
+
+.problem-category li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--color-hero-text-secondary); /* 薄い文字色 */
+}
+
+/* カスタムリストマーカー (小さな点) */
+.problem-category li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary); /* マーカーを青色にする */
+    font-weight: 900;
+}
+
+/* レスポンシブ対応: モバイルではカテゴリを縦積みにする */
+@media (max-width: 768px) {
+    .problem-analysis-container {
+        grid-template-columns: 1fr; /* 1列にする */
+    }
+}
+}
+
