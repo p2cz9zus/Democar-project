@@ -98,7 +98,7 @@ body {
 }
 
 /* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
-.hero h1, .hero h2, .hero p, .hero .cta-button {
+.hero h1, .hero h2, .hero p, .hero .hero-tabs-container {
     color: var(--color-text-light);
     position: relative;
     z-index: 2;
@@ -122,21 +122,38 @@ body {
     color: var(--color-hero-text-secondary);
 }
 
-/* CTAボタン */
-.cta-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 999px;
-    font-weight: 500;
-    transition: background-color 0.3s;
+/* --- 新規：ヒーロータブナビゲーション --- */
+.hero-tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* タブ間のスペース */
+    margin-top: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 5%;
 }
 
-.cta-button:hover {
-    background-color: var(--color-primary-hover);
+.hero-tab-button {
+    flex: 1;
+    min-width: 120px;
+    background-color: rgba(255, 255, 255, 0.15); /* 半透明の背景 */
+    backdrop-filter: blur(5px);
+    color: var(--color-text-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color 0.3s, border-color 0.3s;
 }
+
+.hero-tab-button:hover {
+    background-color: var(--color-primary); /* ホバーでプライマリカラーに */
+    border-color: var(--color-primary);
+}
+
 
 /* ==========================================================================
     4. プロジェクト目標グリッド
@@ -174,6 +191,16 @@ body {
     margin-top: 0;
     margin-bottom: 10px;
 }
+/* 新しい目標リストの箇条書きスタイルを調整 */
+.goal-item p {
+    margin: 0;
+}
+/* 箇条書き風の表示 */
+.goal-item p * {
+    list-style: disc outside;
+    margin-left: 15px;
+}
+
 
 /* ==========================================================================
     5. 技術概要セクション
@@ -223,8 +250,16 @@ body {
 }
 
 /* ==========================================================================
-    6. 製作プロセス
+    6. 製作プロセス (ヒストリー)
     ========================================================================== */
+/* 新しいヒストリーレイアウトに対応 */
+.process-preamble {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+}
+
 .process-container {
     display: flex;
     gap: 40px;
@@ -232,24 +267,71 @@ body {
     margin: 0 auto;
     text-align: left;
     
-    /* ★★★ デスクトップでも縦並びに変更 ★★★ */
+    /* ★★★ デスクトップでも縦並びに固定 ★★★ */
     flex-direction: column; 
+    gap: 50px; /* 縦並びのステップ間のスペースを確保 */
 }
 
+/* タイムラインの各ステップ */
 .process-container .step {
     flex: 1;
-    padding: 20px;
+    padding: 0 0 0 40px; /* 左側にスペースを確保 */
+    max-width: 700px; /* ステップの幅を制限して読みやすく */
+    margin: 0 auto; /* 中央寄せ */
+    position: relative;
     
-    /* ★★★ 縦並びにあわせて、PCでも左ボーダーに変更 ★★★ */
-    border-top: none;
+    /* 縦並びのタイムライン装飾 */
+    border-top: none; 
     border-left: 3px solid var(--color-primary);
-    padding-left: 20px;
 }
 
-.process-container h4 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
+/* タイムライン上の点 (Circle) */
+.process-container .step:before {
+    content: '';
+    position: absolute;
+    left: -8px; /* タイムライン上に配置 */
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
 }
+
+.process-container .step h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.step-number {
+    display: block;
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.major-change-note, .major-change-reason {
+    color: #ff9500; /* 方針転換の注意色 */
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/* 画像/動画のためのプレースホルダー */
+.media-placeholder {
+    margin-top: 20px;
+    height: 300px; /* 画像/動画表示のための高さを確保 */
+    background-color: var(--color-card-dark); 
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-hero-text-secondary);
+    font-style: italic;
+    font-size: 1.2rem;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
 
 /* ==========================================================================
     7. フッター
@@ -274,8 +356,13 @@ footer {
         font-size: 1.5rem;
     }
 
+    /* ヒーロータブは縦積みに変更 */
+    .hero-tabs-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     /* グリッドレイアウトを縦積みに変更 */
-    /* .process-container はすでに column なので削除または無視 */
     .goal-grid, .overview-content {
         flex-direction: column;
     }
@@ -283,13 +370,11 @@ footer {
     .goal-item, .process-container .step {
         max-width: none;
         margin-bottom: 20px;
-        text-align: center;
+        text-align: left; /* ヒストリーは左揃えを維持 */
     }
 
-    /* 縦積みに合わせてプロセスステップの強調表示を変更 (すでにPC側で対応済み) */
+    /* プロセスステップの強調表示はPCと共通 (左ボーダー) */
     .process-container .step {
-        border-top: none;
-        border-left: 3px solid var(--color-primary);
-        padding-left: 20px;
+        padding-left: 30px; /* モバイルではパディングを少し減らす */
     }
 }
