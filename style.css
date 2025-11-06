@@ -162,9 +162,9 @@ body {
     ========================================================================== */
 /* 元のgoal-gridは削除し、目標7項目のための新しいコンテナを用意 */
 .goal-list-container {
-    display: grid;
+    display: **grid**;
     /* PCでは3列のグリッドにする */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: **repeat(3, 1fr)**; 
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -378,3 +378,44 @@ footer {
 @media (max-width: 900px) {
     /* 900px以下で目標グリッドを2列にする */
     .goal-list-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    /* ヒーロータブは縦積みに変更 */
+    .hero-tabs-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* ヒーロータブのモバイルでのデザイン調整 */
+    .hero-tab-button {
+        /* モバイルでは枠を少し細くしても良い */
+        border-width: 1px;
+    }
+    
+    /* 目標グリッドは1列にする */
+    .goal-list-container {
+        grid-template-columns: 1fr;
+    }
+
+    .goal-item-small, .process-container .step {
+        max-width: none;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    /* プロセスステップの強調表示はPCと共通 (左ボーダー) */
+    .process-container .step {
+        padding-left: 30px;
+    }
+}
