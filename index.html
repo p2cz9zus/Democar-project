@@ -13,7 +13,12 @@
         <h1>A1班 創成プロジェクト発表</h1>
         <h2>制約を超えろ。次世代モビリティの創造。</h2>
         <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
-        <a href="#goals" class="cta-button">プロジェクト目標を見る</a>
+        
+        <div class="hero-tabs-container">
+            <a href="#goals" class="hero-tab-button">🏆 プロジェクト目標を見る</a>
+            <a href="#overview" class="hero-tab-button">⚙️ 技術概要を見る</a>
+            <a href="#process" class="hero-tab-button">📜 製作ヒストリーを見る</a>
+        </div>
     </header>
 
     <section id="goals" class="section dark-bg">
@@ -71,19 +76,45 @@
 
     <section id="process" class="section dark-bg">
         <h3>📜 製作ヒストリー</h3>
+        <p class="process-preamble">当初はファン駆動の車体を製作することを検討していましたが、途中で大きく方針転換しました。</p>
         <div class="process-container">
+            
             <div class="step">
-                <h4>フェーズ 1: 初期設計とファン駆動の試み</h4>
-                <p>まずは車体設計と部品の強度計算から着手しました。当初の車体1は**ファン駆動**を採用し、マイクロコンピュータでサーボモータの基本制御を実現しましたが、**十分な推力が得ることが難しく**、**問題が発生**しました。</p>
+                <span class="step-number">初期フェーズ</span>
+                <h4>① 車体の設計：台車部分及び全体図</h4>
+                <p>プロジェクト開始にあたり、車体構造の基礎設計を行い、台車部分と全体の構成図を作成しました。</p>
+                <div class="media-placeholder">図・動画挿入予定 (車体の設計図)</div>
             </div>
+
             <div class="step">
-                <h4>フェーズ 2: タイヤ駆動への方針変更と回路設計</h4>
-                <p>推力不足を解消するため、**二輪駆動タイヤ**による走行方法へと**方針を変更**しました。この新しい駆動方法に基づき、回路を設計し、マイコンでサーボモータを制御する仕組みを構築しました。</p>
+                <span class="step-number">初期フェーズ</span>
+                <h4>② 部品の強度計算</h4>
+                <p>設計した各部品の強度計算を実施し、ファン駆動における動作環境での耐久性を検証しました。</p>
+                <div class="media-placeholder">図・動画挿入予定 (強度計算結果)</div>
             </div>
+            
             <div class="step">
-                <h4>フェーズ 3: 課題解決と精度追求</h4>
-                <p>試走を通じて、**乾電池の固定方法**、**サーボモータの角度**、そして**最適な制御値の調節**など、様々な問題に直面しました。現在、これらの課題解決と、最適なファン稼働時間・反転動作のプログラム調整を繰り返すことで、**精度と信頼性の追求**を進めています。</p>
+                <span class="step-number">初期フェーズ</span>
+                <h4>③ ファン部分の確認と問題発覚</h4>
+                <p>ファン駆動に必要な推力を確保できるかを確認するテストを実施しました。</p>
+                <p class="major-change-note">**ここで大きく方針転換**</p>
+                <p class="major-change-reason">→ ファン駆動では**十分な推進力が得られず**、**タイヤ駆動に変更**</p>
             </div>
+
+            <div class="step">
+                <span class="step-number">方針転換後</span>
+                <h4>④ 回路の設計</h4>
+                <p>タイヤ駆動に対応するため、モータードライバを含む新しい回路の設計と配線を行いました。</p>
+                <div class="media-placeholder">図・動画挿入予定 (回路図)</div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">最終フェーズ</span>
+                <h4>⑤ マイクロコンピュータによるサーボモータ制御</h4>
+                <p>C言語プログラムを核として、マイクロコンピュータを用いてサーボモータの正確な旋回と反転動作を制御するプログラムの実装と調整を進めています。</p>
+                <div class="media-placeholder">図・動画挿入予定 (プログラム画面や動作デモ)</div>
+            </div>
+
         </div>
     </section>
 
