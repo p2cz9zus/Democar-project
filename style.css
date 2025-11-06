@@ -162,9 +162,9 @@ body {
     ========================================================================== */
 /* 元のgoal-gridは削除し、目標7項目のための新しいコンテナを用意 */
 .goal-list-container {
-    display: **grid**;
+    display: grid;
     /* PCでは3列のグリッドにする */
-    grid-template-columns: **repeat(3, 1fr)**; 
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
