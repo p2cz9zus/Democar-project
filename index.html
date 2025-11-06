@@ -27,43 +27,43 @@
             <div class="goal-item-small">
                 <span class="goal-number-small">01</span>
                 <h4>軽量化</h4>
-                <p>車体の軽量化を追求する。</p>
+                <p>**車体の軽量化**を追求する。</p>
             </div>
             <div class="goal-item-small">
                 <span class="goal-number-small">02</span>
                 <h4>低コスト</h4>
-                <p>低コストでモビリティの実現を目指す。</p>
+                <p>**低コスト**でモビリティの実現を目指す。</p>
             </div>
             <div class="goal-item-small">
                 <span class="goal-number-small">03</span>
                 <h4>安定動作性</h4>
-                <p>厳密な制御により、安定した動作性を確保する。</p>
+                <p>厳密な制御により、**安定した動作性**を確保する。</p>
             </div>
             <div class="goal-item-small">
                 <span class="goal-number-small">04</span>
                 <h4>必要最低限の装備</h4>
-                <p>目標達成に必須な装備のみに絞り込む。</p>
+                <p>目標達成に**必須な装備のみ**に絞り込む。</p>
             </div>
             <div class="goal-item-small">
                 <span class="goal-number-small">05</span>
                 <h4>マイコン制御による達成</h4>
-                <p>マイクロコンピュータを活用して、全ての課題を達成する。</p>
+                <p>**マイクロコンピュータ**を活用して、全ての課題を達成する。</p>
             </div>
             <div class="goal-item-small">
                 <span class="goal-number-small">06</span>
-                <h4>SDGsへの貢献 (部品再利用)</h4>
-                <p>既存部品の再利用を通じて、SDGs目標達成に貢献する。</p>
+                <h4>SDGsへの貢献</h4>
+                <p>既存部品の**再利用**を通じて、SDGs目標達成に貢献する。</p>
             </div>
             <div class="goal-item-small">
                 <span class="goal-number-small">07</span>
-                <h4>成功率90%以上</h4>
-                <p>デモンストレーションにおいて成功率90%以上の達成を目指す。</p>
+                <h4>高精度な成功率</h4>
+                <p>デモンストレーションにおいて**成功率90%以上**の達成を目指す。</p>
             </div>
         </div>
     </section>
 
     <section id="overview" class="section light-bg">
-        <h3>技術概要: 最終仕様 (車体2: タイヤ駆動)</h3>
+        <h3>技術概要</h3>
         <div class="overview-content">
             <div class="tech-spec">
                 <h4>車体スペック</h4>
@@ -93,23 +93,23 @@
                 <span class="step-number">初期フェーズ</span>
                 <h4>① 車体の設計：台車部分及び全体図</h4>
                 <p>プロジェクト開始にあたり、車体構造の基礎設計を行い、台車部分と全体の構成図を作成しました。</p>
-                <img src="./img/daisya.jpg" alt="台車部分の設計図" class="process-media">
-                <img src="./img/zenntaizu.jpg" alt="車体全体の設計図" class="process-media">
+                <img src="./daisya.jpg" alt="台車部分の設計図" class="process-media">
+                <img src="./zenntaizu.JPG" alt="車体全体の設計図" class="process-media">
             </div>
 
             <div class="step">
                 <span class="step-number">初期フェーズ</span>
                 <h4>② 部品の強度計算</h4>
                 <p>設計した各部品の強度計算を実施し、ファン駆動における動作環境での耐久性を検証しました。</p>
-                <img src="./img/kyoudo.jpg" alt="強度計算結果" class="process-media">
+                <img src="./kyoudo.jpg" alt="強度計算結果" class="process-media">
             </div>
             
             <div class="step">
                 <span class="step-number">初期フェーズ</span>
                 <h4>③ ファン部分の確認と問題発覚</h4>
                 <p>ファン駆動に必要な推力を確保できるかを確認するテストを実施しました。</p>
-                <video controls **muted** class="process-media">
-                    <source src="./img/fan.mp4" type="video/mp4">
+                <video controls muted class="process-media">
+                    <source src="./fan.mp4" type="video/mp4">
                 </video>
                 <p class="major-change-note">**ここで大きく方針転換**</p>
                 <p class="major-change-reason">→ ファン駆動では**十分な推進力が得ることが難しく**、**タイヤ駆動に変更**</p>
@@ -119,15 +119,15 @@
                 <span class="step-number">方針転換後</span>
                 <h4>④ 回路の設計</h4>
                 <p>タイヤ駆動に対応するため、モータードライバを含む新しい回路の設計と配線を行いました。</p>
-                <img src="./img/kairo.jpeg" alt="回路図" class="process-media">
+                <img src="./kairo.jpg" alt="回路図" class="process-media">
             </div>
 
             <div class="step">
                 <span class="step-number">最終フェーズ</span>
                 <h4>⑤ マイクロコンピュータによるサーボモータ制御</h4>
                 <p>C言語プログラムを核として、マイクロコンピュータを用いてサーボモータの正確な旋回と反転動作を制御するプログラムの実装と調整を進めています。</p>
-                <video controls **muted** class="process-media">
-                    <source src="./img/sa-bomo-ta-seigyo.mov" type="video/quicktime"> 
+                <video controls muted class="process-media">
+                    <source src="./img/sa-bomo-ta-seigyo.mp4" type="video/quicktime"> 
                     <source src="./img/sa-bomo-ta-seigyo.mp4" type="video/mp4">
                 </video>
             </div>
