@@ -261,6 +261,18 @@ body {
     margin-top: 20px;
 }
 
+/* 核心技術セクションのアニメーション初期状態 */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+/* 表示されたときにフェードイン */
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* ==========================================================================
     6. 製作プロセス (ヒストリー)
     ========================================================================== */
@@ -428,4 +440,5 @@ footer {
         width: 100%;
     }
 }
+
 
