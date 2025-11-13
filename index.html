@@ -79,7 +79,7 @@
                     <li>トリガ機構: 金属ピース（スイッチの役割）</li>
                 </ul>
             </div>
-            <div class="tech-detail">
+            <div class="tech-detail animate-on-scroll">
                 <h4>核心技術: マイコン制御による反転・旋回</h4>
                 <p>車体の安定動作と複雑な反転・旋回機構を、マイクロコンピュータ制御で実現しています。サーボモータを駆動し車体を正確に180°回転させることが、成功の鍵となります。当初はファン駆動でしたが、ファン駆動では十分な推力が得ることが難しく、二輪駆動タイヤ方式へと方針を変更しました。</p>
                 <div class="diagram-placeholder">最終仕様のイメージ図</div>
@@ -185,8 +185,21 @@
         <p>&copy; 創成プロジェクト A1班. All rights reserved.</p>
     </footer>
 
+    <script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
+
 
 
 
