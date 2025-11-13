@@ -418,4 +418,14 @@ footer {
     .process-container .step {
         padding-left: 30px;
     }
+
+    .overview-content {
+        flex-direction: column;
+    }
+
+    .tech-spec,
+    .tech-detail {
+        width: 100%;
+    }
 }
+
