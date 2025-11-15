@@ -469,21 +469,24 @@ footer {
         font-size: 1.5rem;
     }
 
-    /* モバイルではタブを完全に隠す */
+    /* タブは初期状態で非表示 */
     .hero-tabs-container {
         display: none;
     }
 
-    /* モバイルメニューのスタイル */
+    /* ハンバーガークリック時に表示されるメニュー */
     .mobile-menu {
+        display: none;
         flex-direction: column;
         background-color: #111;
         padding: 10px;
     }
 
-    .hero-tab-button {
-        border-width: 1px;
+    .mobile-menu.active {
+        display: flex; /* JSで .active を付けたら表示 */
     }
+}
+
 
     /* 目標グリッドは1列にする */
     .goal-list-container {
@@ -574,6 +577,7 @@ footer {
   border: 2px solid var(--color-primary);
   background-color: rgba(255,255,255,0.05);
 }
+
 
 
 
