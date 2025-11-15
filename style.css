@@ -461,57 +461,35 @@ footer {
 
 /* スマホサイズ以下（768px以下） */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
+    .hero h1 { font-size: 2.5rem; }
+    .hero h2 { font-size: 1.5rem; }
 
-    .hero h2 {
-        font-size: 1.5rem;
-    }
+    .hero-tabs-container { display: none; }
 
-    /* タブは初期状態で非表示 */
-    .hero-tabs-container {
-        display: none;
-    }
-
-    /* ハンバーガークリック時に表示されるメニュー */
     .mobile-menu {
         display: none;
         flex-direction: column;
         background-color: #111;
         padding: 10px;
     }
-
     .mobile-menu.active {
-        display: flex; /* JSで .active を付けたら表示 */
+        display: flex;
     }
-}
-
 
     /* 目標グリッドは1列にする */
-    .goal-list-container {
-        grid-template-columns: 1fr;
-    }
+    .goal-list-container { grid-template-columns: 1fr; }
 
     .goal-item-small, .process-container .step {
         max-width: none;
         margin-bottom: 20px;
         text-align: left;
     }
+    .process-container .step { padding-left: 30px; }
 
-    .process-container .step {
-        padding-left: 30px;
-    }
-
-    .overview-content {
-        flex-direction: column;
-    }
-
-    .tech-spec,
-    .tech-detail {
-        width: 100%;
-    }
+    .overview-content { flex-direction: column; }
+    .tech-spec, .tech-detail { width: 100%; }
 }
+
 
 
 /* 9. ロゴスタイル */
@@ -577,6 +555,7 @@ footer {
   border: 2px solid var(--color-primary);
   background-color: rgba(255,255,255,0.05);
 }
+
 
 
 
