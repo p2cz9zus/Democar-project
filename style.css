@@ -526,7 +526,6 @@ footer {
 .navbar-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* ロゴ左、タブ右端まで広げる */
   padding: 10px 20px;
   min-height: 80px; /* ロゴに合わせて高さを確保 */
 }
@@ -535,23 +534,24 @@ footer {
 .logo {
   width: 150px;
   height: auto;
+  flex-shrink: 0; /* ロゴが潰れないように固定 */
 }
 
 /* タブコンテナ */
 .hero-tabs-container {
   display: flex;
-  flex: 1;                     /* ロゴから右端まで伸ばす */
-  justify-content: space-around; /* 等間隔に並べる */
-  margin-left: 40px;           /* ロゴとの間隔を確保 */
+  flex: 1;                        /* ロゴの右側を全部使う */
+  justify-content: space-evenly;  /* 等間隔に並べる */
+  margin-left: 40px;              /* ロゴとの間隔を確保 */
 }
 
 /* タブボタン */
 .hero-tab-button {
-  flex-grow: 1;                 /* タブを大きく広げる */
+  flex-grow: 1;                 /* タブを広げる */
   text-align: center;           /* 中央揃え */
   color: #fff;
   text-decoration: none;
-  padding: 12px 0;              /* 縦方向に余白を増やして大きく見せる */
+  padding: 14px 0;              /* 縦方向に余白を増やす */
   border-radius: 6px;
   transition: all 0.3s ease;
 }
@@ -560,3 +560,4 @@ footer {
   border: 2px solid var(--color-primary);
   background-color: rgba(255,255,255,0.05);
 }
+
