@@ -430,6 +430,15 @@ footer {
 /* ==========================================================================
     8. レスポンシブ対応 (モバイルフレンドリー)
     ========================================================================== */
+
+/* PC版（769px以上） */
+@media (min-width: 769px) {
+    .hero-tabs-container { display: flex; }   /* PCではタブを表示 */
+    .menu-icon { display: none; }             /* ハンバーガーアイコンは非表示 */
+    .mobile-menu { display: none !important; }/* モバイルメニューは絶対非表示 */
+}
+
+/* タブレットサイズ以下（900px以下） */
 @media (max-width: 900px) {
     /* 900px以下で目標グリッドを2列にする */
     .goal-list-container {
@@ -443,9 +452,14 @@ footer {
     .menu-icon {
         display: block;
     }
+
+    /* モバイルメニューは初期状態で非表示 */
+    .mobile-menu {
+        display: none;
+    }
 }
 
-
+/* スマホサイズ以下（768px以下） */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -455,18 +469,22 @@ footer {
         font-size: 1.5rem;
     }
 
-    /* ヒーロータブは縦積みに変更 */
+    /* モバイルではタブを完全に隠す */
     .hero-tabs-container {
-        flex-direction: column;
-        gap: 10px;
+        display: none;
     }
-    
-    /* ヒーロータブのモバイルでのデザイン調整 */
+
+    /* モバイルメニューのスタイル */
+    .mobile-menu {
+        flex-direction: column;
+        background-color: #111;
+        padding: 10px;
+    }
+
     .hero-tab-button {
-        /* モバイルでは枠を少し細くしても良い */
         border-width: 1px;
     }
-    
+
     /* 目標グリッドは1列にする */
     .goal-list-container {
         grid-template-columns: 1fr;
@@ -478,7 +496,6 @@ footer {
         text-align: left;
     }
 
-    /* プロセスステップの強調表示はPCと共通 (左ボーダー) */
     .process-container .step {
         padding-left: 30px;
     }
@@ -492,6 +509,7 @@ footer {
         width: 100%;
     }
 }
+
 
 /* ==========================================================================
     9. ロゴスタイル
@@ -569,5 +587,6 @@ footer {
   border: 2px solid var(--color-primary);
   background-color: rgba(255,255,255,0.05);
 }
+
 
 
