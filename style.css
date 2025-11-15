@@ -435,7 +435,16 @@ footer {
     .goal-list-container {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    /* 900px以下ではタブを隠してメニューアイコンを表示 */
+    .hero-tabs-container {
+        display: none;
+    }
+    .menu-icon {
+        display: block;
+    }
 }
+
 
 @media (max-width: 768px) {
     .hero h1 {
@@ -560,4 +569,5 @@ footer {
   border: 2px solid var(--color-primary);
   background-color: rgba(255,255,255,0.05);
 }
+
 
