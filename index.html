@@ -11,21 +11,39 @@
 </head>
 <body>
 
-    <header class="hero">
-    <div class="hero-top">
-        <img src="A1.png" alt="プロジェクトロゴ" class="logo">
-        <div class="hero-tabs-container">
-            <a href="#goals" class="hero-tab-button">プロジェクト目標を見る</a>
-            <a href="#overview" class="hero-tab-button">技術概要を見る</a>
-            <a href="#process" class="hero-tab-button">製作ヒストリーを見る</a>
-            <a href="#ideas" class="hero-tab-button">工夫点を見る</a>
-        </div>
-    </div>
+   <header class="navbar">
+  <div class="navbar-container">
+    <!-- 左側ロゴ -->
+    <img src="A1.png" alt="プロジェクトロゴ" class="logo">
 
-    <h1>創成プロジェクト発表　A1班</h1>
-    <h2>制約を超えろ。次世代モビリティの創造。</h2>
-    <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
+    <!-- PC用タブ -->
+    <nav class="hero-tabs-container">
+      <a href="#goals" class="hero-tab-button">プロジェクト目標を見る</a>
+      <a href="#overview" class="hero-tab-button">技術概要を見る</a>
+      <a href="#process" class="hero-tab-button">製作ヒストリーを見る</a>
+      <a href="#ideas" class="hero-tab-button">工夫点を見る</a>
+    </nav>
+
+    <!-- モバイル用メニューアイコン -->
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+  </div>
+
+  <!-- モバイル用ドロワーメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#goals">プロジェクト目標を見る</a>
+    <a href="#overview">技術概要を見る</a>
+    <a href="#process">製作ヒストリーを見る</a>
+    <a href="#ideas">工夫点を見る</a>
+  </div>
 </header>
+
+<!-- ここから元のヒーローセクションの見出しなどを続ける -->
+<section class="hero">
+  <h1>創成プロジェクト発表　A1班</h1>
+  <h2>制約を超えろ。次世代モビリティの創造。</h2>
+  <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
+</section>
+
 
     <section id="goals" class="section dark-bg">
         <h3>🏆 プロジェクト目標</h3>
@@ -203,6 +221,7 @@
 
 </body>
 </html>
+
 
 
 
