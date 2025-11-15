@@ -507,6 +507,90 @@ footer {
     vertical-align: middle;    /* テキストと縦位置を揃える */
 }
 
+/* ==========================================================================
+    10. ナビバー（ロゴ＋タブ）スタイル
+    ========================================================================== */
+
+/* ナビバー全体を固定 */
+.navbar {
+  background-color: #000; /* 黒背景 */
+  color: #fff;
+  width: 100%;
+  position: fixed; /* スクロールしても上部に固定 */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* ロゴ＋タブ＋メニューアイコンのコンテナ */
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* 左ロゴ、右タブ */
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* ロゴ（ナビバー用） */
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+/* PC用タブ */
+.hero-tabs-container {
+  display: flex;
+  gap: 20px;
+}
+
+.hero-tab-button {
+  color: #fff;                 /* 白文字 */
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.hero-tab-button:hover {
+  border: 2px solid var(--color-primary); /* 青枠 */
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* モバイル用メニューアイコン */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* モバイル用ドロワーメニュー */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: #111;
+  padding: 10px;
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.mobile-menu a:hover {
+  border: 2px solid var(--color-primary);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .hero-tabs-container {
+    display: none; /* PC用タブを非表示 */
+  }
+  .menu-icon {
+    display: block; /* ハンバーガーメニュー表示 */
+  }
+}
+
 
 
 
