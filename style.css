@@ -28,6 +28,49 @@
     --space-title-margin-bottom: 60px;
     --space-grid-gap: 30px;
 }
+/* ==========================================================================
+    10. ロゴ＋タブナビゲーションスタイル
+    ========================================================================== */
+
+/* ロゴとタブを横並びにする黒背景バー */
+.hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    background-color: #000;   /* 黒背景 */
+    padding: 15px 30px;
+    position: relative;
+    z-index: 3;
+}
+
+/* ロゴは左側に配置 */
+.logo {
+    width: 150px;   /* 大きめに調整 */
+    height: auto;
+}
+
+/* タブの横並び */
+.hero-tabs-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* タブの基本スタイル */
+.hero-tab-button {
+    color: #fff;                 /* 白文字 */
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* ホバー時に青枠 */
+.hero-tab-button:hover {
+    border: 2px solid var(--color-primary); /* 青枠 */
+    background-color: rgba(255,255,255,0.05); /* ほんのり背景 */
+}
+
 
 /* ==========================================================================
     2. ベーススタイル
@@ -463,6 +506,7 @@ footer {
     margin-right: 10px;
     vertical-align: middle;    /* テキストと縦位置を揃える */
 }
+
 
 
 
