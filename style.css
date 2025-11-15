@@ -445,15 +445,16 @@ footer {
     9. ロゴスタイル
     ========================================================================== */
 
-/* ヘッダー用ロゴ */
+/* ヘッダー用ロゴ（左上に配置） */
 .logo {
-    width: 100px;              /* ロゴの幅を調整 */
-    height: auto;              /* 縦横比を維持 */
-    display: block;            /* ブロック要素にして扱いやすく */
-    margin: 0 auto 20px;       /* 中央寄せ＋下に余白 */
-    position: relative;
-    z-index: 2;                /* ヒーローのオーバーレイより前に表示 */
+    width: 150px;        /* 今より大きめに調整 */
+    height: auto;
+    position: absolute;  /* ヘッダー内で絶対配置 */
+    top: 20px;           /* 上からの余白 */
+    left: 20px;          /* 左からの余白 */
+    z-index: 3;          /* 背景オーバーレイより前に表示 */
 }
+
 
 /* フッター用ロゴ */
 .footer-logo {
@@ -462,6 +463,7 @@ footer {
     margin-right: 10px;
     vertical-align: middle;    /* テキストと縦位置を揃える */
 }
+
 
 
 
