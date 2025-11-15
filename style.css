@@ -511,92 +511,52 @@ footer {
     10. ナビバー（ロゴ＋タブ）スタイル
     ========================================================================== */
 
-/* ナビバー全体を固定 */
+/* ナビバー全体 */
 .navbar {
-  background-color: #000; /* 黒背景 */
+  background-color: #000;
   color: #fff;
   width: 100%;
-  position: fixed; /* スクロールしても上部に固定 */
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
 }
 
-/* ロゴ＋タブ＋メニューアイコンのコンテナ */
+/* コンテナ（ロゴ＋タブ＋メニューアイコン） */
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* 左ロゴ、右タブ */
-  align-items: center;            /* 縦方向中央揃え */
+  align-items: center;
+  justify-content: space-between; /* ロゴ左、タブ右端まで広げる */
   padding: 10px 20px;
-  min-height: 80px;               /* ロゴに合わせて高さを確保 */
+  min-height: 80px; /* ロゴに合わせて高さを確保 */
 }
 
-
-/* ロゴ（ナビバー用） */
+/* ロゴ */
 .logo {
   width: 150px;
   height: auto;
 }
 
-/* PC用タブ */
+/* タブコンテナ */
 .hero-tabs-container {
   display: flex;
-  gap: 20px;
-  margin-left: 40px; /* ロゴとの間隔を広げる */
+  flex: 1;                     /* ロゴから右端まで伸ばす */
+  justify-content: space-around; /* 等間隔に並べる */
+  margin-left: 40px;           /* ロゴとの間隔を確保 */
 }
 
-
+/* タブボタン */
 .hero-tab-button {
-  color: #fff;                 /* 白文字 */
+  flex-grow: 1;                 /* タブを大きく広げる */
+  text-align: center;           /* 中央揃え */
+  color: #fff;
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 12px 0;              /* 縦方向に余白を増やして大きく見せる */
   border-radius: 6px;
   transition: all 0.3s ease;
 }
 
 .hero-tab-button:hover {
-  border: 2px solid var(--color-primary); /* 青枠 */
+  border: 2px solid var(--color-primary);
   background-color: rgba(255,255,255,0.05);
 }
-
-/* モバイル用メニューアイコン */
-.menu-icon {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #fff;
-}
-
-/* モバイル用ドロワーメニュー */
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  background-color: #111;
-  padding: 10px;
-}
-
-.mobile-menu a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-}
-
-.mobile-menu a:hover {
-  border: 2px solid var(--color-primary);
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  .hero-tabs-container {
-    display: none; /* PC用タブを非表示 */
-  }
-  .menu-icon {
-    display: block; /* ハンバーガーメニュー表示 */
-  }
-}
-
-
-
-
-
-
