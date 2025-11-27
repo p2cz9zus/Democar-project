@@ -220,15 +220,30 @@
 </script>
 
 <script>
+// メニューの表示/非表示を切り替える関数
 function toggleMenu() {
   const menu = document.getElementById("mobileMenu");
   // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
-  menu.classList.toggle("is-open"); 
+  menu.classList.toggle("is-open"); 
 }
+
+// ページ読み込み後、モバイルメニュー内のリンク全てにイベントリスナーを追加
+document.addEventListener('DOMContentLoaded', (event) => {
+    const mobileMenuLinks = document.querySelectorAll('#mobileMenu a');
+
+    mobileMenuLinks.forEach(link => {
+        // リンクがクリックされたときに toggleMenu を実行
+        link.addEventListener('click', () => {
+            // スムーズな遷移を妨げないよう、クラスをトグルするだけ
+            toggleMenu(); 
+        });
+    });
+});
 </script>   
 
 </body>
 </html>
+
 
 
 
