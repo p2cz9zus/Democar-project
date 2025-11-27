@@ -38,7 +38,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 30px;
-    background-color: #000;   /* 黒背景 */
+    background-color: #000;    /* 黒背景 */
     padding: 15px 30px;
     position: relative;
     z-index: 3;
@@ -46,7 +46,7 @@
 
 /* ロゴは左側に配置 */
 .logo {
-    width: 150px;   /* 大きめに調整 */
+    width: 150px;    /* 大きめに調整 */
     height: auto;
 }
 
@@ -58,7 +58,7 @@
 
 /* タブの基本スタイル */
 .hero-tab-button {
-    color: #fff;                 /* 白文字 */
+    color: #fff;              /* 白文字 */
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 6px;
@@ -185,7 +185,7 @@ body {
     backdrop-filter: blur(5px);
     color: var(--color-text-light);
     /* 青枠に変更 */
-    border: 2px solid var(--color-primary); 
+    border: 2px solid var(--color-primary);
     padding: 12px 15px;
     text-decoration: none;
     border-radius: 8px;
@@ -207,7 +207,7 @@ body {
 .goal-list-container {
     display: grid;
     /* PCでは3列のグリッドにする */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -306,15 +306,15 @@ body {
 
 /* 核心技術セクションのアニメーション初期状態 */
 .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.6s ease-out;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.6s ease-out;
 }
 
 /* 表示されたときにフェードイン */
 .animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 /* ==========================================================================
     6. 製作プロセス (ヒストリー)
@@ -335,7 +335,7 @@ body {
     text-align: left;
     
     /* ★★★ デスクトップでも縦並びに固定 ★★★ */
-    flex-direction: column; 
+    flex-direction: column;
     gap: 50px; /* 縦並びのステップ間のスペースを確保 */
 }
 
@@ -348,7 +348,7 @@ body {
     position: relative;
     
     /* 縦並びのタイムライン装飾 */
-    border-top: none; 
+    border-top: none;
     border-left: 3px solid var(--color-primary);
 }
 
@@ -388,7 +388,7 @@ body {
 .media-placeholder {
     margin-top: 20px;
     height: 300px; /* 画像/動画表示のための高さを確保 */
-    background-color: var(--color-card-dark); 
+    background-color: var(--color-card-dark);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -410,9 +410,9 @@ body {
     margin-bottom: 20px; /* 画像間のスペース確保 */
     border-radius: 10px;
     /* 画像と動画に影をつけて、コンテンツとして目立たせる */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     /* video要素の幅を確保 */
-    width: 100%; 
+    width: 100%;
 }
 
 
@@ -427,10 +427,10 @@ footer {
 
 /* フッター内のロゴサイズ調整 */
 footer .logo {
-    max-width: 120px;   /* デスクトップ用に小さめ */
+    max-width: 120px;    /* デスクトップ用に小さめ */
     height: auto;
     display: block;
-    margin: 0 auto;     /* 中央寄せ */
+    margin: 0 auto;      /* 中央寄せ */
 }
 
 /* 8. レスポンシブ対応 (モバイルフレンドリー) */
@@ -439,6 +439,7 @@ footer .logo {
 @media (min-width: 769px) {
     .hero-tabs-container { display: flex; }
     .menu-icon { display: none; }
+    /* ★修正点★ PCサイズではJavaScriptによる操作を無効化し非表示を徹底 */
     .mobile-menu { display: none !important; }
 }
 
@@ -447,6 +448,7 @@ footer .logo {
     .goal-list-container { grid-template-columns: repeat(2, 1fr); }
     .hero-tabs-container { display: none; }
     .menu-icon { display: block; }
+    /* 初期状態は非表示（JavaScriptのトグルを待つ） */
     .mobile-menu { display: none; }
 }
 
@@ -457,12 +459,16 @@ footer .logo {
     .hero-tabs-container { display: none; }
 
     .mobile-menu {
-        display: none;
+        display: none; /* スマホでの初期状態 */
         flex-direction: column;
         background-color: #111;
         padding: 10px;
     }
-    .mobile-menu.active { display: flex; }
+    
+    /* ★追記点★ JavaScriptでトグルするクラス。これが表示のトリガーになる。 */
+    .mobile-menu.is-open { 
+        display: flex;
+    }
 
     .goal-list-container { grid-template-columns: 1fr; }
     .goal-item-small, .process-container .step {
@@ -481,7 +487,6 @@ footer .logo {
 }
 
 
-
 /* 9. ロゴスタイル */
 .logo {
     width: 150px;
@@ -498,57 +503,50 @@ footer .logo {
 
 /* ナビバー全体 */
 .navbar {
-  background-color: #000;
-  color: #fff;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 /* コンテナ（ロゴ＋タブ＋メニューアイコン） */
 .navbar-container {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  min-height: 80px; /* ロゴに合わせて高さを確保 */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: 80px; /* ロゴに合わせて高さを確保 */
 }
 
 /* ロゴ */
 .logo {
-  width: 150px;
-  height: auto;
-  flex-shrink: 0; /* ロゴが潰れないように固定 */
+    width: 150px;
+    height: auto;
+    flex-shrink: 0; /* ロゴが潰れないように固定 */
 }
 
 /* タブコンテナ */
 .hero-tabs-container {
-  display: flex;
-  flex: 1;                        /* ロゴの右側を全部使う */
-  justify-content: space-evenly;  /* 等間隔に並べる */
-  margin-left: 40px;              /* ロゴとの間隔を確保 */
+    display: flex;
+    flex: 1;             /* ロゴの右側を全部使う */
+    justify-content: space-evenly; /* 等間隔に並べる */
+    margin-left: 40px;     /* ロゴとの間隔を確保 */
 }
 
 /* タブボタン */
 .hero-tab-button {
-  flex-grow: 1;                 /* タブを広げる */
-  text-align: center;           /* 中央揃え */
-  color: #fff;
-  text-decoration: none;
-  padding: 14px 0;              /* 縦方向に余白を増やす */
-  border-radius: 6px;
-  transition: all 0.3s ease;
+    flex-grow: 1;         /* タブを広げる */
+    text-align: center;   /* 中央揃え */
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 0;       /* 縦方向に余白を増やす */
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
 .hero-tab-button:hover {
-  border: 2px solid var(--color-primary);
-  background-color: rgba(255,255,255,0.05);
+    border: 2px solid var(--color-primary);
+    background-color: rgba(255,255,255,0.05);
 }
-
-
-
-
-
-
-
