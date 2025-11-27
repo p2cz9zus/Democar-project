@@ -1,6 +1,7 @@
 /*
  * ファイル名: style.css
  * 目的: 元のCSSセレクタを維持しつつ、CSS変数で管理性を向上
+ * モバイルメニューの表示制御をクラスベース（.is-open）に統一し、レスポンシブ対応を完了。
  */
 
 /* ==========================================================================
@@ -28,50 +29,6 @@
     --space-title-margin-bottom: 60px;
     --space-grid-gap: 30px;
 }
-/* ==========================================================================
-    10. ロゴ＋タブナビゲーションスタイル
-    ========================================================================== */
-
-/* ロゴとタブを横並びにする黒背景バー */
-.hero-top {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 30px;
-    background-color: #000;    /* 黒背景 */
-    padding: 15px 30px;
-    position: relative;
-    z-index: 3;
-}
-
-/* ロゴは左側に配置 */
-.logo {
-    width: 150px;    /* 大きめに調整 */
-    height: auto;
-}
-
-/* タブの横並び */
-.hero-tabs-container {
-    display: flex;
-    gap: 20px;
-}
-
-/* タブの基本スタイル */
-.hero-tab-button {
-    color: #fff;              /* 白文字 */
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-/* ホバー時に青枠 */
-.hero-tab-button:hover {
-    border: 2px solid var(--color-primary); /* 青枠 */
-    background-color: rgba(255,255,255,0.05); /* ほんのり背景 */
-}
-
-
 /* ==========================================================================
     2. ベーススタイル
     ========================================================================== */
@@ -121,7 +78,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     
-    padding: 150px 5% 100px;
+    /* 固定ナビバー（.navbar）の高さ（約80px）を考慮してパディングを調整 */
+    padding: calc(150px + 80px) 5% 100px;
     text-align: center;
     min-height: 70vh;
     position: relative;
@@ -165,45 +123,13 @@ body {
     color: var(--color-hero-text-secondary);
 }
 
-/* --- ヒーロータブナビゲーション (青枠の近代的なデザイン) --- */
-.hero-tabs-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* タブ間のスペース */
-    margin-top: 40px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 5%;
-}
-
-.hero-tab-button {
-    flex: 1;
-    min-width: 120px;
-    /* 背景を透明にし、青い枠線を強調 */
-    background-color: rgba(255, 255, 255, 0.05); /* ほとんど透明な背景 */
-    backdrop-filter: blur(5px);
-    color: var(--color-text-light);
-    /* 青枠に変更 */
-    border: 2px solid var(--color-primary);
-    padding: 12px 15px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: background-color 0.3s, transform 0.2s; /* ホバー時に変化をつける */
-}
-
-.hero-tab-button:hover {
-    background-color: var(--color-primary); /* ホバーで青で塗りつぶす */
-    transform: translateY(-2px); /* 少し浮き上がるエフェクト */
-}
+/* --- ヒーロータブナビゲーション (このセクション内のタブは不要なので非表示) --- */
+/* HTMLでナビバー内に移動したため、このセクションから該当スタイルを削除または無視 */
 
 
 /* ==========================================================================
     4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
     ========================================================================== */
-/* 元のgoal-gridは削除し、目標7項目のための新しいコンテナを用意 */
 .goal-list-container {
     display: grid;
     /* PCでは3列のグリッドにする */
@@ -215,22 +141,20 @@ body {
 }
 
 .goal-item-small {
-    /* ★★★ 枠で囲むためのデザイン変更 ★★★ */
-    padding: 25px; /* パディングを増やして見やすく */
+    padding: 25px;
     border-radius: 10px;
     background-color: var(--color-card-dark);
-    border: 1px solid var(--color-primary); /* 青い枠線を追加 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 影をつけて立体感を出す */
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
 }
 
 .goal-item-small:hover {
-    transform: translateY(-5px); /* ホバーで少し持ち上げる */
+    transform: translateY(-5px);
 }
 
 .goal-number-small {
-    /* ★★★ 文字サイズ調整 ★★★ */
-    font-size: 2.2rem; /* 少し大きく */
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--color-primary);
     display: block;
@@ -238,8 +162,7 @@ body {
 }
 
 .goal-item-small h4 {
-    /* ★★★ 文字サイズ調整 ★★★ */
-    font-size: 1.3rem; /* 見やすいサイズに */
+    font-size: 1.3rem;
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 10px;
@@ -247,11 +170,10 @@ body {
 }
 
 .goal-item-small p {
-    font-size: 1rem; /* 見やすいサイズに */
+    font-size: 1rem;
     color: var(--color-hero-text-secondary);
 }
 
-/* 旧 goal-grid に依存していたスタイルを削除 */
 .goal-grid {
     display: none;
 }
@@ -304,14 +226,13 @@ body {
     margin-top: 20px;
 }
 
-/* 核心技術セクションのアニメーション初期状態 */
+/* 核心技術セクションのアニメーション */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
     transition: all 1.6s ease-out;
 }
 
-/* 表示されたときにフェードイン */
 .animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
@@ -319,7 +240,6 @@ body {
 /* ==========================================================================
     6. 製作プロセス (ヒストリー)
     ========================================================================== */
-/* 新しいヒストリーレイアウトに対応 */
 .process-preamble {
     text-align: center;
     max-width: 800px;
@@ -329,34 +249,29 @@ body {
 
 .process-container {
     display: flex;
-    gap: 40px;
+    /* デスクトップでも縦並びに固定 */
+    flex-direction: column;
+    gap: 50px;
     max-width: 1000px;
     margin: 0 auto;
     text-align: left;
-    
-    /* ★★★ デスクトップでも縦並びに固定 ★★★ */
-    flex-direction: column;
-    gap: 50px; /* 縦並びのステップ間のスペースを確保 */
 }
 
-/* タイムラインの各ステップ */
 .process-container .step {
     flex: 1;
-    padding: 0 0 0 40px; /* 左側にスペースを確保 */
-    max-width: 700px; /* ステップの幅を制限して読みやすく */
-    margin: 0 auto; /* 中央寄せ */
+    padding: 0 0 0 40px;
+    max-width: 700px;
+    margin: 0 auto;
     position: relative;
-    
     /* 縦並びのタイムライン装飾 */
     border-top: none;
     border-left: 3px solid var(--color-primary);
 }
 
-/* タイムライン上の点 (Circle) */
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px; /* タイムライン上に配置 */
+    left: -8px;
     top: 0;
     width: 16px;
     height: 16px;
@@ -379,44 +294,27 @@ body {
 }
 
 .major-change-note, .major-change-reason {
-    color: #ff9500; /* 方針転換の注意色 */
+    color: #ff9500;
     font-weight: 700;
     margin-top: 10px;
 }
 
-/* 画像/動画のためのプレースホルダー */
-.media-placeholder {
-    margin-top: 20px;
-    height: 300px; /* 画像/動画表示のための高さを確保 */
-    background-color: var(--color-card-dark);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-hero-text-secondary);
-    font-style: italic;
-    font-size: 1.2rem;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-}
-
-/* ----------------------------------------------------
- * ★追加：挿入された画像/動画のスタイル★
- * ---------------------------------------------------- */
+/* 挿入された画像/動画のスタイル */
 .process-media {
-    max-width: 100%; /* 親要素の幅を超えないようにする */
+    max-width: 100%;
     height: auto;
     display: block;
     margin-top: 20px;
-    margin-bottom: 20px; /* 画像間のスペース確保 */
+    margin-bottom: 20px;
     border-radius: 10px;
-    /* 画像と動画に影をつけて、コンテンツとして目立たせる */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    /* video要素の幅を確保 */
     width: 100%;
 }
 
 
-/* 7. フッター */
+/* ==========================================================================
+    7. フッター
+    ========================================================================== */
 footer {
     padding: 20px var(--space-page-padding-horizontal);
     background-color: var(--color-background-footer);
@@ -427,73 +325,10 @@ footer {
 
 /* フッター内のロゴサイズ調整 */
 footer .logo {
-    max-width: 120px;    /* デスクトップ用に小さめ */
+    max-width: 120px;
     height: auto;
     display: block;
-    margin: 0 auto;      /* 中央寄せ */
-}
-
-/* 8. レスポンシブ対応 (モバイルフレンドリー) */
-
-/* PC版（769px以上） */
-@media (min-width: 769px) {
-    .hero-tabs-container { display: flex; }
-    .menu-icon { display: none; }
-    /* ★修正点★ PCサイズではJavaScriptによる操作を無効化し非表示を徹底 */
-    .mobile-menu { display: none !important; }
-}
-
-/* タブレットサイズ以下（900px以下） */
-@media (max-width: 900px) {
-    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
-    .hero-tabs-container { display: none; }
-    .menu-icon { display: block; }
-    /* 初期状態は非表示（JavaScriptのトグルを待つ） */
-    .mobile-menu { display: none; }
-}
-
-/* スマホサイズ以下（768px以下） */
-@media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
-    .hero h2 { font-size: 1.5rem; }
-    .hero-tabs-container { display: none; }
-
-    .mobile-menu {
-        display: none; /* スマホでの初期状態 */
-        flex-direction: column;
-        background-color: #111;
-        padding: 10px;
-    }
-    
-    /* ★追記点★ JavaScriptでトグルするクラス。これが表示のトリガーになる。 */
-    .mobile-menu.is-open { 
-        display: flex;
-    }
-
-    .goal-list-container { grid-template-columns: 1fr; }
-    .goal-item-small, .process-container .step {
-        max-width: none;
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .process-container .step { padding-left: 30px; }
-    .overview-content { flex-direction: column; }
-    .tech-spec, .tech-detail { width: 100%; }
-
-    /* スマホ用フッターロゴをさらに小さく */
-    footer .logo {
-        max-width: 80px;
-    }
-}
-
-
-/* 9. ロゴスタイル */
-.logo {
-    width: 150px;
-    height: auto;
-    /* position: absolute; ←これを削除 */
-    /* top, left も削除 */
-    flex-shrink: 0; /* 既に10章で指定済みなので活かす */
+    margin: 0 auto;
 }
 
 
@@ -506,7 +341,8 @@ footer .logo {
     background-color: #000;
     color: #fff;
     width: 100%;
-    position: fixed;
+    /* ナビゲーションバーを上部に固定 */
+    position: fixed; 
     top: 0;
     left: 0;
     z-index: 1000;
@@ -517,31 +353,31 @@ footer .logo {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    min-height: 80px; /* ロゴに合わせて高さを確保 */
+    min-height: 80px;
 }
 
 /* ロゴ */
 .logo {
     width: 150px;
     height: auto;
-    flex-shrink: 0; /* ロゴが潰れないように固定 */
+    flex-shrink: 0;
 }
 
-/* タブコンテナ */
+/* PC用タブコンテナ */
 .hero-tabs-container {
     display: flex;
-    flex: 1;             /* ロゴの右側を全部使う */
-    justify-content: space-evenly; /* 等間隔に並べる */
-    margin-left: 40px;     /* ロゴとの間隔を確保 */
+    flex: 1;
+    justify-content: space-evenly;
+    margin-left: 40px;
 }
 
 /* タブボタン */
 .hero-tab-button {
-    flex-grow: 1;         /* タブを広げる */
-    text-align: center;   /* 中央揃え */
+    flex-grow: 1;
+    text-align: center;
     color: #fff;
     text-decoration: none;
-    padding: 14px 0;       /* 縦方向に余白を増やす */
+    padding: 14px 0;
     border-radius: 6px;
     transition: all 0.3s ease;
 }
@@ -549,4 +385,105 @@ footer .logo {
 .hero-tab-button:hover {
     border: 2px solid var(--color-primary);
     background-color: rgba(255,255,255,0.05);
+}
+
+/* モバイルメニューアイコン */
+.menu-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px;
+    /* 右端に寄せる */
+    margin-left: auto; 
+    display: none; /* PCでは非表示 */
+}
+
+/* モバイルメニュー本体 */
+.mobile-menu {
+    /* 初期状態は非表示 */
+    display: none; 
+    flex-direction: column;
+    background-color: #111;
+    width: 100%;
+    position: absolute; /* .navbar内を基準 */
+    top: 100%; /* ナビバーの直下に配置 */
+    left: 0;
+    z-index: 999;
+}
+
+/* モバイルメニュー内のリンク */
+.mobile-menu a {
+    color: var(--color-text-light);
+    padding: 15px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+.mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+    8. レスポンシブ対応 (モバイルフレンドリー)
+    ========================================================================== */
+
+/* PC版（769px以上） */
+@media (min-width: 769px) {
+    /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
+    .hero-tabs-container { display: flex; }
+    .menu-icon { display: none; }
+    /* ★最終修正★ JavaScriptによる影響を完全に無視し、PCでは確実に非表示 */
+    .mobile-menu { display: none !important; }
+}
+
+/* タブレットサイズ以下（900px以下） */
+@media (max-width: 900px) {
+    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
+    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
+    .hero-tabs-container { display: none; }
+    .menu-icon { display: block; }
+}
+
+/* スマホサイズ以下（768px以下） */
+@media (max-width: 768px) {
+    /* ヒーローセクションの文字サイズを調整 */
+    .hero h1 { font-size: 2.5rem; }
+    .hero h2 { font-size: 1.5rem; }
+    
+    /* PC用タブは非表示 */
+    .hero-tabs-container { display: none; }
+
+    /* ★修正点★ JavaScriptでトグルするクラス。これが表示のトリガーになる。 */
+    .mobile-menu.is-open { 
+        display: flex;
+    }
+
+    /* グリッドを1列に変更 */
+    .goal-list-container { grid-template-columns: 1fr; }
+    
+    /* プロセスと目標アイテムの幅を調整 */
+    .goal-item-small, .process-container .step {
+        max-width: none;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    .process-container .step { padding-left: 30px; }
+    
+    /* 技術概要セクションを縦並びにする */
+    .overview-content { flex-direction: column; }
+    .tech-spec, .tech-detail { width: 100%; }
+
+    /* スマホ用フッターロゴをさらに小さく */
+    footer .logo {
+        max-width: 80px;
+    }
+    
+    /* ヒーローセクションのトップパディングをスマホ向けに調整 */
+    .hero {
+        padding-top: calc(100px + 80px);
+    }
 }
