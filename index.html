@@ -221,13 +221,15 @@
 
 <script>
 function toggleMenu() {
-  const menu = document.getElementById("mobileMenu");
-  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+  const menu = document.getElementById("mobileMenu");
+  // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
+  menu.classList.toggle("is-open"); 
 }
-</script>    
+</script>   
 
 </body>
 </html>
+
 
 
 
