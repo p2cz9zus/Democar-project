@@ -271,14 +271,14 @@ body {
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px;              /* 線の位置に合わせる */
-    top: 0;                  /* 線の上端に丸を置く */
-    transform: translateY(-50%); /* 丸の高さ分を考慮して線の上端にぴったり揃える */
+    left: -8px;       /* 線の中央に丸を揃える */
+    top: -8px;        /* 丸を線の上端に置く */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
     border-radius: 50%;
 }
+
 
 .process-container .step h4 {
     font-size: 1.5rem;
@@ -604,6 +604,7 @@ html, body {
     border-radius: 50%;
   }
 }
+
 
 
 
