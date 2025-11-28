@@ -588,18 +588,21 @@ html, body {
   .code-block pre {
     font-size: 0.85em;
     padding: 8px;
-    white-space: pre-wrap; /* モバイルでは折り返しを許可して文字が途切れないようにする */
+    white-space: pre-wrap; /* モバイルでは折り返しを許可 */
   }
- @media (max-width: 768px) {
+
   .process-container .step {
     padding-left: 55px;   /* 左余白を広げて文字を線から離す */
   }
+
   .process-container .step:before {
     left: 10px;           /* 丸印を線の位置に揃える */
+    top: -8px;            /* 丸を線の上端に置く */
   }
 }
 
 }
+
 
 
 
