@@ -598,10 +598,17 @@ html, body {
   .process-container .step:before {
     left: 10px;           /* 丸印を線の位置に揃える */
     top: -8px;            /* 丸を線の上端に置く */
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
   }
 }
 
 }
+
+
+
 
 
 
