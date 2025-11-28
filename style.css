@@ -578,7 +578,7 @@ footer .logo {
     /* 製作ヒストリーのタイムライン調整（モバイル用） */
     .process-container .step {
         /* 左側のパディング: 青い線とコンテンツの距離を維持 */
-        padding-left: 40px;    
+        padding-left: 35px;    
         
         /* ページ全体の横パディング (--space-page-padding-horizontal: 5%) に合わせる */
         padding-right: 5%;    
@@ -786,6 +786,7 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
 
 
 
