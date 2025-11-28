@@ -435,6 +435,8 @@ footer .logo {
     box-shadow: none;
     /* アニメーションの時間を設定 */
     transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    /* ★修正点1: ナビバーのテキスト色を白に強制 ★ */
+    color: var(--color-text-light);
 }
 
 /* スクロール後（背景を黒に戻す） */
@@ -482,7 +484,8 @@ footer .logo {
 .hero-tab-button {
     flex-grow: 1;
     text-align: center;
-    color: #fff;
+    /* ★修正点2: .navbar.transparent の color: white を継承するため、ここを調整★ */
+    color: inherit; 
     text-decoration: none;
     padding: 14px 0;
     border-radius: 6px;
@@ -863,6 +866,7 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
 
 
 
