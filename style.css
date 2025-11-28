@@ -580,6 +580,7 @@ html, body {
   .code-block pre {
     font-size: 0.85em;
     padding: 8px;
+    white-space: pre-wrap; /* モバイルでは折り返しを許可して文字が途切れないようにする */
   }
   .process-container .step {
     padding-left: 0;   /* 左余白を消す */
