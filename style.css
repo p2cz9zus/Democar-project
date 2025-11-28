@@ -271,8 +271,9 @@ body {
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px;
-    top: -8px;
+    left: -8px;              /* 線の位置に合わせる */
+    top: 0;                  /* 線の上端に丸を置く */
+    transform: translateY(-50%); /* 丸の高さ分を考慮して線の上端にぴったり揃える */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -599,6 +600,7 @@ html, body {
 }
 
 }
+
 
 
 
