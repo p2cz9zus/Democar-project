@@ -459,10 +459,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 });
-</script>    
+</script>  
+/* タブ切り替え機能 */
+document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTabId = button.getAttribute('data-tab');
+
+            // すべてのボタンとコンテンツから active クラスを削除
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // クリックされたボタンを active に
+            button.classList.add('active');
+
+            // 対応するコンテンツを active に
+            const targetContent = document.getElementById(targetTabId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+});    
 
 </body>
 </html>
+
 
 
 
