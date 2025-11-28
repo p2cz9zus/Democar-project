@@ -180,39 +180,9 @@ body {
 
 
 /* ==========================================================================
- * 5. 技術概要セクション
+ * 5. 技術概要セクション（旧スタイルはタブ導入により不要）
  * ========================================================================== */
-.overview-content {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    text-align: left;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.tech-spec {
-    flex: 1;
-}
-
-.tech-detail {
-    flex: 2;
-}
-
-.tech-detail p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
-.tech-spec ul {
-    list-style: none;
-    padding: 0;
-}
-
-.tech-spec li {
-    font-size: 1.1rem;
-    padding: 8px 0;
-}
+/* 旧 .overview-content, .tech-spec, .tech-detail はタブ構造導入により削除または上書きされる */
 
 .diagram-placeholder {
     height: 250px;
@@ -271,8 +241,8 @@ body {
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px;        /* 線の中央に丸を揃える */
-    top: -8px;         /* 丸を線の上端に置く */
+    left: -8px;      /* 線の中央に丸を揃える */
+    top: -8px;       /* 丸を線の上端に置く */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -332,7 +302,7 @@ footer .logo {
 }
 
 /* ==========================================================================
- * 9. コードブロック（新しいセクション）
+ * 9. コードブロック
  * ========================================================================== */
 
 /* コードブロックのラッパー（相対位置の基準） */
@@ -402,7 +372,7 @@ footer .logo {
     color: #fff;
     width: 100%;
     /* ナビゲーションバーを上部に固定 */
-    position: fixed;    
+    position: fixed;   
     top: 0;
     left: 0;
     z-index: 1000;
@@ -453,7 +423,7 @@ footer .logo {
     cursor: pointer;
     padding: 5px;
     /* 右端に寄せる */
-    margin-left: auto;    
+    margin-left: auto;   
     display: none; /* PCでは非表示 */
 }
 
@@ -517,7 +487,7 @@ footer .logo {
     .menu-icon { display: block; }
     
     /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {    
+    .navbar .logo {   
         width: 50px; /* 60pxから50pxに縮小 */
     }
 }
@@ -542,8 +512,9 @@ footer .logo {
     }
     .process-container .step { padding-left: 30px; }
     
-    /* 技術概要セクションを縦並びにする */
+    /* 技術概要セクションを縦並びにする（旧スタイル） */
     .overview-content { flex-direction: column; }
+    /* .tech-spec, .tech-detail はタブコンテンツ内にあるため、このスタイルは無視されるはずだが、念のため残す */
     .tech-spec, .tech-detail { width: 100%; }
 
     /* ★修正ポイント2: スマホ用フッターロゴをさらに小さく（768px以下） */
@@ -559,62 +530,18 @@ footer .logo {
     /* 製作ヒストリーのタイムライン調整（モバイル用） */
     .process-container .step {
         /* 左側のパディング: 青い線とコンテンツの距離を維持 */
-        padding-left: 55px;    
+        padding-left: 55px;   
         
         /* 💡 修正済み: 右側にパディングを追加し、コンテンツが画面の端に重なるのを防ぐ */
         /* ページ全体の横パディング (--space-page-padding-horizontal: 5%) に合わせる */
-        padding-right: 5%;    
+        padding-right: 5%;   
         
         /* max-width は不要か、または max-width: none でコンテンツを広げる設定を維持 */
         max-width: none;
     }
     .process-container .step:before {
-        left: 0;               /* 丸印を線の位置に揃える */
-    }
-}
-/* ページ全体の横スクロール禁止 */
-html, body {
-    overflow-x: hidden;
-}
-
-/* コードブロックの横スクロールを内部だけに限定 */
-.code-container {
-    overflow-x: hidden;    /* 親では横スクロール禁止 */
-}
-.code-block {
-    overflow-x: auto;      /* 内部だけ横スクロール許可 */
-    -webkit-overflow-scrolling: touch; /* モバイルでスムーズスクロール */
-}
-.code-block pre {
-    white-space: pre;      /* 折り返しせず横スクロール */
-    max-width: 100%;
-    box-sizing: border-box;
-    display: block;
-}
-
-/* モバイル用調整 */
-@media (max-width: 768px) {
-    /* 💡 修正 2: コードブロック内の pre タグの幅を明示的に制限し、既存の設定を統合 */
-    .code-block pre {
-        font-size: 0.85em;
-        padding: 8px;
-        white-space: pre-wrap; /* モバイルでは折り返しを許可 */
-        /* ★追加修正: 幅の制限を明示的に加える */
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .process-container .step {
-        padding-left: 55px;    /* 左余白を広げて文字を線から離す */
-    }
-
-    .process-container .step:before {
-        left: -8px;            /* 丸印を線の位置に揃える */
-        top: -8px;             /* 丸を線の上端に置く */
-        width: 16px;
-        height: 16px;
-        background-color: var(--color-primary);
-        border-radius: 50%;
+        left: -8px;      /* 丸印を線の位置に揃える */
+        top: -8px;        /* 丸を線の上端に置く */
     }
     
     /* 💡 修正 1: ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
@@ -624,8 +551,51 @@ html, body {
         box-sizing: border-box; 
         margin: 0; 
     }
-    /* ==========================================================================
- * タブ構造のスタイル定義
+    
+    /* 💡 修正 2: コードブロック内の pre タグの幅を明示的に制限し、既存の設定を統合 */
+    .code-block pre {
+        font-size: 0.85em;
+        padding: 8px;
+        white-space: pre-wrap; /* モバイルでは折り返しを許可 */
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+/* ページ全体の横スクロール禁止 */
+html, body {
+    overflow-x: hidden;
+}
+
+/* コードブロックの横スクロールを内部だけに限定 */
+.code-container {
+    overflow-x: hidden;     /* 親では横スクロール禁止 */
+}
+.code-block {
+    overflow-x: auto;       /* 内部だけ横スクロール許可 */
+    -webkit-overflow-scrolling: touch; /* モバイルでスムーズスクロール */
+}
+.code-block pre {
+    white-space: pre;       /* 折り返しせず横スクロール */
+    max-width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* モバイル用調整 (768px以下) */
+@media (max-width: 768px) {
+    /* タイムラインの丸印の再調整 */
+    .process-container .step:before {
+        left: -8px;      /* 丸印を線の位置に揃える */
+        top: -8px;        /* 丸を線の上端に置く */
+        width: 16px;
+        height: 16px;
+        background-color: var(--color-primary);
+        border-radius: 50%;
+    }
+}
+
+/* ==========================================================================
+ * タブ構造のスタイル定義（全画面サイズで適用される）
  * ========================================================================== */
 
 /* タブボタンのコンテナ (横並び) */
@@ -749,7 +719,7 @@ html, body {
     margin-bottom: 0;
 }
 
-/* レスポンシブ対応 */
+/* タブコンテンツ内のレスポンシブ対応 */
 @media (max-width: 768px) {
     .tab-button {
         padding: 15px 15px;
@@ -758,6 +728,7 @@ html, body {
     .tech-card-container {
         grid-template-columns: 1fr; /* スマホでは1列 */
     }
+    /* スペックテーブルを縦に積み上げる */
     .spec-table th, .spec-table td {
         display: block;
         width: 100%;
@@ -775,5 +746,3 @@ html, body {
         margin-bottom: 10px;
     }
 }
-}
-
