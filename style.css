@@ -472,24 +472,26 @@ footer .logo {
 
 /* PC版（769px以上） */
 @media (min-width: 769px) {
-    /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
-    .hero-tabs-container { display: flex; }
-    .menu-icon { display: none; }
-    /* PCではメニューを強制的に非表示にする */
-    .mobile-menu { display: none !important; }
+    /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
+    .hero-tabs-container { display: flex; }
+    .menu-icon { display: none; }
+    /* .mobile-menu の強制非表示ルールは削除。901px以上のルールで対応する */
 }
 
 /* タブレットサイズ以下（900px以下） */
 @media (max-width: 900px) {
-    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
-    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
-    .hero-tabs-container { display: none; }
-    .menu-icon { display: block; }
+    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
+    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
+    .hero-tabs-container { display: none; }
+    .menu-icon { display: block; }
+
+    /* ★【追記】モバイルメニューの display を明示し、開閉を可能にする */
+    .mobile-menu { display: flex; }
     
-    /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {   
-        width: 50px; /* 60pxから50pxに縮小 */
-    }
+    /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
+    .navbar .logo {   
+        width: 50px; /* 60pxから50pxに縮小 */
+    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -591,6 +593,15 @@ html, body {
         height: 16px;
         background-color: var(--color-primary);
         border-radius: 50%;
+    }
+}
+/* -------------------------------------------------------------------------- */
+/* 【新規追加】大型画面 (901px以上) でモバイルメニューを完全に隠すルール */
+/* -------------------------------------------------------------------------- */
+@media (min-width: 901px) {
+    /* PC用タブが表示されているブレークポイントで、モバイルメニューを完全に非表示 */
+    .mobile-menu { 
+        display: none !important; 
     }
 }
 
@@ -746,3 +757,4 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
