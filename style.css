@@ -154,34 +154,25 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
 }
 
 /* ==========================================================================
- * 3. ヒーローセクション の修正
+ * 3. ヒーローセクション の修正 (修正版)
  * ========================================================================== */
 /* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
-.hero h1, .hero h2, .hero p, .hero .hero-tabs-container {
+/* ★ .hero .hero-tabs-container を削除しました！ ★ */
+.hero h1, .hero h2, .hero p {
     color: var(--color-text-light);
     position: relative;
     z-index: 2;
     /* 初期状態を非表示にする（アニメーション開始前） */
     opacity: 0; 
     /* フェードインアニメーションを適用 */
-    animation: slideInUp 1.0s ease-out forwards; /* 1.0秒かけてアニメーション */
+    animation: slideInUp 1.0s ease-out forwards; 
 }
 
 /* 要素ごとに遅延を設定して順番に表示 */
-.hero h1 {
-    /* 既存のスタイルを維持 */
-    animation-delay: 0.3s; /* 0.3秒後にアニメーション開始 */
-}
-
-.hero h2 {
-    /* 既存のスタイルを維持 */
-    animation-delay: 0.6s; /* 0.6秒後にアニメーション開始 */
-}
-
-.hero p {
-    /* 既存のスタイルを維持 */
-    animation-delay: 0.9s; /* 0.9秒後にアニメーション開始 */
-}
+.hero h1 { animation-delay: 0.3s; }
+.hero h2 { animation-delay: 0.6s; }
+.hero p { animation-delay: 0.9s; }
+/* .hero-tabs-container のアニメーション設定は全て削除します */
 
 /* ==========================================================================
  * 4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
@@ -632,9 +623,6 @@ footer .logo {
     /* ナビゲーションバーとの距離を維持するため、トップパディングは維持 */
     /* .hero { padding-top: calc(100px + 80px); } */
 }
-    
-    /* PC用タブは非表示 */
-    .hero-tabs-container { display: none; }
 
     /* グリッドを1列に変更 */
     .goal-list-container { grid-template-columns: 1fr; }
@@ -873,6 +861,7 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
 
 
 
