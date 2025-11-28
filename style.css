@@ -82,8 +82,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     
-    /* 固定ナビバー（.navbar）の高さ（約80px）を考慮してパディングを調整 */
-    padding: calc(150px + 80px) 5% 100px;
+    /* 固定ナビバー（.navbar）の高さ（約100px）を考慮してパディングを調整（80px -> 100pxに修正） */
+    padding: calc(150px + 100px) 5% 100px;
     text-align: center;
     min-height: 70vh;
     position: relative;
@@ -417,7 +417,7 @@ footer .logo {
 
 /* ロゴ */
 .logo {
-    width: 100px;
+    width: 130px;
     height: auto;
     flex-shrink: 0;
 }
@@ -517,7 +517,7 @@ footer .logo {
     
     /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
     .navbar .logo { 
-        width: 45px; /* 60pxから45pxに縮小 */
+        width: 50px; /* 60pxから50pxに縮小 */
     }
 }
 
@@ -547,7 +547,7 @@ footer .logo {
 
     /* ★修正ポイント2: スマホ用フッターロゴをさらに小さく（768px以下） */
     footer .logo {
-        max-width: 25px; /* 30pxから25pxに縮小 */
+        max-width: 27px; /* 30pxから27pxに縮小 */
     }
     
     /* ヒーローセクションのトップパディングをスマホ向けに調整 */
@@ -555,5 +555,3 @@ footer .logo {
         padding-top: calc(100px + 80px);
     }
 }
-
-
