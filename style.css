@@ -584,14 +584,3 @@ html, body {
   }
   .process-container .step {
     padding-left: 0;   /* 左余白を消す */
-    padding-right: 0;  /* 念のため右余白も消す */
-  }
-  .process-media {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-  }
-}
