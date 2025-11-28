@@ -555,32 +555,42 @@ footer .logo {
         padding-top: calc(100px + 80px);
     }
 }
-/* ページ全体の横スクロールを禁止 */
+/* ページ全体の横スクロール禁止 */
 html, body {
   overflow-x: hidden;
 }
-/* コードブロックのラッパーに横スクロールを許可 */
-.code-block-wrapper {
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: auto;
+
+/* コードブロックの横スクロールを内部だけに限定 */
+.code-container {
+  overflow-x: hidden;   /* 親では横スクロール禁止 */
 }
-/* コードブロック本体に横スクロールを許可 */
-.code-block-wrapper .code-block {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+.code-block {
+  overflow-x: auto;     /* 内部だけ横スクロール許可 */
+  -webkit-overflow-scrolling: touch; /* モバイルでスムーズスクロール */
 }
-/* preタグに横スクロールと幅制限 */
-.code-block-wrapper pre {
-  white-space: pre;
-  overflow-x: auto;
+.code-block pre {
+  white-space: pre;     /* 折り返しせず横スクロール */
   max-width: 100%;
   box-sizing: border-box;
   display: block;
 }
 
-
-
-
-
-
+/* モバイル用調整 */
+@media (max-width: 768px) {
+  .code-block pre {
+    font-size: 0.85em;
+    padding: 8px;
+  }
+  .process-container .step {
+    padding-left: 0;   /* 左余白を消す */
+    padding-right: 0;  /* 念のため右余白も消す */
+  }
+  .process-media {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+}
