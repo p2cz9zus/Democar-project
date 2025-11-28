@@ -272,7 +272,7 @@ body {
     content: '';
     position: absolute;
     left: -8px;
-    top: 0;
+    top: -8px;
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -599,5 +599,6 @@ html, body {
 }
 
 }
+
 
 
