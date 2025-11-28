@@ -554,6 +554,13 @@ footer .logo {
     .hero {
         padding-top: calc(100px + 80px);
     }
+        /* 製作ヒストリーのタイムライン調整（モバイル用） */
+    .process-container .step {
+        padding-left: 50px;   /* 左余白を広げて文字を線から離す */
+    }
+    .process-container .step:before {
+        left: 0;              /* 丸印を線の位置に揃える */
+    }
 }
 /* ページ全体の横スクロール禁止 */
 html, body {
@@ -586,3 +593,4 @@ html, body {
     padding-left: 0;   /* 左余白を消す */
   }
 }
+
