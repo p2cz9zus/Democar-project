@@ -91,7 +91,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     /* ★ 背景画像を '3.jpg' に変更済み ★ */
     background-image: url('./3.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     
     /* 固定ナビバー（.navbar）の高さ（約100px）を考慮してパディングを調整（80px -> 100pxに修正） */
@@ -542,9 +542,28 @@ footer .logo {
 
 /* スマホサイズ以下（768px以下） */
 @media (max-width: 768px) {
-    /* ヒーローセクションの文字サイズを調整 */
-    .hero h1 { font-size: 2.5rem; }
-    .hero h2 { font-size: 1.5rem; }
+    /* ヒーローセクションの文字サイズを調整 (既存) */
+    .hero h1 { 
+        font-size: 2.8rem; /* 2.5remから少し大きく */
+        line-height: 1.1;  /* 行間を詰める */
+    } 
+    .hero h2 { 
+        font-size: 1.3rem; /* 1.5remから少し小さく */
+        margin-bottom: 20px; /* 下のマージンを詰める */
+    } 
+    
+    /* 補足文 (pタグ) の調整 */
+    .hero p {
+        font-size: 1rem;
+        padding: 0 5%; /* 両サイドのパディングを維持 */
+        line-height: 1.5;
+        /* 中央にある長いタイトルから少しスペースを空ける */
+        margin-top: 20px; 
+    }
+    
+    /* ナビゲーションバーとの距離を維持するため、トップパディングは維持 */
+    /* .hero { padding-top: calc(100px + 80px); } */
+}
     
     /* PC用タブは非表示 */
     .hero-tabs-container { display: none; }
@@ -786,6 +805,7 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
 
 
 
