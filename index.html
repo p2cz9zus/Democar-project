@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- 埋め込むコードブロック用のTailwind CSSを読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
 </head>
 <body>
 
@@ -183,6 +187,184 @@
                     
                 </video>
             </div>
+
+            <!-- ここから追加された「⑧ コード作成」ステップ -->
+            <div class="step">
+                <span class="step-number">最終フェーズ</span>
+                <h4>⑧ 制御コードの作成とロジック実装</h4>
+                <p>モビリティの自律走行を実現するための核となるArduino (C++) コードです。金属センサーの状態（ピースの有無）に応じて、「待機」「直進駆動」「Uターン後の再開」の3つの状態を切り替える**状態機械（State Machine）ロジック**を採用しています。</p>
+
+                <!-- コードブロックの埋め込み開始 -->
+                <div class="code-display mt-4">
+                    <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino)</h5>
+                    <div class="code-container bg-gray-900 rounded-lg shadow-2xl p-4" style="color: #f8f8f2; overflow-x: auto;">
+                        <div class="code-block" style="max-height: 400px; overflow-y: auto;">
+<pre class="whitespace-pre-wrap text-sm leading-relaxed"><code>#include &lt;Arduino.h&gt;
+#include &lt;Servo.h&gt;
+
+// ----------------------------------------------------------------------
+// I. グローバル設定とインスタンス
+// ----------------------------------------------------------------------
+
+Servo front_steer_servo; // ステアリング制御用サーボモーター
+
+// --- シーケンス状態の定義（課題の進行を管理） ---
+enum SequenceState {
+  WAIT_START = 0, // ピース待機中（リセット状態）
+  DRIVING,        // 自律的な直進駆動中
+  PAUSE,          // ピース除去による一時停止中（金属検出時）
+  COMPLETE        // 課題完了（未使用の可能性あり）
+};
+SequenceState current_state = WAIT_START;
+
+// --- 動作パラメータ（試験後に調整） ---
+const int DC_DRIVE_PWM = 200;  // DCモーターの駆動速度 (0-255)
+const int STEER_STRAIGHT = 90; // サーボ: 直進角度
+const int STEER_LEFT = 140;    // サーボ: 左旋回角度 (Uターン用)
+const int STEER_RIGHT = 40;    // サーボ: 右旋回角度（※未使用）
+
+// Uターン動作に必要な時間（ミリ秒） - 調整必須 ★
+const unsigned long UTURN_DURATION_MS = 1500;
+
+// --- ピン割り当て ---
+const int METAL_SENSOR_PIN = 3;  // 金属センサーの入力ピン
+const int SERVO_PIN = 9;         // ステアリングサーボの出力ピン
+const int DC_MOTOR_PWM = 5;      // 後輪DCモーターの速度制御（PWM）ピン
+const int DC_MOTOR_DIR = 6;      // 後輪DCモーターの方向制御ピン
+
+// --- デバウンス変数 ---
+unsigned long lastSensorChange = 0; // 最後にセンサー値が変化した時間
+const unsigned long DEBOUNCE_DELAY = 50; // デバウンス遅延時間（ミリ秒）
+int lastMetalStatus = HIGH; // 前回の金属センサーの状態 (HIGH=金属なし, LOW=金属あり)
+
+
+// ----------------------------------------------------------------------
+// II. 駆動・制御関数
+// ----------------------------------------------------------------------
+
+// 全ての駆動を停止させる
+void stop_all_motors(void) {
+  analogWrite(DC_MOTOR_PWM, 0); // DCモーターの速度を0に設定
+  front_steer_servo.write(STEER_STRAIGHT); // ステアリングを直進に戻す
+}
+
+// 直進駆動
+void drive_forward() {
+  front_steer_servo.write(STEER_STRAIGHT); // ステアリングは直進
+  digitalWrite(DC_MOTOR_DIR, HIGH); // 前進方向
+  analogWrite(DC_MOTOR_PWM, DC_DRIVE_PWM); // 設定速度で駆動
+}
+
+// 左旋回駆動（Uターンの一段階）
+void drive_turn_left() {
+  front_steer_servo.write(STEER_LEFT); // ステアリングを左旋回角度に
+  digitalWrite(DC_MOTOR_DIR, HIGH); // 前進方向
+  analogWrite(DC_MOTOR_PWM, DC_DRIVE_PWM); // 設定速度で駆動
+}
+
+// Uターンを自律的に実行する関数（課題必須動作）
+void perform_uturn() {
+  // シリアル出力はウェブサイトには表示されませんが、コードの意図を示すために残します
+  // Serial.println("🔥 Performing mandatory U-Turn..."); 
+  // 指定時間だけ左旋回を行う
+  drive_turn_left();
+  delay(UTURN_DURATION_MS); // 指定時間待機
+  stop_all_motors(); // 一旦停止
+}
+
+// 状態遷移のための駆動停止処理（PAUSE状態へ移行）
+void drive_motor_stop_pause() {
+  stop_all_motors();
+  current_state = PAUSE;
+  // Serial.println("⏸️ State PAUSE (Piece removed).");
+}
+
+
+// ----------------------------------------------------------------------
+// III. Arduino SetupとLoop
+// ----------------------------------------------------------------------
+
+void setup(void) {
+  // Serial.begin(9600); // シリアル通信の開始
+
+  // ピン設定
+  pinMode(DC_MOTOR_PWM, OUTPUT); 
+  pinMode(DC_MOTOR_DIR, OUTPUT); 
+  pinMode(METAL_SENSOR_PIN, INPUT_PULLUP); // 内部プルアップを使用
+
+  front_steer_servo.attach(SERVO_PIN); 
+
+  stop_all_motors(); 
+  // Serial.println("System Ready. Autonomous Mode Active.");
+}
+
+
+void loop(void) {
+  // 1. センサー読み取り（デバウンス処理）
+  int raw_metal_status = digitalRead(METAL_SENSOR_PIN);
+  int metal_status = raw_metal_status;
+
+  if (raw_metal_status != lastMetalStatus) {
+    lastSensorChange = millis();
+  }
+
+  // 2. 安定したセンサー値での状態遷移判定（課題の進行）
+  if ((millis() - lastSensorChange) > DEBOUNCE_DELAY) {
+    metal_status = raw_metal_status;
+
+    switch (current_state) {
+
+      case WAIT_START:
+        // 【ピースを置く】(LOW) -> 駆動開始 (DRIVING)
+        if (metal_status == LOW) {
+          current_state = DRIVING;
+        }
+        break;
+
+      case DRIVING:
+        // AI指令がないため、直進を継続
+        drive_forward();
+
+        // 【ピースを取る】(HIGH) -> 一時停止へ (PAUSE)
+        if (metal_status == HIGH) {
+          drive_motor_stop_pause(); // モーターを停止し、PAUSE状態へ
+        }
+        break;
+
+      case PAUSE:
+        // 【ピースを置く】(LOW) -> Uターン実行後に駆動再開
+        if (metal_status == LOW) {
+          perform_uturn(); // 課題ルール: Uターン実行
+
+          // Uターン完了後、DRIVING状態に移行
+          current_state = DRIVING;
+        }
+        break;
+
+      case COMPLETE:
+        // 【ピースを取る】(HIGH) -> リセット (WAIT_START)
+        if (metal_status == HIGH) {
+          current_state = WAIT_START;
+        }
+        break;
+
+      default:
+        stop_all_motors();
+        current_state = WAIT_START;
+        break;
+    }
+  }
+
+  // 次のループのためにセンサー値を更新
+  lastMetalStatus = raw_metal_status;
+}
+</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- コードブロックの埋め込み終了 -->
+
+            </div>
         </div>
     </section>
 
@@ -222,9 +404,9 @@
 <script>
 // メニューの表示/非表示を切り替える関数
 function toggleMenu() {
-  const menu = document.getElementById("mobileMenu");
-  // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
-  menu.classList.toggle("is-open"); 
+  const menu = document.getElementById("mobileMenu");
+  // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
+  menu.classList.toggle("is-open"); 
 }
 
 // ページ読み込み後、モバイルメニュー内のリンク全てにイベントリスナーを追加
@@ -239,42 +421,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 });
-</script>   
+</script>    
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
