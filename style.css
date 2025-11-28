@@ -555,10 +555,18 @@ footer .logo {
     .hero {
         padding-top: calc(100px + 80px);
     }
-        /* 製作ヒストリーのタイムライン調整（モバイル用） */
-    .process-container .step {
-        padding-left: 50px;   /* 左余白を広げて文字を線から離す */
-    }
+       /* 製作ヒストリーのタイムライン調整（モバイル用） */
+.process-container .step {
+    /* 左側のパディング: 青い線とコンテンツの距離を維持 */
+    padding-left: 55px;    
+    
+    /* 💡 修正点: 右側にパディングを追加し、コンテンツが画面の端に重なるのを防ぐ */
+    /* ページ全体の横パディング (--space-page-padding-horizontal: 5%) に合わせる */
+    padding-right: 5%; 
+    
+    /* max-width は不要か、または max-width: none でコンテンツを広げる設定を維持 */
+    max-width: none;
+}
     .process-container .step:before {
         left: 0;              /* 丸印を線の位置に揃える */
     }
@@ -604,6 +612,7 @@ html, body {
     border-radius: 50%;
   }
 }
+
 
 
 
