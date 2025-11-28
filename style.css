@@ -555,3 +555,18 @@ footer .logo {
         padding-top: calc(100px + 80px);
     }
 }
+/* ここから追加する */
+pre, code {
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  pre {
+    font-size: 0.85em;
+    padding: 8px;
+  }
+}
+
