@@ -555,20 +555,30 @@ footer .logo {
         padding-top: calc(100px + 80px);
     }
 }
-/* ページ全体の横スクロール禁止 */
+/* ページ全体の横スクロールを禁止 */
 html, body {
   overflow-x: hidden;
 }
-
-/* コードブロックだけ横スクロール許可 */
-.code-block-wrapper .code-block {
+/* コードブロックのラッパーに横スクロールを許可 */
+.code-block-wrapper {
+  width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
 }
+/* コードブロック本体に横スクロールを許可 */
+.code-block-wrapper .code-block {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* preタグに横スクロールと幅制限 */
 .code-block-wrapper pre {
   white-space: pre;
   overflow-x: auto;
   max-width: 100%;
+  box-sizing: border-box;
+  display: block;
 }
+
 
 
 
