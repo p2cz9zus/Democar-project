@@ -514,6 +514,11 @@ footer .logo {
     /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
     .hero-tabs-container { display: none; }
     .menu-icon { display: block; }
+    
+    /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
+    .navbar .logo { 
+        width: 100px; 
+    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -540,9 +545,9 @@ footer .logo {
     .overview-content { flex-direction: column; }
     .tech-spec, .tech-detail { width: 100%; }
 
-    /* スマホ用フッターロゴをさらに小さく */
+    /* ★修正ポイント2: スマホ用フッターロゴをさらに小さく（768px以下） */
     footer .logo {
-        max-width: 80px;
+        max-width: 50px; /* 80pxから50pxに縮小 */
     }
     
     /* ヒーローセクションのトップパディングをスマホ向けに調整 */
