@@ -47,6 +47,11 @@ body {
     background-color: var(--color-background-light);
 }
 
+/* ★ 新規追加: スムーズスクロールの導入 ★ */
+html {
+    scroll-behavior: smooth;
+}
+
 /* --- セクション共通スタイル --- */
 .section {
     padding: var(--space-section-padding) var(--space-page-padding-horizontal);
@@ -70,6 +75,13 @@ body {
 
 .dark-bg h3 {
     color: var(--color-dark-bg-heading);
+}
+
+/* ★ 新規追加: アクセシビリティのためのフォーカスインジケータ改善 ★ */
+a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
+    outline: 2px solid var(--color-primary); /* プライマリカラーの青色 */
+    outline-offset: 3px;
+    border-radius: 4px; /* 角丸を適用 */
 }
 
 /* ==========================================================================
@@ -455,6 +467,35 @@ footer .logo {
     transition: max-height 0.5s ease-in;
 }
 
+/* ★ 新規追加: 開閉時のリンクのフェードイン/アウトアニメーション ★ */
+.mobile-menu a {
+    /* 現在のスタイルを維持 */
+    color: var(--color-text-light);
+    padding: 15px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+    
+    /* 初期状態: 非表示 */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, background-color 0.3s;
+}
+
+/* 開いた状態のアニメーション */
+.mobile-menu.is-open a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 複数のリンクにディレイをかける (JavaScriptと組み合わせることで真価を発揮) */
+/* CSSのみで行う場合は、N番目の子要素に対して直接ディレイをかけます */
+.mobile-menu.is-open a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.is-open a:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.is-open a:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.is-open a:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.is-open a:nth-child(5) { transition-delay: 0.3s; }
+
 /* モバイルメニュー内のリンク */
 .mobile-menu a {
     color: var(--color-text-light);
@@ -745,3 +786,4 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
