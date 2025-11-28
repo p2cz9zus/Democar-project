@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-</head>
+    </head>
 <body>
 
 <header class="navbar">
@@ -29,10 +27,10 @@
   </div>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#goals">プロジェクト目標を見る</a>
-    <a href="#overview">技術概要を見る</a>
-    <a href="#process">製作ヒストリーを見る</a>
-    <a href="#ideas">工夫点を見る</a>
+    <a href="#goals" onclick="toggleMenu()">プロジェクト目標を見る</a>
+    <a href="#overview" onclick="toggleMenu()">技術概要を見る</a>
+    <a href="#process" onclick="toggleMenu()">製作ヒストリーを見る</a>
+    <a href="#ideas" onclick="toggleMenu()">工夫点を見る</a>
   </div>
 </header>
   
@@ -222,13 +220,13 @@
             <div class="step">
                 <span class="step-number">最終フェーズ</span>
                 <h4>⑧ 制御コードの作成とロジック実装</h4>
-                <p>モビリティの自律走行を実現するための核となるArduino (C++) コードです。金属センサーの状態（ピースの有無）に応じて、「待機」「直進駆動」「Uターン後の再開」の3つの状態を切り替えるロジックを採用しています。</p>
+                <p>モビリティの自律走行を実現するための核となるArduino (C++) コードです。金属センサーの状態（ピースの有無）に応じて、「待機」「直進駆動」「Uターン後の再開」の3つの状態を切り替える**状態機械（State Machine）ロジック**を採用しています。</p>
 
-                <div class="code-display mt-4">
+                <div class="code-display">
                     <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino)</h5>
-                    <div class="code-container bg-gray-900 rounded-lg shadow-2xl p-4" style="color: #f8f8f2; overflow-x: auto;">
-                        <div class="code-block" style="max-height: 400px; overflow-y: auto;">
-<pre class="whitespace-pre-wrap text-sm leading-relaxed"><code>#include &lt;Arduino.h&gt;
+                    <div class="code-block-wrapper">
+                        <div class="code-block">
+<pre><code>#include &lt;Arduino.h&gt;
 #include &lt;Servo.h&gt;
 
 // ----------------------------------------------------------------------
@@ -391,7 +389,7 @@ void loop(void) {
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
     </section>
 
@@ -435,19 +433,8 @@ void loop(void) {
       // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
       menu.classList.toggle("is-open"); 
     }
-
-    // ページ読み込み後、モバイルメニュー内のリンク全てにイベントリスナーを追加
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const mobileMenuLinks = document.querySelectorAll('#mobileMenu a');
-
-        mobileMenuLinks.forEach(link => {
-            // リンクがクリックされたときに toggleMenu を実行
-            link.addEventListener('click', () => {
-                // スムーズな遷移を妨げないよう、クラスをトグルするだけ
-                toggleMenu(); 
-            });
-        });
-    });
+    
+    // 【削除されたコード】: リンククリック時の冗長な toggleMenu() 呼び出しはHTML側のインラインイベントに移行しました。
     </script>
 
     <script>
@@ -478,6 +465,3 @@ void loop(void) {
     </script>
     </body>
 </html>
-
-
-
