@@ -611,7 +611,20 @@ html, body {
     background-color: var(--color-primary);
     border-radius: 50%;
   }
+  /* style.css の @media (max-width: 768px) セクションの末尾に追加 */
+
+/* 💡 修正 1: ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
+.process-container .step .process-media,
+.process-container .step .code-block-wrapper {
+    /* 親要素の幅を超えないように制限 */
+    max-width: 100%;
+    /* paddingやborderを含めても幅が100%を超えないように設定 */
+    box-sizing: border-box; 
+    /* 念のため、親要素のパディングによるはみ出しを防ぐ */
+    margin: 0; 
+}  
 }
+
 
 
 
