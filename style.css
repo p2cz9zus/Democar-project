@@ -578,26 +578,33 @@ footer .logo {
  * 11. レスポンシブ対応 (モバイルフレンドリー)
  * ========================================================================== */
 
-/* PC版（769px以上） */
-@media (min-width: 769px) {
+/* PC版（901px以上）: ここでタブの表示を確定させる */
+@media (min-width: 901px) {
     /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
-    .hero-tabs-container { display: flex; }
-    .menu-icon { display: none; }
+    .hero-tabs-container { 
+        display: flex; 
+        flex: 1; 
+    }
+    .menu-icon { 
+        display: none; 
+    }
 }
 
-/* タブレットサイズ以下（900px以下） */
+
+/* タブレットサイズ以下（900px以下）: モバイルレイアウトに切り替える */
 @media (max-width: 900px) {
     .goal-list-container { grid-template-columns: repeat(2, 1fr); }
+    
     /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
-    .hero-tabs-container { display: none; }
+    .hero-tabs-container { display: none; } 
     .menu-icon { display: block; }
 
     /* モバイルメニューの display を明示し、開閉を可能にする */
     .mobile-menu { display: flex; }
     
     /* ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {    
-        width: 50px; /* 60pxから50pxに縮小 */
+    .navbar .logo {     
+        width: 50px; 
     }
 }
 
@@ -866,6 +873,7 @@ html, body {
         margin-bottom: 10px;
     }
 }
+
 
 
 
