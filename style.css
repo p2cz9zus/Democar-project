@@ -9,7 +9,7 @@
     ========================================================================== */
 :root {
     /* カラーパレット */
-    --color-primary: #007aff; /* Blue */
+    --color-primary: #007aff; /* Blue (Apple Blue) */
     --color-primary-hover: #006ddf;
     --color-text-dark: #1d1d1f;
     --color-text-light: #ffffff;
@@ -28,6 +28,10 @@
     --space-page-padding-horizontal: 5%;
     --space-title-margin-bottom: 60px;
     --space-grid-gap: 30px;
+
+    /* コードブロック用 */
+    --color-code-bg: #2d2d2d; /* Monaco Dark */
+    --color-code-text: #f8f8f2;
 }
 /* ==========================================================================
     2. ベーススタイル
@@ -122,10 +126,6 @@ body {
     margin-bottom: 40px;
     color: var(--color-hero-text-secondary);
 }
-
-/* --- ヒーロータブナビゲーション (このセクション内のタブは不要なので非表示) --- */
-/* HTMLでナビバー内に移動したため、このセクションから該当スタイルを削除または無視 */
-
 
 /* ==========================================================================
     4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
@@ -311,7 +311,6 @@ body {
     width: 100%;
 }
 
-
 /* ==========================================================================
     7. フッター
     ========================================================================== */
@@ -329,6 +328,66 @@ footer .logo {
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+/* ==========================================================================
+    9. コードブロック（新しいセクション）
+    ========================================================================== */
+
+/* コードブロックのラッパー（相対位置の基準） */
+.code-block-wrapper {
+    position: relative;
+    background-color: var(--color-code-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Tailwind shadow-2xl 相当 */
+    padding: 1rem; /* Tailwind p-4 相当 */
+    color: var(--color-code-text);
+    margin-top: 1rem; /* Tailwind mt-4 相当 */
+    text-align: left;
+}
+
+/* コードブロック本体（スクロールバーの制御とフォント設定） */
+.code-block-wrapper .code-block {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.code-block-wrapper pre {
+    white-space: pre-wrap;
+    font-size: 0.875rem; /* Tailwind text-sm 相当 */
+    line-height: 1.625; /* Tailwind leading-relaxed 相当 */
+    margin: 0; /* preタグのデフォルトマージンをリセット */
+    padding-top: 1.5rem; /* コピーボタンとの重なりを防ぐため */
+}
+
+/* コピーボタンのスタイル */
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background-color 0.2s;
+    z-index: 10;
+}
+
+.copy-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* コードブロック内の見出し */
+.code-display h5 {
+    font-size: 1.125rem; /* Tailwind text-lg 相当 */
+    font-weight: 500; /* Tailwind font-medium 相当 */
+    margin-bottom: 0.5rem; /* Tailwind mb-2 相当 */
+    color: var(--color-dark-bg-heading); /* 見やすい色に変更 */
+    text-align: left;
+    padding: 0;
 }
 
 
@@ -399,8 +458,11 @@ footer .logo {
 
 /* モバイルメニュー本体 */
 .mobile-menu {
-    /* 初期状態は非表示 */
-    display: none; 
+    /* 初期状態: 非表示（height: 0） */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out; /* 開閉アニメーション */
+    display: flex; /* Flexboxで縦並びに（メディアクエリで制御） */
     flex-direction: column;
     background-color: #111;
     width: 100%;
@@ -408,6 +470,12 @@ footer .logo {
     top: 100%; /* ナビバーの直下に配置 */
     left: 0;
     z-index: 999;
+}
+
+/* 展開状態 */
+.mobile-menu.is-open {
+    max-height: 500px; /* 展開時に十分な高さを設定 */
+    transition: max-height 0.5s ease-in;
 }
 
 /* モバイルメニュー内のリンク */
@@ -428,7 +496,7 @@ footer .logo {
 }
 
 /* ==========================================================================
-    8. レスポンシブ対応 (モバイルフレンドリー)
+    11. レスポンシブ対応 (モバイルフレンドリー)
     ========================================================================== */
 
 /* PC版（769px以上） */
@@ -436,7 +504,7 @@ footer .logo {
     /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
     .hero-tabs-container { display: flex; }
     .menu-icon { display: none; }
-    /* ★最終修正★ JavaScriptによる影響を完全に無視し、PCでは確実に非表示 */
+    /* PCではメニューを強制的に非表示にする */
     .mobile-menu { display: none !important; }
 }
 
@@ -456,11 +524,6 @@ footer .logo {
     
     /* PC用タブは非表示 */
     .hero-tabs-container { display: none; }
-
-    /* ★修正点★ JavaScriptでトグルするクラス。これが表示のトリガーになる。 */
-    .mobile-menu.is-open { 
-        display: flex;
-    }
 
     /* グリッドを1列に変更 */
     .goal-list-container { grid-template-columns: 1fr; }
