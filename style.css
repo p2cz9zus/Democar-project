@@ -584,3 +584,5 @@ html, body {
   }
   .process-container .step {
     padding-left: 0;   /* 左余白を消す */
+  }
+}
