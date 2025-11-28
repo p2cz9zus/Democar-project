@@ -310,10 +310,10 @@ footer .logo {
     position: relative;
     background-color: var(--color-code-bg);
     border-radius: 0.5rem;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Tailwind shadow-2xl 相当 */
-    padding: 1rem; /* Tailwind p-4 相当 */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
     color: var(--color-code-text);
-    margin-top: 1rem; /* Tailwind mt-4 相当 */
+    margin-top: 1rem;
     text-align: left;
 }
 
@@ -321,14 +321,31 @@ footer .logo {
 .code-block-wrapper .code-block {
     max-height: 400px;
     overflow-y: auto;
+    /* コードブロック内の pre タグに横スクロールを許可 */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+}
+
+/* コードブロック内の見出し */
+.code-display h5 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark-bg-heading); 
+    text-align: left;
+    padding: 0;
 }
 
 .code-block-wrapper pre {
-    white-space: pre-wrap;
-    font-size: 0.875rem; /* Tailwind text-sm 相当 */
-    line-height: 1.625; /* Tailwind leading-relaxed 相当 */
-    margin: 0; /* preタグのデフォルトマージンをリセット */
-    padding-top: 1.5rem; /* コピーボタンとの重なりを防ぐため */
+    /* HTMLから削除したインラインスタイルを統合 */
+    white-space: pre; /* モバイルでも横スクロールを維持するため pre を採用 */
+    font-size: 0.875rem;
+    line-height: 1.625;
+    margin: 0;
+    padding-top: 1.5rem; 
+    max-width: 100%; /* 親の .code-block-wrapper の幅に合わせる */
+    box-sizing: border-box;
+    display: block;
 }
 
 /* コピーボタンのスタイル */
@@ -349,16 +366,6 @@ footer .logo {
 
 .copy-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* コードブロック内の見出し */
-.code-display h5 {
-    font-size: 1.125rem; /* Tailwind text-lg 相当 */
-    font-weight: 500; /* Tailwind font-medium 相当 */
-    margin-bottom: 0.5rem; /* Tailwind mb-2 相当 */
-    color: var(--color-dark-bg-heading); /* 見やすい色に変更 */
-    text-align: left;
-    padding: 0;
 }
 
 
@@ -433,7 +440,6 @@ footer .logo {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out; /* 開閉アニメーション */
-    /* display: flex; <--- 削除しました */
     flex-direction: column;
     background-color: #111;
     width: 100%;
@@ -475,7 +481,6 @@ footer .logo {
     /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
     .hero-tabs-container { display: flex; }
     .menu-icon { display: none; }
-    /* .mobile-menu の強制非表示ルールは削除。901px以上のルールで対応する */
 }
 
 /* タブレットサイズ以下（900px以下） */
@@ -485,10 +490,10 @@ footer .logo {
     .hero-tabs-container { display: none; }
     .menu-icon { display: block; }
 
-    /* ★【追記】モバイルメニューの display を明示し、開閉を可能にする */
+    /* モバイルメニューの display を明示し、開閉を可能にする */
     .mobile-menu { display: flex; }
     
-    /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
+    /* ナビバーのロゴサイズを小さくする（900px以下） */
     .navbar .logo {    
         width: 50px; /* 60pxから50pxに縮小 */
     }
@@ -519,7 +524,7 @@ footer .logo {
     /* .tech-spec, .tech-detail はタブコンテンツ内にあるため、このスタイルは無視されるはずだが、念のため残す */
     .tech-spec, .tech-detail { width: 100%; }
 
-    /* ★修正ポイント2: スマホ用フッターロゴをさらに小さく（768px以下） */
+    /* スマホ用フッターロゴをさらに小さく（768px以下） */
     footer .logo {
         max-width: 27px; /* 30pxから27pxに縮小 */
     }
@@ -534,7 +539,6 @@ footer .logo {
         /* 左側のパディング: 青い線とコンテンツの距離を維持 */
         padding-left: 55px;    
         
-        /* 💡 修正済み: 右側にパディングを追加し、コンテンツが画面の端に重なるのを防ぐ */
         /* ページ全体の横パディング (--space-page-padding-horizontal: 5%) に合わせる */
         padding-right: 5%;    
         
@@ -546,7 +550,7 @@ footer .logo {
         top: -8px;         /* 丸を線の上端に置く */
     }
     
-    /* 💡 修正 1: ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
+    /* ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
     .process-container .step .process-media,
     .process-container .step .code-block-wrapper {
         max-width: 100%;
@@ -554,7 +558,7 @@ footer .logo {
         margin: 0;    
     }
     
-    /* 💡 修正 2: コードブロック内の pre タグの幅を明示的に制限し、既存の設定を統合 */
+    /* コードブロック内の pre タグの幅を明示的に制限し、既存の設定を統合 */
     .code-block pre {
         font-size: 0.85em;
         padding: 8px;
@@ -572,16 +576,9 @@ html, body {
 .code-container {
     overflow-x: hidden;      /* 親では横スクロール禁止 */
 }
-.code-block {
-    overflow-x: auto;        /* 内部だけ横スクロール許可 */
-    -webkit-overflow-scrolling: touch; /* モバイルでスムーズスクロール */
-}
-.code-block pre {
-    white-space: pre;        /* 折り返しせず横スクロール */
-    max-width: 100%;
-    box-sizing: border-box;
-    display: block;
-}
+/* .code-block の overflow-x: auto は .code-block-wrapper .code-block に統合されました */
+/* .code-block pre の white-space: pre; は .code-block-wrapper pre に統合されました */
+
 
 /* モバイル用調整 (768px以下) */
 @media (max-width: 768px) {
