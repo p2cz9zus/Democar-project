@@ -241,8 +241,8 @@ body {
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px;      /* 線の中央に丸を揃える */
-    top: -8px;       /* 丸を線の上端に置く */
+    left: -8px;       /* 線の中央に丸を揃える */
+    top: -8px;         /* 丸を線の上端に置く */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -372,7 +372,7 @@ footer .logo {
     color: #fff;
     width: 100%;
     /* ナビゲーションバーを上部に固定 */
-    position: fixed;   
+    position: fixed;    
     top: 0;
     left: 0;
     z-index: 1000;
@@ -423,7 +423,7 @@ footer .logo {
     cursor: pointer;
     padding: 5px;
     /* 右端に寄せる */
-    margin-left: auto;   
+    margin-left: auto;    
     display: none; /* PCでは非表示 */
 }
 
@@ -433,7 +433,7 @@ footer .logo {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out; /* 開閉アニメーション */
-    /* display: flex; /* Flexboxで縦並びに（メディアクエリで制御） */ <--- この行を削除 */
+    /* display: flex; <--- 削除しました */
     flex-direction: column;
     background-color: #111;
     width: 100%;
@@ -472,26 +472,26 @@ footer .logo {
 
 /* PC版（769px以上） */
 @media (min-width: 769px) {
-    /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
-    .hero-tabs-container { display: flex; }
-    .menu-icon { display: none; }
-    /* .mobile-menu の強制非表示ルールは削除。901px以上のルールで対応する */
+    /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
+    .hero-tabs-container { display: flex; }
+    .menu-icon { display: none; }
+    /* .mobile-menu の強制非表示ルールは削除。901px以上のルールで対応する */
 }
 
 /* タブレットサイズ以下（900px以下） */
 @media (max-width: 900px) {
-    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
-    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
-    .hero-tabs-container { display: none; }
-    .menu-icon { display: block; }
+    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
+    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
+    .hero-tabs-container { display: none; }
+    .menu-icon { display: block; }
 
-    /* ★【追記】モバイルメニューの display を明示し、開閉を可能にする */
-    .mobile-menu { display: flex; }
+    /* ★【追記】モバイルメニューの display を明示し、開閉を可能にする */
+    .mobile-menu { display: flex; }
     
-    /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {   
-        width: 50px; /* 60pxから50pxに縮小 */
-    }
+    /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
+    .navbar .logo {    
+        width: 50px; /* 60pxから50pxに縮小 */
+    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -532,26 +532,26 @@ footer .logo {
     /* 製作ヒストリーのタイムライン調整（モバイル用） */
     .process-container .step {
         /* 左側のパディング: 青い線とコンテンツの距離を維持 */
-        padding-left: 55px;   
+        padding-left: 55px;    
         
         /* 💡 修正済み: 右側にパディングを追加し、コンテンツが画面の端に重なるのを防ぐ */
         /* ページ全体の横パディング (--space-page-padding-horizontal: 5%) に合わせる */
-        padding-right: 5%;   
+        padding-right: 5%;    
         
         /* max-width は不要か、または max-width: none でコンテンツを広げる設定を維持 */
         max-width: none;
     }
     .process-container .step:before {
         left: -8px;      /* 丸印を線の位置に揃える */
-        top: -8px;        /* 丸を線の上端に置く */
+        top: -8px;         /* 丸を線の上端に置く */
     }
     
     /* 💡 修正 1: ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
     .process-container .step .process-media,
     .process-container .step .code-block-wrapper {
         max-width: 100%;
-        box-sizing: border-box; 
-        margin: 0; 
+        box-sizing: border-box;    
+        margin: 0;    
     }
     
     /* 💡 修正 2: コードブロック内の pre タグの幅を明示的に制限し、既存の設定を統合 */
@@ -570,14 +570,14 @@ html, body {
 
 /* コードブロックの横スクロールを内部だけに限定 */
 .code-container {
-    overflow-x: hidden;     /* 親では横スクロール禁止 */
+    overflow-x: hidden;      /* 親では横スクロール禁止 */
 }
 .code-block {
-    overflow-x: auto;       /* 内部だけ横スクロール許可 */
+    overflow-x: auto;        /* 内部だけ横スクロール許可 */
     -webkit-overflow-scrolling: touch; /* モバイルでスムーズスクロール */
 }
 .code-block pre {
-    white-space: pre;       /* 折り返しせず横スクロール */
+    white-space: pre;        /* 折り返しせず横スクロール */
     max-width: 100%;
     box-sizing: border-box;
     display: block;
@@ -588,7 +588,7 @@ html, body {
     /* タイムラインの丸印の再調整 */
     .process-container .step:before {
         left: -8px;      /* 丸印を線の位置に揃える */
-        top: -8px;        /* 丸を線の上端に置く */
+        top: -8px;         /* 丸を線の上端に置く */
         width: 16px;
         height: 16px;
         background-color: var(--color-primary);
@@ -748,5 +748,3 @@ html, body {
         margin-bottom: 10px;
     }
 }
-
-
