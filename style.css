@@ -517,7 +517,7 @@ footer .logo {
     
     /* ★修正ポイント1: ナビバーのロゴサイズを小さくする（900px以下） */
     .navbar .logo { 
-        width: 40px; /* 60pxから40pxに縮小 */
+        width: 45px; /* 60pxから45pxに縮小 */
     }
 }
 
@@ -547,7 +547,7 @@ footer .logo {
 
     /* ★修正ポイント2: スマホ用フッターロゴをさらに小さく（768px以下） */
     footer .logo {
-        max-width: 20px; /* 30pxから20pxに縮小 */
+        max-width: 25px; /* 30pxから25pxに縮小 */
     }
     
     /* ヒーローセクションのトップパディングをスマホ向けに調整 */
@@ -555,3 +555,4 @@ footer .logo {
         padding-top: calc(100px + 80px);
     }
 }
+
