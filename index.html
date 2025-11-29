@@ -163,7 +163,7 @@
         <p class="process-preamble">当初はファン駆動の車体を製作することを検討していましたが、途中で大きく方針転換しました。</p>
         <div class="process-container">
             
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">初期フェーズ</span>
                 <h4>① 車体の設計：台車部分及び全体図</h4>
                 <p>プロジェクト開始にあたり、車体構造の基礎設計を行い、台車部分と全体の構成図を作成しました。</p>
@@ -171,14 +171,14 @@
                 <img src="./zenntaizu.JPG" alt="車体全体の設計図" class="process-media">
             </div>
 
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">初期フェーズ</span>
                 <h4>② 部品の強度計算</h4>
                 <p>設計した各部品の強度計算を実施し、ファン駆動における動作環境での耐久性を検証しました。</p>
                 <img src="./kyoudo.jpg" alt="強度計算結果" class="process-media">
             </div>
             
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">初期フェーズ</span>
                 <h4>③ ファン部分の確認と問題発覚</h4>
                 <p>ファン駆動に必要な推力を確保できるかを確認するテストを実施しました。</p>
@@ -190,7 +190,7 @@
                 <p class="major-change-reason">→ ファン駆動では十分な推進力を得ることが難しく、タイヤ駆動に変更した。</p>
             </div>
 
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">方針転換後</span>
                 <h4>④ 回路の設計</h4>
                 <p>タイヤ駆動に対応するため、回路の設計と配線を行いました。</p>
@@ -198,7 +198,7 @@
                 <img src="./kuwashiikairo.jpeg" alt="回路図" class="process-media">
             </div>
 
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">初期フェーズ（方針転換後）</span>
                 <h4>⑤ マイクロコンピュータによるサーボモータ制御</h4>
                 <p>C言語プログラムを核として、マイクロコンピュータを用いてサーボモータの正確な旋回と反転動作を制御するプログラムの実装と調整を進めています。</p>
@@ -209,7 +209,7 @@
                 </video>
             </div>
 
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">初期フェーズ（方針転換後）</span>
                 <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮）</h4>
                 <p>初期フェーズ①で設計した車体をさらに改良しました。サーボモータの設置位置・前輪タイヤの動きを考慮して再度，設計しました。</p>
@@ -221,13 +221,13 @@
                 </video>
             </div>
 
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">初期フェーズ（方針転換後）</span>
                 <h4>⑦ トラブル発生：電源構成の変更</h4>
                 <p>電池ケースの不具合により、単3電池6本から9V電池への変更を行いました。これによりサーボモータとマイコンの安定動作を確保することができます。</p>
             </div>
 
-            <div class="step">
+            <div class="step animate-on-scroll">
                 <span class="step-number">最終フェーズ</span>
                 <h4>⑧ 制御コードの作成とロジック実装</h4>
                 <p>モビリティの自律走行を実現するための核となるArduino (C++) コードです。金属センサーの状態（ピースの有無）に応じて、「待機」「直進駆動」「Uターン後の再開」の3つの状態を切り替えるロジックを採用しています。</p>
@@ -567,6 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
     </body>
 </html>
+
 
 
 
