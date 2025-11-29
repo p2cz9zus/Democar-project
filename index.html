@@ -45,37 +45,37 @@
     <section id="goals" class="section dark-bg">
         <h3>プロジェクト目標</h3>
         <div class="goal-list-container">
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">01</span>
                 <h4>軽量化</h4>
                 <p>車体の軽量化を追求する。</p>
             </div>
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">02</span>
                 <h4>低コスト</h4>
                 <p>低コストでモビリティの実現を目指す。</p>
             </div>
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">03</span>
                 <h4>安定動作性</h4>
                 <p>厳密な制御により、安定した動作性を確保する。</p>
             </div>
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">04</span>
                 <h4>必要最低限の装備</h4>
                 <p>目標達成に必須な装備のみに絞り込む。</p>
             </div>
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">05</span>
                 <h4>マイコン制御による達成</h4>
                 <p>マイクロコンピュータを活用して、全ての課題を達成する。</p>
             </div>
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">06</span>
                 <h4>SDGsへの貢献 (部品再利用)</h4>
                 <p>既存部品の再利用を通じて、SDGs目標達成に貢献する。</p>
             </div>
-            <div class="goal-item-small">
+            <div class="goal-item-small animate-on-scroll">
                 <span class="goal-number-small">07</span>
                 <h4>成功率90%以上</h4>
                 <p>デモンストレーションにおいて成功率90%以上の達成を目指す。</p>
@@ -127,19 +127,19 @@
             <p>車体の安定動作と複雑なUターン機構を、マイコン制御で実現しています。</p>
             
             <div class="tech-card-container">
-                <div class="tech-card">
+                <div class="tech-card animate-on-scroll">
                     <h4>ロジック</h4>
                     <p>金属センサーの状態に応じて、待機 → 直進駆動 → 一時停止 → Uターン・再開 のサイクルを自動で切り替えるロジックを採用。成功率90%以上を支える厳密な制御です。</p>
                 </div>
-                <div class="tech-card">
+                <div class="tech-card animate-on-scroll">
                     <h4>マイコンによる高精度制御</h4>
                     <p>単なる駆動ではなく、マイクロコンピュータで旋回と180°反転を精密に制御。特にUターン動作の正確性が、課題達成の鍵となります。</p>
                 </div>
-                <div class="tech-card">
+                <div class="tech-card animate-on-scroll">
                     <h4>電力安定化</h4>
                     <p>ノイズや過負荷による誤動作を防ぐため、DCモータとマイコン/サーボの電力系統を分けました。</p>
                 </div>
-                <div class="tech-card">
+                <div class="tech-card animate-on-scroll">
                     <h4>設計変更による課題克服</h4>
                     <p>当初のファン駆動では必要な推力が得られないと判断し、安定性・推進力に優れたタイヤ駆動へ早期に方針転換しました。この柔軟な対応が実現に繋がりました。</p>
                 </div>
@@ -406,12 +406,12 @@ void loop(void) {
     <section id="ideas" class="section light-bg">
     <h3>🔧 工夫点</h3>
     <div class="goal-list-container">
-        <div class="goal-item-small">
+        <div class="goal-item-small animate-on-scroll">
             <span class="goal-number-small">01</span>
             <h4>配線の色分けによる再設計性向上</h4>
             <p>マイコンの配線に色分けを施すことで、回路の視認性を高め、再設計や修正が容易になった。</p>
         </div>
-        <div class="goal-item-small">
+        <div class="goal-item-small animate-on-scroll">
             <span class="goal-number-small">02</span>
             <h4>起電力の分離による電力安定化</h4>
             <p>マイコンとサーボモータを同一の起電力で動作させ、モータのみ別系統とすることで、電力の過不足による誤動作を防止した。</p>
@@ -567,6 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
     </body>
 </html>
+
 
 
 
