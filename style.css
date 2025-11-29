@@ -18,6 +18,19 @@
     }
 }
 
+/* ★新規追加★ 360度ビューア操作ヒント用アニメーション */
+@keyframes subtleShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(3px); /* わずかに右へ */
+    }
+    75% {
+        transform: translateX(-3px); /* わずかに左へ */
+    }
+}
+
 /* ==========================================================================
  * 1. カスタムプロパティ (変数) 定義
  * ========================================================================== */
@@ -129,11 +142,21 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
 }
 
 /* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
-.hero h1, .hero h2, .hero p, .hero .hero-tabs-container {
+.hero h1, .hero h2, .hero p {
     color: var(--color-text-light);
     position: relative;
     z-index: 2;
+    /* 初期状態を非表示にする（アニメーション開始前） */
+    opacity: 0; 
+    /* フェードインアニメーションを適用 */
+    animation: slideInUp 1.0s ease-out forwards; 
 }
+
+/* 要素ごとに遅延を設定して順番に表示 */
+.hero h1 { animation-delay: 0.3s; }
+.hero h2 { animation-delay: 0.6s; }
+.hero p { animation-delay: 0.9s; }
+/* .hero-tabs-container のアニメーション設定は全て削除します */
 
 .hero h1 {
     font-size: 3.5rem;
@@ -154,27 +177,6 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
 }
 
 /* ==========================================================================
- * 3. ヒーローセクション の修正 (修正版)
- * ========================================================================== */
-/* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
-/* ★ .hero .hero-tabs-container を削除しました！ ★ */
-.hero h1, .hero h2, .hero p {
-    color: var(--color-text-light);
-    position: relative;
-    z-index: 2;
-    /* 初期状態を非表示にする（アニメーション開始前） */
-    opacity: 0; 
-    /* フェードインアニメーションを適用 */
-    animation: slideInUp 1.0s ease-out forwards; 
-}
-
-/* 要素ごとに遅延を設定して順番に表示 */
-.hero h1 { animation-delay: 0.3s; }
-.hero h2 { animation-delay: 0.6s; }
-.hero p { animation-delay: 0.9s; }
-/* .hero-tabs-container のアニメーション設定は全て削除します */
-
-/* ==========================================================================
  * 4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
  * ========================================================================== */
 .goal-list-container {
@@ -187,17 +189,31 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     text-align: left;
 }
 
+/* ★修正・追加★ goal-item-small にトランジションと初期状態を設定 */
 .goal-item-small {
     padding: 25px;
     border-radius: 10px;
     background-color: var(--color-card-dark);
     border: 1px solid var(--color-primary);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+    /* ホバーアニメーション */
     transition: transform 0.3s;
+    
+    /* スクロールアニメーションの初期状態 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s, border 0.3s;
 }
 
 .goal-item-small:hover {
     transform: translateY(-5px);
+}
+
+/* ★追加★ visibleクラスが適用されたときのアニメーション */
+.goal-item-small.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .goal-number-small {
@@ -229,7 +245,6 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
 /* ==========================================================================
  * 5. 技術概要セクション（旧スタイルはタブ導入により不要）
  * ========================================================================== */
-/* 旧 .overview-content, .tech-spec, .tech-detail はタブ構造導入により削除または上書きされる */
 
 .diagram-placeholder {
     height: 250px;
@@ -243,8 +258,8 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     margin-top: 20px;
 }
 
-/* 核心技術セクションのアニメーション */
-.animate-on-scroll {
+/* 核心技術セクションのアニメーション (汎用クラスを削除し、個別クラスで制御) */
+/* .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
     transition: all 1.6s ease-out;
@@ -254,6 +269,8 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     opacity: 1;
     transform: translateY(0);
 }
+*/
+
 /* ==========================================================================
  * 6. 製作プロセス (ヒストリー)
  * ========================================================================== */
@@ -274,6 +291,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     text-align: left;
 }
 
+/* ★修正・追加★ 製作ステップ (タイムライン) にアニメーションを設定 */
 .process-container .step {
     flex: 1;
     padding: 0 0 0 40px;
@@ -283,13 +301,25 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     /* 縦並びのタイムライン装飾 */
     border-top: none;
     border-left: 3px solid var(--color-primary);
+
+    /* スクロールアニメーションの初期状態 */
+    opacity: 0;
+    transform: translateX(-30px); /* 左からスライドイン */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+/* ★追加★ visibleクラスが適用されたときのアニメーション */
+.process-container .step.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ステップの丸印 */
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px;       /* 線の中央に丸を揃える */
-    top: -8px;         /* 丸を線の上端に置く */
+    left: -8px;      /* 線の中央に丸を揃える */
+    top: -8px;       /* 丸を線の上端に置く */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -494,7 +524,7 @@ footer .logo {
     cursor: pointer;
     padding: 5px;
     /* 右端に寄せる */
-    margin-left: auto;    
+    margin-left: auto;     
     display: none; /* PCでは非表示 */
 }
 
@@ -540,8 +570,7 @@ footer .logo {
     transform: translateY(0);
 }
 
-/* 複数のリンクにディレイをかける (JavaScriptと組み合わせることで真価を発揮) */
-/* CSSのみで行う場合は、N番目の子要素に対して直接ディレイをかけます */
+/* 複数のリンクにディレイをかける (CSSのみで実現) */
 .mobile-menu.is-open a:nth-child(1) { transition-delay: 0.1s; }
 .mobile-menu.is-open a:nth-child(2) { transition-delay: 0.15s; }
 .mobile-menu.is-open a:nth-child(3) { transition-delay: 0.2s; }
@@ -594,7 +623,7 @@ footer .logo {
     .mobile-menu { display: flex; }
     
     /* ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {     
+    .navbar .logo {      
         width: 50px; 
     }
 }
@@ -622,7 +651,7 @@ footer .logo {
     
     /* ナビゲーションバーとの距離を維持するため、トップパディングは維持 */
     /* .hero { padding-top: calc(100px + 80px); } */
-}
+
 
     /* グリッドを1列に変更 */
     .goal-list-container { grid-template-columns: 1fr; }
@@ -663,7 +692,7 @@ footer .logo {
     }
     .process-container .step:before {
         left: -8px;      /* 丸印を線の位置に揃える */
-        top: -8px;         /* 丸を線の上端に置く */
+        top: -8px;           /* 丸を線の上端に置く */
     }
     
     /* ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
@@ -701,7 +730,7 @@ html, body {
     /* タイムラインの丸印の再調整 */
     .process-container .step:before {
         left: -8px;      /* 丸印を線の位置に揃える */
-        top: -8px;         /* 丸を線の上端に置く */
+        top: -8px;           /* 丸を線の上端に置く */
         width: 16px;
         height: 16px;
         background-color: var(--color-primary);
@@ -807,18 +836,32 @@ html, body {
     margin-top: 20px;
 }
 
+/* ★修正・追加★ tech-card にトランジションと初期状態を設定 */
 .tech-card {
     padding: 25px;
     border: 1px solid #e0e0e0;
     border-left: 5px solid var(--color-primary);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    
+    /* ホバーアニメーション */
     transition: transform 0.3s;
+
+    /* スクロールアニメーションの初期状態 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s, border 0.3s;
 }
 
 .tech-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ★追加★ visibleクラスが適用されたときのアニメーション */
+.tech-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .tech-card h4 {
@@ -867,76 +910,75 @@ html, body {
 
 /* ビューアを配置するセクションラッパー */
 .viewer-section-wrapper {
-    max-width: 1000px;
-    margin: 60px auto 0; /* 上にマージンを追加 */
-    text-align: center;
+    max-width: 1000px;
+    margin: 60px auto 0; /* 上にマージンを追加 */
+    text-align: center;
 }
 
 .viewer-section-wrapper h4 {
-    font-size: 1.8rem;
-    color: var(--color-text-dark);
-    margin-bottom: 30px;
+    font-size: 1.8rem;
+    color: var(--color-text-dark);
+    margin-bottom: 30px;
 }
 
 .viewer {
-    width: 90%; /* レスポンシブ対応 */
-    max-width: 700px; /* 最大幅を少し広めに設定 */
-    height: 450px;  /* 高さを調整 */
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-    background: #333;
-    border: 5px solid var(--color-primary); /* ボーダーをプライマリカラーに変更 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    cursor: grab;
-    border-radius: 10px;
+    width: 90%; /* レスポンシブ対応 */
+    max-width: 700px; /* 最大幅を少し広めに設定 */
+    height: 450px;  /* 高さを調整 */
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: #333;
+    border: 5px solid var(--color-primary); /* ボーダーをプライマリカラーに変更 */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    border-radius: 10px;
+
+    /* ★新規追加★ ドラッグを促すアニメーション */
+    animation: subtleShake 3s ease-in-out 1s 2; /* 1秒後に開始し、2回繰り返す */
 }
-    
-.viewer img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.05s ease-out; 
-    user-select: none;
-    -webkit-user-drag: none;
-}
-    
-.viewer img.active {
-    opacity: 1;
-}
-    
+    
+/* ★新規追加★ ドラッグ中はアニメーションを停止 */
 .viewer.dragging {
-    cursor: grabbing;
+    cursor: grabbing;
+    animation: none; /* ドラッグ開始でアニメーションを停止 */
+}
+
+.viewer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.05s ease-out; 
+    user-select: none;
+    -webkit-user-drag: none;
+}
+    
+.viewer img.active {
+    opacity: 1;
+}
+    
+.viewer.dragging {
+    cursor: grabbing;
 }
 
 /* 画像がない場合のプレースホルダーテキストのスタイル */
 .viewer .image-placeholder-text {
-    color: var(--color-text-light);
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    padding: 0 10px;
+    color: var(--color-text-light);
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0 10px;
 }
 
 @media (max-width: 768px) {
-    .viewer {
-        height: 300px; /* モバイルでは高さを縮小 */
-    }
+    .viewer {
+        height: 300px; /* モバイルでは高さを縮小 */
+    }
 }
-
-
-
-
-
-
-
-
-
-
