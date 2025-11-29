@@ -147,6 +147,16 @@
             <div class="diagram-placeholder">最終仕様のイメージ図</div>
         </div>
     </div>
+        <div class="viewer-section-wrapper">
+        <h4>🔄 360° 車体ビューア</h4>
+        <div class="viewer" id="viewer">
+                        <img src="car_01.jpg" class="active" alt="A1班モビリティ">
+            <img src="car_02.jpg" alt="A1班モビリティ">
+            <img src="car_03.jpg" alt="A1班モビリティ">
+            <img src="car_04.jpg" alt="A1班モビリティ">
+            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
+        </div>
+    </div>
 </section>
     <section id="process" class="section dark-bg">
         <h3>製作ヒストリー</h3>
@@ -463,7 +473,97 @@ void loop(void) {
         });
     }); 
     </script>
+    // ---------------------------------------------------- 
+// 360° Car Viewer スクリプトの追加
+// ----------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const viewer = document.getElementById('viewer');
+    // ビューア要素が見つからない場合は処理を中断
+    if (!viewer) return;
+
+    // `img`要素のみを選択（メッセージ用のpタグを除外するため）
+    const images = viewer.querySelectorAll('img'); 
+    const totalImages = images.length;
+
+    if (totalImages === 0) {
+        console.error("360度ビューア用の画像が見つかりませんでした。");
+        return; 
+    }
+
+    let current = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startImageIndex = 0;
+
+    // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
+    const SENSITIVITY = 1.0; 
+
+    // 指定されたインデックスの画像を表示する関数
+    function showImage(index) {
+      images[current].classList.remove('active');
+      // モジュロ演算でインデックスをループさせる (負の値にも対応)
+      current = (index % totalImages + totalImages) % totalImages;
+      images[current].classList.add('active');
+    }
+
+    // ドラッグ開始ハンドラ
+    function startDrag(e) {
+      if (e.type === 'touchstart' && e.touches.length > 1) return;
+      
+      e.preventDefault();
+      isDragging = true;
+      viewer.classList.add('dragging');
+
+      startX = e.pageX || e.touches[0].pageX;
+      startImageIndex = current;
+      
+      document.addEventListener('mousemove', onDragMove);
+      document.addEventListener('touchmove', onDragMove);
+      document.addEventListener('mouseup', endDrag);
+      document.addEventListener('touchend', endDrag);
+    }
+
+    // ドラッグ中のハンドラ
+    function onDragMove(e) {
+      if (!isDragging) return;
+      
+      if (e.type === 'touchmove' && e.touches.length > 1) return;
+
+      const currentX = e.pageX || e.touches[0].pageX;
+      const diffX = currentX - startX; 
+      
+      const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
+      const imageDelta = Math.round(diffX / dragAmountPerImage);
+      
+      const newIndex = startImageIndex - imageDelta; 
+
+      if (newIndex !== current) {
+        showImage(newIndex);
+      }
+    }
+
+    // ドラッグ終了ハンドラ
+    function endDrag() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      viewer.classList.remove('dragging');
+      
+      document.removeEventListener('mousemove', onDragMove);
+      document.removeEventListener('touchmove', onDragMove);
+      document.removeEventListener('mouseup', endDrag);
+      document.removeEventListener('touchend', endDrag);
+    }
+
+    // 初期イベントリスナーの設定
+    viewer.addEventListener('mousedown', startDrag);
+    viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+    
+    // 初期表示
+    showImage(0);
+});
     </body>
 </html>
+
 
 
