@@ -640,8 +640,7 @@ footer .logo {
     /* ナビバーのロゴサイズを小さくする（900px以下） - 修正しました */
     .navbar .logo {
         width: 50px;
-        /* モバイル環境でもロゴの高さを明示的に設定 */
-        height: 20px;
+        
         /* モバイルでもフレックスを適用し、imgを中央に配置 */
         display: flex; 
         align-items: center; 
@@ -996,6 +995,7 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
 
