@@ -493,7 +493,7 @@ footer .logo {
     display: flex;
     align-items: center;
     padding: 4px 20px;
-    min-height: 60px;
+    min-height: 50px;
 }
 
 /* ロゴ - 修正しました */
@@ -996,6 +996,7 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
 
