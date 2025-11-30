@@ -511,7 +511,7 @@ footer .logo {
 
 /* ロゴ */
 .logo {
-    width: 130px;
+    width: 120px;
     height: auto;
     flex-shrink: 0;
 }
@@ -1005,4 +1005,5 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
