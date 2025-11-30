@@ -567,8 +567,45 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(0);
 });
 </script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // 1. 要素の取得
+    const menuIcon = document.querySelector('.menu-icon');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    // 2. メニューアイコンにイベントリスナーを設定
+    if (menuIcon && mobileMenu) {
+        menuIcon.addEventListener('click', function() {
+            // .is-open クラスを切り替える (トグルする)
+            // このクラスによってCSSの max-height: 500px が適用され、メニューが開く
+            mobileMenu.classList.toggle('is-open');
+
+            // 必要に応じてアイコンの状態を切り替える処理 (例: ハンバーガーアイコン ↔︎ Xマーク)
+            // このCSSセレクタ（.menu-icon h2）は仮定です。実際のHTML構造に合わせてください。
+            const iconText = menuIcon.querySelector('h2'); 
+            if (iconText) {
+                iconText.textContent = mobileMenu.classList.contains('is-open') ? '✕' : '≡';
+            }
+        });
+
+        // 3. メニュー内のリンクをクリックしたときにメニューを閉じる
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // .is-open クラスを削除する
+                mobileMenu.classList.remove('is-open');
+                
+                // アイコンを閉じた状態に戻す
+                const iconText = menuIcon.querySelector('h2');
+                 if (iconText) {
+                    iconText.textContent = '≡';
+                }
+            });
+        });
+    }
+});
     </body>
 </html>
+
 
 
 
