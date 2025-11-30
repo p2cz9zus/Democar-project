@@ -493,7 +493,7 @@ footer .logo {
     display: flex;
     align-items: center;
     padding: 4px 20px;
-　　
+	
 }
 
 /* ロゴ - 修正しました */
@@ -630,24 +630,23 @@ footer .logo {
 @media (max-width: 900px) {
     /* ... (中略) ... */
 
-    /* モバイルメニューの display を明示し、開閉を可能にする */
-    .mobile-menu { display: flex; }
-    
-    /* 【★新規追加/修正★】モバイル版のナビバーコンテナの最小高さを設定 */
+    /* モバイルメニューの display を明示し、開閉を可能にする */
+    .mobile-menu { display: flex; }
+    
+    /* 【★最終修正★】モバイル版のナビバーコンテナの最小高さを、操作性を考慮し40pxに設定 */
     .navbar-container {
-        /* コンテンツの高さ（ロゴやアイコン）に応じて動的に高さを決められるように、
-           最小高さを PC版のより低くする */
-        min-height: 30px; 
+        min-height: 40px; 
     }
 
-    /* ナビバーのロゴサイズを小さくする（900px以下） - 修正しました */
-    .navbar .logo {
-        width: 50px;
-        /* min-height: 10px; <-- この誤った行を削除 */
-        /* モバイルでもフレックスを適用し、imgを中央に配置 */
-        display: flex; 
-        align-items: center; 
-    }
+    /* ナビバーのロゴサイズを小さくする（900px以下） - 修正しました */
+    .navbar .logo {
+        width: 50px;
+        /* height: 42px の指定を削除。コンテンツの高さはmin-heightで制御される */
+        height: auto; 
+        /* モバイルでもフレックスを適用し、imgを中央に配置 */
+        display: flex; 
+        align-items: center; 
+    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -998,14 +997,3 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
