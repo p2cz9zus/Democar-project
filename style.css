@@ -504,7 +504,7 @@ footer .logo {
     align-items: center; 
     
     width: 120px;
-    height: 40px;
+    height: 42px;
     flex-shrink: 0;
 }
 
@@ -636,8 +636,8 @@ footer .logo {
     /* 【★新規追加/修正★】モバイル版のナビバーコンテナの最小高さを設定 */
     .navbar-container {
         /* コンテンツの高さ（ロゴやアイコン）に応じて動的に高さを決められるように、
-           最小高さを PC版の 50px より低く（例: 40px）するか、完全に解除（0）する */
-        min-height: 40px; 
+           最小高さを PC版のより低くする */
+        min-height: 30px; 
     }
 
     /* ナビバーのロゴサイズを小さくする（900px以下） - 修正しました */
@@ -998,6 +998,7 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
 
