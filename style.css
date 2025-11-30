@@ -493,7 +493,7 @@ footer .logo {
     display: flex;
     align-items: center;
     padding: 4px 20px;
-    min-height: 70px;
+    min-height: 60px;
 }
 
 /* ロゴ - 修正しました */
@@ -641,7 +641,7 @@ footer .logo {
     .navbar .logo {
         width: 50px;
         /* モバイル環境でもロゴの高さを明示的に設定 */
-        height: 40px;
+        height: 30px;
         /* モバイルでもフレックスを適用し、imgを中央に配置 */
         display: flex; 
         align-items: center; 
@@ -996,5 +996,6 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
