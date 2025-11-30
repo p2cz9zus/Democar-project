@@ -8,14 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
+    
+    </head>
 <body>
 
 <header class="navbar">
   <div class="navbar-container">
-    <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
-      <img src="A1.png" alt="プロジェクトロゴ" style="width: 100%; height: auto; display: block;">
-    </a>
+    <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">  
+    <img src="A1.png" alt="プロジェクトロゴ" class="logo">
 
     <nav class="hero-tabs-container">
       <a href="#goals" class="hero-tab-button">プロジェクト目標</a>
@@ -149,15 +149,15 @@
         </div>
     </div>
         <div class="viewer-section-wrapper">
-        <h4>🔄 360° 車体ビューア</h4>
-        <div class="viewer" id="viewer">
-            <img src="car_01.jpg" class="active" alt="A1班モビリティ">
-            <img src="car_02.jpg" alt="A1班モビリティ">
-            <img src="car_03.jpg" alt="A1班モビリティ">
-            <img src="car_04.jpg" alt="A1班モビリティ">
-            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
-        </div>
-    </div>
+        <h4>🔄 360° 車体ビューア</h4>
+        <div class="viewer" id="viewer">
+                        <img src="car_01.jpg" class="active" alt="A1班モビリティ">
+            <img src="car_02.jpg" alt="A1班モビリティ">
+            <img src="car_03.jpg" alt="A1班モビリティ">
+            <img src="car_04.jpg" alt="A1班モビリティ">
+            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
+        </div>
+    </div>
 </section>
     <section id="process" class="section dark-bg">
         <h3>製作ヒストリー</h3>
@@ -426,9 +426,6 @@ void loop(void) {
     </footer>
 
     <script>
-    // ---------------------------------------------------- 
-    // 1. スクロールアニメーション制御
-    // ----------------------------------------------------
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -438,31 +435,21 @@ void loop(void) {
     });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    </script>
 
-
-    // ---------------------------------------------------- 
-    // 2. モバイルメニューの開閉制御 (HTMLのonclickに連動)
-    // ----------------------------------------------------
+    <script>
+    // メニューの表示/非表示を切り替える関数
     function toggleMenu() {
       const menu = document.getElementById("mobileMenu");
-      const icon = document.querySelector(".menu-icon");
-
-      // is-open クラスをトグル
+      // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
       menu.classList.toggle("is-open"); 
-
-      // アイコンの '≡' と '✕' を切り替える
-      // HTMLの構造に合わせて textContent を直接変更
-      if (menu.classList.contains("is-open")) {
-        icon.innerHTML = '&#10005;'; // Xマーク
-      } else {
-        icon.innerHTML = '&#9776;'; // ハンバーガー
-      }
     }
+    
+    // 【削除されたコード】: リンククリック時の冗長な toggleMenu() 呼び出しはHTML側のインラインイベントに移行しました。
+    </script>
 
-
-    // ---------------------------------------------------- 
-    // 3. タブ切り替え機能
-    // ----------------------------------------------------
+    <script>
+    /* タブ切り替え機能 */
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -486,89 +473,102 @@ void loop(void) {
             });
         });
     }); 
-    
-    
-    // ---------------------------------------------------- 
-    // 4. 360° Car Viewer スクリプト
-    // ----------------------------------------------------
-    document.addEventListener('DOMContentLoaded', () => {
-        const viewer = document.getElementById('viewer');
-        if (!viewer) return;
-
-        const images = viewer.querySelectorAll('img'); 
-        const totalImages = images.length;
-
-        if (totalImages === 0) return; 
-
-        let current = 0;
-        let isDragging = false;
-        let startX = 0;
-        let startImageIndex = 0;
-
-        const SENSITIVITY = 1.0; 
-
-        function showImage(index) {
-          images[current].classList.remove('active');
-          current = (index % totalImages + totalImages) % totalImages;
-          images[current].classList.add('active');
-        }
-
-        function startDrag(e) {
-          if (e.type === 'touchstart' && e.touches.length > 1) return;
-          
-          e.preventDefault();
-          isDragging = true;
-          viewer.classList.add('dragging');
-
-          startX = e.pageX || e.touches[0].pageX;
-          startImageIndex = current;
-          
-          document.addEventListener('mousemove', onDragMove);
-          document.addEventListener('touchmove', onDragMove);
-          document.addEventListener('mouseup', endDrag);
-          document.addEventListener('touchend', endDrag);
-        }
-
-        function onDragMove(e) {
-          if (!isDragging) return;
-          
-          if (e.type === 'touchmove' && e.touches.length > 1) return;
-
-          const currentX = e.pageX || e.touches[0].pageX;
-          const diffX = currentX - startX; 
-          
-          const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
-          const imageDelta = Math.round(diffX / dragAmountPerImage);
-          
-          const newIndex = startImageIndex - imageDelta; 
-
-          if (newIndex !== current) {
-            showImage(newIndex);
-          }
-        }
-
-        function endDrag() {
-          if (!isDragging) return;
-
-          isDragging = false;
-          viewer.classList.remove('dragging');
-          
-          document.removeEventListener('mousemove', onDragMove);
-          document.removeEventListener('touchmove', onDragMove);
-          document.removeEventListener('mouseup', endDrag);
-          document.removeEventListener('touchend', endDrag);
-        }
-
-        viewer.addEventListener('mousedown', startDrag);
-        viewer.addEventListener('touchstart', startDrag, { passive: false }); 
-        
-        showImage(0);
-    });
-
-    // ---------------------------------------------------- 
-    // 5. 【冗長なコードの削除】
-    // 以前のメニュー開閉ロジックのブロックは削除しました。
-    // ----------------------------------------------------
     </script>
-</body>
+    
+    <script>
+    // ---------------------------------------------------- 
+// 360° Car Viewer スクリプトの追加
+// ----------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const viewer = document.getElementById('viewer');
+    // ビューア要素が見つからない場合は処理を中断
+    if (!viewer) return;
+
+    // `img`要素のみを選択（メッセージ用のpタグを除外するため）
+    const images = viewer.querySelectorAll('img'); 
+    const totalImages = images.length;
+
+    if (totalImages === 0) {
+        console.error("360度ビューア用の画像が見つかりませんでした。");
+        return; 
+    }
+
+    let current = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startImageIndex = 0;
+
+    // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
+    const SENSITIVITY = 1.0; 
+
+    // 指定されたインデックスの画像を表示する関数
+    function showImage(index) {
+      images[current].classList.remove('active');
+      // モジュロ演算でインデックスをループさせる (負の値にも対応)
+      current = (index % totalImages + totalImages) % totalImages;
+      images[current].classList.add('active');
+    }
+
+    // ドラッグ開始ハンドラ
+    function startDrag(e) {
+      if (e.type === 'touchstart' && e.touches.length > 1) return;
+      
+      e.preventDefault();
+      isDragging = true;
+      viewer.classList.add('dragging');
+
+      startX = e.pageX || e.touches[0].pageX;
+      startImageIndex = current;
+      
+      document.addEventListener('mousemove', onDragMove);
+      document.addEventListener('touchmove', onDragMove);
+      document.addEventListener('mouseup', endDrag);
+      document.addEventListener('touchend', endDrag);
+    }
+
+    // ドラッグ中のハンドラ
+    function onDragMove(e) {
+      if (!isDragging) return;
+      
+      if (e.type === 'touchmove' && e.touches.length > 1) return;
+
+      const currentX = e.pageX || e.touches[0].pageX;
+      const diffX = currentX - startX; 
+      
+      const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
+      const imageDelta = Math.round(diffX / dragAmountPerImage);
+      
+      const newIndex = startImageIndex - imageDelta; 
+
+      if (newIndex !== current) {
+        showImage(newIndex);
+      }
+    }
+
+    // ドラッグ終了ハンドラ
+    function endDrag() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      viewer.classList.remove('dragging');
+      
+      document.removeEventListener('mousemove', onDragMove);
+      document.removeEventListener('touchmove', onDragMove);
+      document.removeEventListener('mouseup', endDrag);
+      document.removeEventListener('touchend', endDrag);
+    }
+
+    // 初期イベントリスナーの設定
+    viewer.addEventListener('mousedown', startDrag);
+    viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+    
+    // 初期表示
+    showImage(0);
+});
+</script>
+    </body>
 </html>
+
+
+
+
