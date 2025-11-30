@@ -505,8 +505,8 @@ footer .logo {
 .navbar-container {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    min-height: 80px;
+    padding: 8px 20px;
+    min-height: 70px;
 }
 
 /* ロゴ */
@@ -1005,5 +1005,6 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
