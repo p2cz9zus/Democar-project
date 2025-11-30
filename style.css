@@ -641,7 +641,7 @@ footer .logo {
     .navbar .logo {
         width: 50px;
         /* モバイル環境でナビバーをさらに低くしたい場合 */
-        min-height: 20px;
+        min-height: 10px;
         /* モバイルでもフレックスを適用し、imgを中央に配置 */
         display: flex; 
         align-items: center; 
@@ -996,6 +996,7 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
 
