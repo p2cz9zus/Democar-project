@@ -493,7 +493,7 @@ footer .logo {
     display: flex;
     align-items: center;
     padding: 4px 20px;
-    min-height: 50px;
+　　
 }
 
 /* ロゴ - 修正しました */
@@ -628,24 +628,26 @@ footer .logo {
 
 /* タブレットサイズ以下（900px以下）: モバイルレイアウトに切り替える */
 @media (max-width: 900px) {
-    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
-    
-    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
-    .hero-tabs-container { display: none; }
-    .menu-icon { display: block; }
+    /* ... (中略) ... */
 
-    /* モバイルメニューの display を明示し、開閉を可能にする */
-    .mobile-menu { display: flex; }
-    
-    /* ナビバーのロゴサイズを小さくする（900px以下） - 修正しました */
-    .navbar .logo {
-        width: 50px;
-        /* モバイル環境でナビバーをさらに低くしたい場合 */
-        min-height: 10px;
-        /* モバイルでもフレックスを適用し、imgを中央に配置 */
-        display: flex; 
-        align-items: center; 
+    /* モバイルメニューの display を明示し、開閉を可能にする */
+    .mobile-menu { display: flex; }
+    
+    /* 【★新規追加/修正★】モバイル版のナビバーコンテナの最小高さを設定 */
+    .navbar-container {
+        /* コンテンツの高さ（ロゴやアイコン）に応じて動的に高さを決められるように、
+           最小高さを PC版の 50px より低く（例: 40px）するか、完全に解除（0）する */
+        min-height: 40px; 
     }
+
+    /* ナビバーのロゴサイズを小さくする（900px以下） - 修正しました */
+    .navbar .logo {
+        width: 50px;
+        /* min-height: 10px; <-- この誤った行を削除 */
+        /* モバイルでもフレックスを適用し、imgを中央に配置 */
+        display: flex; 
+        align-items: center; 
+    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -996,6 +998,7 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
 
