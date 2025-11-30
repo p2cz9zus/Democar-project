@@ -8,32 +8,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    </head>
+</head>
 <body>
 
 <header class="navbar">
-  <div class="navbar-container">
-    <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
-      <img src="A1.png" alt="プロジェクトロゴ" style="width: 100%; height: auto; display: block;">
-    </a>
+  <div class="navbar-container">
+    <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
+      <img src="A1.png" alt="プロジェクトロゴ" style="width: 100%; height: auto; display: block;">
+    </a>
 
-    <nav class="hero-tabs-container">
-      <a href="#goals" class="hero-tab-button">プロジェクト目標</a>
-      <a href="#overview" class="hero-tab-button">技術概要</a>
-      <a href="#process" class="hero-tab-button">製作ヒストリー</a>
-      <a href="#ideas" class="hero-tab-button">工夫点</a>
-    </nav>
+    <nav class="hero-tabs-container">
+      <a href="#goals" class="hero-tab-button">プロジェクト目標</a>
+      <a href="#overview" class="hero-tab-button">技術概要</a>
+      <a href="#process" class="hero-tab-button">製作ヒストリー</a>
+      <a href="#ideas" class="hero-tab-button">工夫点</a>
+    </nav>
 
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-  </div>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+  </div>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#goals" onclick="toggleMenu()">プロジェクト目標を見る</a>
-    <a href="#overview" onclick="toggleMenu()">技術概要を見る</a>
-    <a href="#process" onclick="toggleMenu()">製作ヒストリーを見る</a>
-    <a href="#ideas" onclick="toggleMenu()">工夫点を見る</a>
-  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#goals" onclick="toggleMenu()">プロジェクト目標を見る</a>
+    <a href="#overview" onclick="toggleMenu()">技術概要を見る</a>
+    <a href="#process" onclick="toggleMenu()">製作ヒストリーを見る</a>
+    <a href="#ideas" onclick="toggleMenu()">工夫点を見る</a>
+  </div>
 </header>
   
 
@@ -150,15 +149,15 @@
         </div>
     </div>
         <div class="viewer-section-wrapper">
-        <h4>🔄 360° 車体ビューア</h4>
-        <div class="viewer" id="viewer">
-                        <img src="car_01.jpg" class="active" alt="A1班モビリティ">
-            <img src="car_02.jpg" alt="A1班モビリティ">
-            <img src="car_03.jpg" alt="A1班モビリティ">
-            <img src="car_04.jpg" alt="A1班モビリティ">
-            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
-        </div>
-    </div>
+        <h4>🔄 360° 車体ビューア</h4>
+        <div class="viewer" id="viewer">
+            <img src="car_01.jpg" class="active" alt="A1班モビリティ">
+            <img src="car_02.jpg" alt="A1班モビリティ">
+            <img src="car_03.jpg" alt="A1班モビリティ">
+            <img src="car_04.jpg" alt="A1班モビリティ">
+            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
+        </div>
+    </div>
 </section>
     <section id="process" class="section dark-bg">
         <h3>製作ヒストリー</h3>
@@ -427,6 +426,9 @@ void loop(void) {
     </footer>
 
     <script>
+    // ---------------------------------------------------- 
+    // 1. スクロールアニメーション制御
+    // ----------------------------------------------------
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -436,21 +438,31 @@ void loop(void) {
     });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    </script>
 
-    <script>
-    // メニューの表示/非表示を切り替える関数
+
+    // ---------------------------------------------------- 
+    // 2. モバイルメニューの開閉制御 (HTMLのonclickに連動)
+    // ----------------------------------------------------
     function toggleMenu() {
       const menu = document.getElementById("mobileMenu");
-      // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
-      menu.classList.toggle("is-open"); 
-    }
-    
-    // 【削除されたコード】: リンククリック時の冗長な toggleMenu() 呼び出しはHTML側のインラインイベントに移行しました。
-    </script>
+      const icon = document.querySelector(".menu-icon");
 
-    <script>
-    /* タブ切り替え機能 */
+      // is-open クラスをトグル
+      menu.classList.toggle("is-open"); 
+
+      // アイコンの '≡' と '✕' を切り替える
+      // HTMLの構造に合わせて textContent を直接変更
+      if (menu.classList.contains("is-open")) {
+        icon.innerHTML = '&#10005;'; // Xマーク
+      } else {
+        icon.innerHTML = '&#9776;'; // ハンバーガー
+      }
+    }
+
+
+    // ---------------------------------------------------- 
+    // 3. タブ切り替え機能
+    // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -474,146 +486,89 @@ void loop(void) {
             });
         });
     }); 
-    </script>
     
-    <script>
+    
     // ---------------------------------------------------- 
-// 360° Car Viewer スクリプトの追加
-// ----------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const viewer = document.getElementById('viewer');
-    // ビューア要素が見つからない場合は処理を中断
-    if (!viewer) return;
+    // 4. 360° Car Viewer スクリプト
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        const viewer = document.getElementById('viewer');
+        if (!viewer) return;
 
-    // `img`要素のみを選択（メッセージ用のpタグを除外するため）
-    const images = viewer.querySelectorAll('img'); 
-    const totalImages = images.length;
+        const images = viewer.querySelectorAll('img'); 
+        const totalImages = images.length;
 
-    if (totalImages === 0) {
-        console.error("360度ビューア用の画像が見つかりませんでした。");
-        return; 
-    }
+        if (totalImages === 0) return; 
 
-    let current = 0;
-    let isDragging = false;
-    let startX = 0;
-    let startImageIndex = 0;
+        let current = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startImageIndex = 0;
 
-    // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
-    const SENSITIVITY = 1.0; 
+        const SENSITIVITY = 1.0; 
 
-    // 指定されたインデックスの画像を表示する関数
-    function showImage(index) {
-      images[current].classList.remove('active');
-      // モジュロ演算でインデックスをループさせる (負の値にも対応)
-      current = (index % totalImages + totalImages) % totalImages;
-      images[current].classList.add('active');
-    }
+        function showImage(index) {
+          images[current].classList.remove('active');
+          current = (index % totalImages + totalImages) % totalImages;
+          images[current].classList.add('active');
+        }
 
-    // ドラッグ開始ハンドラ
-    function startDrag(e) {
-      if (e.type === 'touchstart' && e.touches.length > 1) return;
-      
-      e.preventDefault();
-      isDragging = true;
-      viewer.classList.add('dragging');
+        function startDrag(e) {
+          if (e.type === 'touchstart' && e.touches.length > 1) return;
+          
+          e.preventDefault();
+          isDragging = true;
+          viewer.classList.add('dragging');
 
-      startX = e.pageX || e.touches[0].pageX;
-      startImageIndex = current;
-      
-      document.addEventListener('mousemove', onDragMove);
-      document.addEventListener('touchmove', onDragMove);
-      document.addEventListener('mouseup', endDrag);
-      document.addEventListener('touchend', endDrag);
-    }
+          startX = e.pageX || e.touches[0].pageX;
+          startImageIndex = current;
+          
+          document.addEventListener('mousemove', onDragMove);
+          document.addEventListener('touchmove', onDragMove);
+          document.addEventListener('mouseup', endDrag);
+          document.addEventListener('touchend', endDrag);
+        }
 
-    // ドラッグ中のハンドラ
-    function onDragMove(e) {
-      if (!isDragging) return;
-      
-      if (e.type === 'touchmove' && e.touches.length > 1) return;
+        function onDragMove(e) {
+          if (!isDragging) return;
+          
+          if (e.type === 'touchmove' && e.touches.length > 1) return;
 
-      const currentX = e.pageX || e.touches[0].pageX;
-      const diffX = currentX - startX; 
-      
-      const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
-      const imageDelta = Math.round(diffX / dragAmountPerImage);
-      
-      const newIndex = startImageIndex - imageDelta; 
+          const currentX = e.pageX || e.touches[0].pageX;
+          const diffX = currentX - startX; 
+          
+          const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
+          const imageDelta = Math.round(diffX / dragAmountPerImage);
+          
+          const newIndex = startImageIndex - imageDelta; 
 
-      if (newIndex !== current) {
-        showImage(newIndex);
-      }
-    }
+          if (newIndex !== current) {
+            showImage(newIndex);
+          }
+        }
 
-    // ドラッグ終了ハンドラ
-    function endDrag() {
-      if (!isDragging) return;
+        function endDrag() {
+          if (!isDragging) return;
 
-      isDragging = false;
-      viewer.classList.remove('dragging');
-      
-      document.removeEventListener('mousemove', onDragMove);
-      document.removeEventListener('touchmove', onDragMove);
-      document.removeEventListener('mouseup', endDrag);
-      document.removeEventListener('touchend', endDrag);
-    }
+          isDragging = false;
+          viewer.classList.remove('dragging');
+          
+          document.removeEventListener('mousemove', onDragMove);
+          document.removeEventListener('touchmove', onDragMove);
+          document.removeEventListener('mouseup', endDrag);
+          document.removeEventListener('touchend', endDrag);
+        }
 
-    // 初期イベントリスナーの設定
-    viewer.addEventListener('mousedown', startDrag);
-    viewer.addEventListener('touchstart', startDrag, { passive: false }); 
-    
-    // 初期表示
-    showImage(0);
-});
-</script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // 1. 要素の取得
-    const menuIcon = document.querySelector('.menu-icon');
-    const mobileMenu = document.querySelector('.mobile-menu');
+        viewer.addEventListener('mousedown', startDrag);
+        viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+        
+        showImage(0);
+    });
 
-    // 2. メニューアイコンにイベントリスナーを設定
-    if (menuIcon && mobileMenu) {
-        menuIcon.addEventListener('click', function() {
-            // .is-open クラスを切り替える (トグルする)
-            // このクラスによってCSSの max-height: 500px が適用され、メニューが開く
-            mobileMenu.classList.toggle('is-open');
-
-            // 必要に応じてアイコンの状態を切り替える処理 (例: ハンバーガーアイコン ↔︎ Xマーク)
-            // このCSSセレクタ（.menu-icon h2）は仮定です。実際のHTML構造に合わせてください。
-            const iconText = menuIcon.querySelector('h2'); 
-            if (iconText) {
-                iconText.textContent = mobileMenu.classList.contains('is-open') ? '✕' : '≡';
-            }
-        });
-
-        // 3. メニュー内のリンクをクリックしたときにメニューを閉じる
-        const menuLinks = mobileMenu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                // .is-open クラスを削除する
-                mobileMenu.classList.remove('is-open');
-                
-                // アイコンを閉じた状態に戻す
-                const iconText = menuIcon.querySelector('h2');
-                 if (iconText) {
-                    iconText.textContent = '≡';
-                }
-            });
-        });
-    }
-});
-    </body>
+    // ---------------------------------------------------- 
+    // 5. 【冗長なコードの削除】
+    // 以前のメニュー開閉ロジックのブロックは削除しました。
+    // ----------------------------------------------------
+    </script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
