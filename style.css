@@ -383,22 +383,100 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
 }
 
 /* ==========================================================================
- * 7. フッター
+ * 7. フッター（新規マルチカラム対応）
  * ========================================================================== */
+
+/* 既存の footer スタイルを上書きし、新しい .site-footer に適用 */
 footer {
-    padding: 20px var(--space-page-padding-horizontal);
-    background-color: var(--color-background-footer);
-    color: var(--color-secondary-text);
-    text-align: center;
-    font-size: 0.9rem;
+    padding: 0; /* 新しいフッターが padding を持つため、既存の footer から削除 */
+    background-color: transparent; /* 新しいフッターの背景に任せる */
 }
 
-/* フッター内のロゴサイズ調整 */
-footer .logo {
-    max-width: 120px;
-    height: auto;
-    display: block;
+/* フッター全体 */
+.site-footer {
+    /* 既存のダーク背景変数を使用 */
+    background-color: var(--color-background-dark); 
+    color: var(--color-text-light); /* 明るい文字色 */
+    padding: 60px var(--space-page-padding-horizontal) 0; /* 上のパディングを増やす */
+    font-family: 'Noto Sans JP', sans-serif; /* 既存のフォントに統一 */
+    text-align: left; /* テキストを左寄せに */
+}
+
+/* コンテナ */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
     margin: 0 auto;
+    padding-bottom: 30px; /* コピーライトとの間にスペース */
+}
+
+/* 各セクション */
+.footer-section {
+    /* PCで3列、スマホで1列になるように調整 */
+    flex: 1 1 200px; 
+    margin: 15px 15px 15px 0;
+    min-width: 150px; /* 小さすぎるのを防ぐ */
+}
+
+.footer-section h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    /* プライマリカラーの青をアクセントラインに */
+    border-bottom: 2px solid var(--color-primary); 
+    padding-bottom: 6px;
+    color: var(--color-dark-bg-heading); /* 白に近い色 */
+}
+
+/* リスト */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 10px 0;
+}
+
+.footer-section ul li a {
+    /* 既存のセカンダリテキスト色に近づける */
+    color: var(--color-hero-text-secondary); 
+    text-decoration: none;
+    transition: color 0.3s, padding-left 0.3s;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-primary); /* ホバー時に青 */
+    padding-left: 5px;
+}
+
+/* フッター下部（コピーライト） */
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* 薄い線 */
+    color: var(--color-secondary-text);
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 40px var(--space-page-padding-horizontal) 0;
+    }
+    .footer-container {
+        flex-direction: column; /* 縦並びに */
+        align-items: flex-start;
+    }
+    .footer-section {
+        width: 100%;
+        margin-right: 0; /* PC用マージンをリセット */
+        margin-bottom: 20px;
+    }
 }
 
 /* ==========================================================================
@@ -1005,5 +1083,6 @@ html, body {
         height: 300px; /* モバイルでは高さを縮小 */
     }
 }
+
 
 
