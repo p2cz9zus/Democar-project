@@ -420,9 +420,38 @@ void loop(void) {
 </section>
 
 
-    <footer>
+    <footer class="site-footer dark-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>プロジェクト情報</h4>
+            <ul>
+                <li><a href="#goals">プロジェクト目標を見る</a></li>
+                <li><a href="#overview">技術概要を見る</a></li>
+                <li><a href="#process">製作ヒストリーを見る</a></li>
+                <li><a href="#ideas">工夫点を見る</a></li>
+                <li><a href="#">紹介動画集</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>関係者用</h4>
+            <ul>
+                <li><a href="#">スケジュール</a></li>
+                <li><a href="#">メモ</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section contact-info">
+            <h4>連絡先/その他</h4>
+            <p>プロジェクトに関するお問い合わせは、各担当者へ直接ご連絡ください。</p>
+            <p class="project-id">創成プロジェクト A1班</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
         <p>&copy; 創成プロジェクト A1班. All rights reserved.</p>
-    </footer>
+    </div>
+</footer>
 
     <script>
     const observer = new IntersectionObserver((entries) => {
@@ -567,6 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
     </body>
 </html>
+
 
 
 
