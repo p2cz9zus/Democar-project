@@ -4,6 +4,7 @@
  * モバイルメニューの表示制御をクラスベース（.is-open）に統一し、レスポンシブ対応を完了。
  * 変更点: モバイルメニュー (.mobile-menu) の背景色を #001f40 (濃いネイビーブルー) に修正。
  * ヒーローセクションにギャラクシーロゴのスタイルとスクロールアニメーションを追加。
+ * ➡ 修正点: ヒーローセクションの背景をグラデーションに変更し、ロゴを新しい幾何学アニメーション（.innovators-logo-container）に置き換えました。
  */
 
 /* ==========================================================================
@@ -144,117 +145,167 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
 /* ==========================================================================
  * 3. ヒーローセクション
  * ========================================================================== */
+
+/*==================================================
+  [A] ヒーローセクションのスタイル修正
+==================================================*/
 .hero {
-    background-image: url('./3.jpg');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    
-    /* 固定ナビバーの高さ（約70px）を考慮してパディングを調整 */
-    padding: calc(150px + 70px) 5% 100px;
-    text-align: center;
-    min-height: 70vh;
+    /* 以前の背景画像、オーバーレイ、パディングを上書き */
     position: relative;
-    overflow: hidden;
-    /* ヒーローセクション全体を画面の高さにする */
-    height: 100vh; 
-    /* テキストとロゴを中央に配置 */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    color: var(--color-text-light); /* ヒーロー内の文字色 */
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* 背景を宇宙風に */
+    overflow: hidden; /* ロゴがはみ出さないように */
+    z-index: 1;
 }
 
-/* 背景画像の上に暗いオーバーレイをかけ、テキストの視認性を高める */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-hero-overlay);
-    /* ロゴテクスチャ(z-index: 2)より下にする */
-    z-index: 1; 
-}
-
-/* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
+/* ヒーロー内のテキストとボタンをロゴより手前に表示 */
 .hero h1, .hero h2, .hero p {
     color: var(--color-text-light);
     position: relative;
-    /* ロゴテクスチャ(z-index: 2)より上にするため z-index: 3 に変更 */
-    z-index: 3; 
+    /* 新しいロゴ(z-index: 5)より上にするため z-index: 10 に変更 */
+    z-index: 10; 
     
-    /* 【視認性向上】テキストシャドウを追加 */
+    /* 【視認性向上】テキストシャドウを追加 (元のスタイルから保持) */
     text-shadow: 
         0 0 8px rgba(0, 0, 0, 0.7), 
         0 0 15px rgba(0, 0, 0, 0.5);
     
-    /* 初期状態を非表示にする（アニメーション開始前） */
+    /* 初期状態を非表示にする（アニメーション開始前） (元のスタイルから保持) */
     opacity: 0; 
-    /* フェードインアニメーションを適用 */
+    /* フェードインアニメーションを適用 (元のスタイルから保持) */
     animation: slideInUp 1.0s ease-out forwards; 
 }
 
-/* 要素ごとに遅延を設定して順番に表示 */
+/* 要素ごとに遅延を設定して順番に表示 (元のスタイルから保持) */
 .hero h1 { animation-delay: 0.3s; }
 .hero h2 { animation-delay: 0.6s; }
 .hero p { animation-delay: 0.9s; }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 .hero h2 {
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 30px;
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    font-weight: 300;
+    margin-bottom: 20px;
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    max-width: 700px;
     margin-bottom: 40px;
     color: var(--color-hero-text-secondary);
 }
 
+
 /* ==================================== */
-/* ギャラクシーロゴテクスチャとクリッピング */
+/* 新しいロゴとアニメーションのスタイル */
 /* ==================================== */
 
-.logo-texture {
+/* 以前の .logo-texture および body.scrolled .logo-texture のスタイルは削除されました。 */
+
+/*==================================================
+  [B] 新しいロゴとアニメーションのスタイル
+==================================================*/
+
+/* ロゴ全体を画面中央に固定 */
+.innovators-logo-container {
     position: absolute;
     top: 50%;
     left: 50%;
-    /* 初期状態の変形をCSSで設定 (JSで上書きされるため transform: translate(-50%, -50%) scale(0.9) のみ) */
-    transform: translate(-50%, -50%) scale(0.9); 
-    
-    width: 350px; /* ロゴの表示サイズ */
-    height: 350px;
-    z-index: 2; /* テキスト(3)より下、オーバーレイ(1)より上 */
-
-    /* ギャラクシー色をグラデーションで表現 */
-    background: linear-gradient(
-        135deg, 
-        var(--color-logo-purple) 0%, 
-        var(--color-logo-blue) 50%, 
-        var(--color-logo-pink) 100%
-    );
-    
-    /* 形状の切り抜き (HTMLで定義したSVGのID #logoShape を参照) */
-    -webkit-clip-path: url(#logoShape);
-    clip-path: url(#logoShape);
-    
-    /* opacity のみ CSS transition を残す (transform は JS で直接制御) */
-    transition: opacity 0.5s ease-out; 
-    opacity: 0.75; /* テキストの視認性確保のため、半透明に */
+    transform: translate(-50%, -50%);
+    /* ヒーローコンテンツの下に配置し、スクロールしても動かないように */
+    z-index: 5; 
+    transition: opacity 0.5s ease;
 }
 
-/* bodyに .scrolled クラスが付いたときのアニメーション */
-/* transform は JS で制御するため、ここでは opacity のみ設定 */
-body.scrolled .logo-texture {
-    opacity: 0.9; 
+.logo-wrapper {
+    position: relative;
+    width: 200px; /* ロゴの全体幅 */
+    height: 200px; /* ロゴの全体高さ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-logo {
+    position: absolute;
+    width: 100px; /* 内側の四角形の幅 */
+    height: 100px; /* 内側の四角形の高さ */
+    transform: rotate(45deg); /* ひし形に回転 */
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+}
+
+/* 2つ目の四角形を少しずらして重ね、絡み合う形を表現 */
+.s-logo.second {
+    transform: rotate(45deg) translate(8px, 8px); 
+    z-index: -1; /* 奥側にあるように見せる */
+}
+
+/* 各線（div）の共通スタイル */
+.s-logo .line {
+    position: absolute;
+    border: 3px solid transparent; /* 線幅 */
+    /* JavaScriptで制御するopacity変化を滑らかにする */
+    transition: opacity 0.2s linear; 
+}
+
+/* -------------------
+    カラフルな線: 四角形A (手前側)
+    ------------------- */
+.s-logo .line-1 {
+    top: 0; left: 0;
+    width: 100%; height: 0;
+    border-top-color: #FF0077; /* ピンク */
+}
+.s-logo .line-2 {
+    top: 0; right: 0;
+    width: 0; height: 100%;
+    border-right-color: #00E5FF; /* シアン */
+}
+.s-logo .line-3 {
+    bottom: 0; right: 0;
+    width: 100%; height: 0;
+    border-bottom-color: #00FF88; /* 緑 */
+}
+.s-logo .line-4 {
+    bottom: 0; left: 0;
+    width: 0; height: 100%;
+    border-left-color: #FFFF00; /* 黄色 */
+}
+
+/* -------------------
+    カラフルな線: 四角形B (奥側)
+    ------------------- */
+.s-logo.second .line-5 {
+    top: 0; left: 0;
+    width: 100%; height: 0;
+    border-top-color: #FF8800; /* オレンジ */
+}
+.s-logo.second .line-6 {
+    top: 0; right: 0;
+    width: 0; height: 100%;
+    border-right-color: #FF00FF; /* マゼンタ */
+}
+.s-logo.second .line-7 {
+    bottom: 0; right: 0;
+    width: 100%; height: 0;
+    border-bottom-color: #4400FF; /* 青 */
+}
+.s-logo.second .line-8 {
+    bottom: 0; left: 0;
+    width: 0; height: 100%;
+    border-left-color: #00AAFF; /* ライトブルー */
 }
 
 
@@ -527,7 +578,7 @@ body.scrolled .logo-texture {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    padding: 0 10px;
+    padding: 10px;
 }
 
 
@@ -577,8 +628,8 @@ body.scrolled .logo-texture {
 .process-container .step:before {
     content: '';
     position: absolute;
-    left: -8px;       /* 線の中央に丸を揃える */
-    top: -8px;        /* 丸を線の上端に置く */
+    left: -8px;      /* 線の中央に丸を揃える */
+    top: -8px;      /* 丸を線の上端に置く */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -986,12 +1037,6 @@ footer {
     .navbar .logo {      
         width: 50px; 
     }
-    
-    /* ロゴサイズをタブレット向けに縮小 */
-    .logo-texture {
-        width: 250px; 
-        height: 250px;
-    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -1011,6 +1056,7 @@ footer {
     }
 
     /* ヒーローセクションの文字サイズを調整 */
+    /* 新しいclamp値を使用しているため、ここでは調整を維持 */
     .hero h1 { 
         font-size: 2.8rem; 
         line-height: 1.1; 
@@ -1025,12 +1071,6 @@ footer {
         padding: 0 5%; 
         line-height: 1.5;
         margin-top: 20px; 
-    }
-    
-    /* ロゴサイズをスマホ向けに縮小 */
-    .logo-texture {
-        width: 200px; /* モバイルでさらに縮小 */
-        height: 200px;
     }
     
     /* グリッドを1列に変更 */
