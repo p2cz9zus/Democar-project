@@ -8,83 +8,87 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    </head>
+</head>
 <body>
 
 <header class="navbar">
-  <div class="navbar-container">
-    <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
-    <img src="A1.png" alt="プロジェクトロゴ" class="logo">
+    <div class="navbar-container">
+        <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
+            <img src="A1.png" alt="プロジェクトロゴ" class="logo">
+        </a>
+        
+        <nav class="hero-tabs-container">
+            <a href="#goals" class="hero-tab-button">プロジェクト目標</a>
+            <a href="#overview" class="hero-tab-button">技術概要</a>
+            <a href="#process" class="hero-tab-button">製作ヒストリー</a>
+            <a href="#ideas" class="hero-tab-button">工夫点</a>
+        </nav>
 
-    <nav class="hero-tabs-container">
-      <a href="#goals" class="hero-tab-button">プロジェクト目標</a>
-      <a href="#overview" class="hero-tab-button">技術概要</a>
-      <a href="#process" class="hero-tab-button">製作ヒストリー</a>
-      <a href="#ideas" class="hero-tab-button">工夫点</a>
-    </nav>
+        <button class="menu-trigger spBTN_NavR" onclick="toggleMenu()" id="menuTrigger" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
 
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#goals" onclick="toggleMenu()">プロジェクト目標を見る</a>
-    <a href="#overview" onclick="toggleMenu()">技術概要を見る</a>
-    <a href="#process" onclick="toggleMenu()">製作ヒストリーを見る</a>
-    <a href="#ideas" onclick="toggleMenu()">工夫点を見る</a>
-  </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#goals" onclick="toggleMenu()">プロジェクト目標を見る</a>
+        <a href="#overview" onclick="toggleMenu()">技術概要を見る</a>
+        <a href="#process" onclick="toggleMenu()">製作ヒストリーを見る</a>
+        <a href="#ideas" onclick="toggleMenu()">工夫点を見る</a>
+    </div>
 </header>
-  
+    
 
 <section class="hero">
-  <h1>創成プロジェクト　A1班</h1>
-  <h2>課題を達成するモビリティの創造。</h2>
-  <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
+    <h1>創成プロジェクト　A1班</h1>
+    <h2>課題を達成するモビリティの創造。</h2>
+    <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
 </section>
 
 
-    <section id="goals" class="section dark-bg">
-        <h3>プロジェクト目標</h3>
-        <div class="goal-list-container">
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">01</span>
-                <h4>軽量化</h4>
-                <p>車体の軽量化を追求する。</p>
-            </div>
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">02</span>
-                <h4>低コスト</h4>
-                <p>低コストでモビリティの実現を目指す。</p>
-            </div>
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">03</span>
-                <h4>安定動作性</h4>
-                <p>厳密な制御により、安定した動作性を確保する。</p>
-            </div>
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">04</span>
-                <h4>必要最低限の装備</h4>
-                <p>目標達成に必須な装備のみに絞り込む。</p>
-            </div>
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">05</span>
-                <h4>マイコン制御による達成</h4>
-                <p>マイクロコンピュータを活用して、全ての課題を達成する。</p>
-            </div>
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">06</span>
-                <h4>SDGsへの貢献 (部品再利用)</h4>
-                <p>既存部品の再利用を通じて、SDGs目標達成に貢献する。</p>
-            </div>
-            <div class="goal-item-small animate-on-scroll">
-                <span class="goal-number-small">07</span>
-                <h4>成功率90%以上</h4>
-                <p>デモンストレーションにおいて成功率90%以上の達成を目指す。</p>
-            </div>
+<section id="goals" class="section dark-bg">
+    <h3>プロジェクト目標</h3>
+    <div class="goal-list-container">
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">01</span>
+            <h4>軽量化</h4>
+            <p>車体の軽量化を追求する。</p>
         </div>
-    </section>
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">02</span>
+            <h4>低コスト</h4>
+            <p>低コストでモビリティの実現を目指す。</p>
+        </div>
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">03</span>
+            <h4>安定動作性</h4>
+            <p>厳密な制御により、安定した動作性を確保する。</p>
+        </div>
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">04</span>
+            <h4>必要最低限の装備</h4>
+            <p>目標達成に必須な装備のみに絞り込む。</p>
+        </div>
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">05</span>
+            <h4>マイコン制御による達成</h4>
+            <p>マイクロコンピュータを活用して、全ての課題を達成する。</p>
+        </div>
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">06</span>
+            <h4>SDGsへの貢献 (部品再利用)</h4>
+            <p>既存部品の再利用を通じて、SDGs目標達成に貢献する。</p>
+        </div>
+        <div class="goal-item-small animate-on-scroll">
+            <span class="goal-number-small">07</span>
+            <h4>成功率90%以上</h4>
+            <p>デモンストレーションにおいて成功率90%以上の達成を目指す。</p>
+        </div>
+    </div>
+</section>
 
-    <section id="overview" class="section light-bg">
+<section id="overview" class="section light-bg">
     <h3>技術概要</h3>
     <div class="tab-buttons">
         <button class="tab-button active" data-tab="specs">車体スペック</button>
@@ -148,95 +152,95 @@
             <div class="diagram-placeholder">最終仕様のイメージ図</div>
         </div>
     </div>
-        <div class="viewer-section-wrapper">
-        <h4>🔄 360° 車体ビューア</h4>
-        <div class="viewer" id="viewer">
-                        <img src="car_01.jpg" class="active" alt="A1班モビリティ">
-            <img src="car_02.jpg" alt="A1班モビリティ">
-            <img src="car_03.jpg" alt="A1班モビリティ">
-            <img src="car_04.jpg" alt="A1班モビリティ">
-            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
-        </div>
-    </div>
+    <div class="viewer-section-wrapper">
+        <h4>🔄 360° 車体ビューア</h4>
+        <div class="viewer" id="viewer">
+            <img src="car_01.jpg" class="active" alt="A1班モビリティ">
+            <img src="car_02.jpg" alt="A1班モビリティ">
+            <img src="car_03.jpg" alt="A1班モビリティ">
+            <img src="car_04.jpg" alt="A1班モビリティ">
+            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
+        </div>
+    </div>
 </section>
-    <section id="process" class="section dark-bg">
-        <h3>製作ヒストリー</h3>
-        <p class="process-preamble">当初はファン駆動の車体を製作することを検討していましたが、途中で大きく方針転換しました。</p>
-        <div class="process-container">
-            
-            <div class="step animate-on-scroll">
-                <span class="step-number">初期フェーズ</span>
-                <h4>① 車体の設計：台車部分及び全体図</h4>
-                <p>プロジェクト開始にあたり、車体構造の基礎設計を行い、台車部分と全体の構成図を作成しました。</p>
-                <img src="./daisya.jpg" alt="台車部分の設計図" class="process-media">
-                <img src="./zenntaizu.JPG" alt="車体全体の設計図" class="process-media">
-            </div>
+<section id="process" class="section dark-bg">
+    <h3>製作ヒストリー</h3>
+    <p class="process-preamble">当初はファン駆動の車体を製作することを検討していましたが、途中で大きく方針転換しました。</p>
+    <div class="process-container">
+        
+        <div class="step animate-on-scroll">
+            <span class="step-number">初期フェーズ</span>
+            <h4>① 車体の設計：台車部分及び全体図</h4>
+            <p>プロジェクト開始にあたり、車体構造の基礎設計を行い、台車部分と全体の構成図を作成しました。</p>
+            <img src="./daisya.jpg" alt="台車部分の設計図" class="process-media">
+            <img src="./zenntaizu.JPG" alt="車体全体の設計図" class="process-media">
+        </div>
 
-            <div class="step animate-on-scroll">
-                <span class="step-number">初期フェーズ</span>
-                <h4>② 部品の強度計算</h4>
-                <p>設計した各部品の強度計算を実施し、ファン駆動における動作環境での耐久性を検証しました。</p>
-                <img src="./kyoudo.jpg" alt="強度計算結果" class="process-media">
-            </div>
-            
-            <div class="step animate-on-scroll">
-                <span class="step-number">初期フェーズ</span>
-                <h4>③ ファン部分の確認と問題発覚</h4>
-                <p>ファン駆動に必要な推力を確保できるかを確認するテストを実施しました。</p>
-                <video controls class="process-media">
-                    <source src="./fan.MP4" type="video/mp4">
-                    
-                </video>
-                <p class="major-change-note">ここで大きく方針転換</p>
-                <p class="major-change-reason">→ ファン駆動では十分な推進力を得ることが難しく、タイヤ駆動に変更した。</p>
-            </div>
+        <div class="step animate-on-scroll">
+            <span class="step-number">初期フェーズ</span>
+            <h4>② 部品の強度計算</h4>
+            <p>設計した各部品の強度計算を実施し、ファン駆動における動作環境での耐久性を検証しました。</p>
+            <img src="./kyoudo.jpg" alt="強度計算結果" class="process-media">
+        </div>
+        
+        <div class="step animate-on-scroll">
+            <span class="step-number">初期フェーズ</span>
+            <h4>③ ファン部分の確認と問題発覚</h4>
+            <p>ファン駆動に必要な推力を確保できるかを確認するテストを実施しました。</p>
+            <video controls class="process-media">
+                <source src="./fan.MP4" type="video/mp4">
+                
+            </video>
+            <p class="major-change-note">ここで大きく方針転換</p>
+            <p class="major-change-reason">→ ファン駆動では十分な推進力を得ることが難しく、タイヤ駆動に変更した。</p>
+        </div>
 
-            <div class="step animate-on-scroll">
-                <span class="step-number">方針転換後</span>
-                <h4>④ 回路の設計</h4>
-                <p>タイヤ駆動に対応するため、回路の設計と配線を行いました。</p>
-                <img src="./kairo.jpg" alt="回路（写真）" class="process-media">
-                <img src="./kuwashiikairo.jpeg" alt="回路図" class="process-media">
-            </div>
+        <div class="step animate-on-scroll">
+            <span class="step-number">方針転換後</span>
+            <h4>④ 回路の設計</h4>
+            <p>タイヤ駆動に対応するため、回路の設計と配線を行いました。</p>
+            <img src="./kairo.jpg" alt="回路（写真）" class="process-media">
+            <img src="./kuwashiikairo.jpeg" alt="回路図" class="process-media">
+        </div>
 
-            <div class="step animate-on-scroll">
-                <span class="step-number">初期フェーズ（方針転換後）</span>
-                <h4>⑤ マイクロコンピュータによるサーボモータ制御</h4>
-                <p>C言語プログラムを核として、マイクロコンピュータを用いてサーボモータの正確な旋回と反転動作を制御するプログラムの実装と調整を進めました。</p>
-                <video controls class="process-media">
-                    <source src="./sa-bomo-ta-seigyo.mp4" type="video/quicktime"> 
-                    <source src="./sa-bomo-ta-seigyo.mp4" type="video/mp4">
-                    
-                </video>
-            </div>
+        <div class="step animate-on-scroll">
+            <span class="step-number">初期フェーズ（方針転換後）</span>
+            <h4>⑤ マイクロコンピュータによるサーボモータ制御</h4>
+            <p>C言語プログラムを核として、マイクロコンピュータを用いてサーボモータの正確な旋回と反転動作を制御するプログラムの実装と調整を進めました。</p>
+            <video controls class="process-media">
+                <source src="./sa-bomo-ta-seigyo.mp4" type="video/quicktime"> 
+                <source src="./sa-bomo-ta-seigyo.mp4" type="video/mp4">
+                
+            </video>
+        </div>
 
-            <div class="step animate-on-scroll">
-                <span class="step-number">初期フェーズ（方針転換後）</span>
-                <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮）</h4>
-                <p>初期フェーズ①で設計した車体をさらに改良しました。サーボモータの設置位置・前輪タイヤの動きを考慮して再度、設計しました。</p>
-                <img src="./zenntaizu2.jpeg" alt="車体全体の設計図" class="process-media">
-                <video controls class="process-media">
-                    <source src="./taiyanougoki.mp4" type="video/quicktime"> 
-                    <source src="./taiyanougoki.mp4" type="video/mp4">
-                    
-                </video>
-            </div>
+        <div class="step animate-on-scroll">
+            <span class="step-number">初期フェーズ（方針転換後）</span>
+            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮）</h4>
+            <p>初期フェーズ①で設計した車体をさらに改良しました。サーボモータの設置位置・前輪タイヤの動きを考慮して再度、設計しました。</p>
+            <img src="./zenntaizu2.jpeg" alt="車体全体の設計図" class="process-media">
+            <video controls class="process-media">
+                <source src="./taiyanougoki.mp4" type="video/quicktime"> 
+                <source src="./taiyanougoki.mp4" type="video/mp4">
+                
+            </video>
+        </div>
 
-            <div class="step animate-on-scroll">
-                <span class="step-number">初期フェーズ（方針転換後）</span>
-                <h4>⑦ トラブル発生：電源構成の変更</h4>
-                <p>電池ケースの不具合により、単3電池6本から9V電池への変更を行いました。これによりサーボモータとマイコンの安定動作を確保することができます。</p>
-            </div>
+        <div class="step animate-on-scroll">
+            <span class="step-number">初期フェーズ（方針転換後）</span>
+            <h4>⑦ トラブル発生：電源構成の変更</h4>
+            <p>電池ケースの不具合により、単3電池6本から9V電池への変更を行いました。これによりサーボモータとマイコンの安定動作を確保することができます。</p>
+        </div>
 
-            <div class="step animate-on-scroll">
-                <span class="step-number">中期フェーズ（方針転換後）</span>
-                <h4>⑧ 制御コード(調整前)の作成とロジック実装</h4>
-                <p>モビリティの自律走行を実現するための核となるArduino (C++) コード（調整前）です。金属センサーの状態（ピースの有無）に応じて、「待機」「直進駆動」「Uターン＋直進」の3つの状態を切り替えるロジックを採用しています。</p>
+        <div class="step animate-on-scroll">
+            <span class="step-number">中期フェーズ（方針転換後）</span>
+            <h4>⑧ 制御コード(調整前)の作成とロジック実装</h4>
+            <p>モビリティの自律走行を実現するための核となるArduino (C++) コード（調整前）です。金属センサーの状態（ピースの有無）に応じて、「待機」「直進駆動」「Uターン＋直進」の3つの状態を切り替えるロジックを採用しています。</p>
 
-                <div class="code-display">
-                    <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino、調整前)</h5>
-                    <div class="code-block-wrapper">
-                        <div class="code-block">
+            <div class="code-display">
+                <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino、調整前)</h5>
+                <div class="code-block-wrapper">
+                    <div class="code-block">
 <pre><code>#include &lt;Arduino.h&gt;
 #include &lt;Servo.h&gt;
 
@@ -397,14 +401,14 @@ void loop(void) {
     lastMetalStatus = raw_metal_status;
 }
 </code></pre>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="ideas" class="section light-bg">
+<section id="ideas" class="section light-bg">
     <h3>🔧 工夫点</h3>
     <div class="goal-list-container">
         <div class="goal-item-small animate-on-scroll">
@@ -421,7 +425,7 @@ void loop(void) {
 </section>
 
 
-    <footer class="site-footer dark-footer">
+<footer class="site-footer dark-footer">
     <div class="footer-container">
         <div class="footer-section">
             <h4>プロジェクト情報</h4>
@@ -454,7 +458,7 @@ void loop(void) {
     </div>
 </footer>
 
-    <script>
+<script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -464,20 +468,22 @@ void loop(void) {
     });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    </script>
+</script>
 
-    <script>
+<script>
     // メニューの表示/非表示を切り替える関数
     function toggleMenu() {
-      const menu = document.getElementById("mobileMenu");
-      // クラスをトグルすることで、CSSの .mobile-menu.is-open を適用させる
-      menu.classList.toggle("is-open"); 
-    }
-    
-    // 【削除されたコード】: リンククリック時の冗長な toggleMenu() 呼び出しはHTML側のインラインイベントに移行しました。
-    </script>
+        const menu = document.getElementById("mobileMenu");
+        // ❗ 修正: アイコン要素を取得 ❗
+        const trigger = document.getElementById("menuTrigger"); 
 
-    <script>
+        // クラスをトグルすることで、CSSの .is-open と .active を適用させる
+        menu.classList.toggle("is-open"); 
+        trigger.classList.toggle("active");
+    }
+</script>
+
+<script>
     /* タブ切り替え機能 */
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.tab-button');
@@ -502,105 +508,98 @@ void loop(void) {
             });
         });
     }); 
-    </script>
-    
-    <script>
-    // ---------------------------------------------------- 
-// 360° Car Viewer スクリプトの追加
-// ----------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const viewer = document.getElementById('viewer');
-    // ビューア要素が見つからない場合は処理を中断
-    if (!viewer) return;
-
-    // `img`要素のみを選択（メッセージ用のpタグを除外するため）
-    const images = viewer.querySelectorAll('img'); 
-    const totalImages = images.length;
-
-    if (totalImages === 0) {
-        console.error("360度ビューア用の画像が見つかりませんでした。");
-        return; 
-    }
-
-    let current = 0;
-    let isDragging = false;
-    let startX = 0;
-    let startImageIndex = 0;
-
-    // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
-    const SENSITIVITY = 1.0; 
-
-    // 指定されたインデックスの画像を表示する関数
-    function showImage(index) {
-      images[current].classList.remove('active');
-      // モジュロ演算でインデックスをループさせる (負の値にも対応)
-      current = (index % totalImages + totalImages) % totalImages;
-      images[current].classList.add('active');
-    }
-
-    // ドラッグ開始ハンドラ
-    function startDrag(e) {
-      if (e.type === 'touchstart' && e.touches.length > 1) return;
-      
-      e.preventDefault();
-      isDragging = true;
-      viewer.classList.add('dragging');
-
-      startX = e.pageX || e.touches[0].pageX;
-      startImageIndex = current;
-      
-      document.addEventListener('mousemove', onDragMove);
-      document.addEventListener('touchmove', onDragMove);
-      document.addEventListener('mouseup', endDrag);
-      document.addEventListener('touchend', endDrag);
-    }
-
-    // ドラッグ中のハンドラ
-    function onDragMove(e) {
-      if (!isDragging) return;
-      
-      if (e.type === 'touchmove' && e.touches.length > 1) return;
-
-      const currentX = e.pageX || e.touches[0].pageX;
-      const diffX = currentX - startX; 
-      
-      const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
-      const imageDelta = Math.round(diffX / dragAmountPerImage);
-      
-      const newIndex = startImageIndex - imageDelta; 
-
-      if (newIndex !== current) {
-        showImage(newIndex);
-      }
-    }
-
-    // ドラッグ終了ハンドラ
-    function endDrag() {
-      if (!isDragging) return;
-
-      isDragging = false;
-      viewer.classList.remove('dragging');
-      
-      document.removeEventListener('mousemove', onDragMove);
-      document.removeEventListener('touchmove', onDragMove);
-      document.removeEventListener('mouseup', endDrag);
-      document.removeEventListener('touchend', endDrag);
-    }
-
-    // 初期イベントリスナーの設定
-    viewer.addEventListener('mousedown', startDrag);
-    viewer.addEventListener('touchstart', startDrag, { passive: false }); 
-    
-    // 初期表示
-    showImage(0);
-});
 </script>
-    </body>
+    
+<script>
+    // ---------------------------------------------------- 
+    // 360° Car Viewer スクリプトの追加
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        const viewer = document.getElementById('viewer');
+        // ビューア要素が見つからない場合は処理を中断
+        if (!viewer) return;
+
+        // `img`要素のみを選択（メッセージ用のpタグを除外するため）
+        const images = viewer.querySelectorAll('img'); 
+        const totalImages = images.length;
+
+        if (totalImages === 0) {
+            console.error("360度ビューア用の画像が見つかりませんでした。");
+            return; 
+        }
+
+        let current = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startImageIndex = 0;
+
+        // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
+        const SENSITIVITY = 1.0; 
+
+        // 指定されたインデックスの画像を表示する関数
+        function showImage(index) {
+          images[current].classList.remove('active');
+          // モジュロ演算でインデックスをループさせる (負の値にも対応)
+          current = (index % totalImages + totalImages) % totalImages;
+          images[current].classList.add('active');
+        }
+
+        // ドラッグ開始ハンドラ
+        function startDrag(e) {
+          if (e.type === 'touchstart' && e.touches.length > 1) return;
+          
+          e.preventDefault();
+          isDragging = true;
+          viewer.classList.add('dragging');
+
+          startX = e.pageX || e.touches[0].pageX;
+          startImageIndex = current;
+          
+          document.addEventListener('mousemove', onDragMove);
+          document.addEventListener('touchmove', onDragMove);
+          document.addEventListener('mouseup', endDrag);
+          document.addEventListener('touchend', endDrag);
+        }
+
+        // ドラッグ中のハンドラ
+        function onDragMove(e) {
+          if (!isDragging) return;
+          
+          if (e.type === 'touchmove' && e.touches.length > 1) return;
+
+          const currentX = e.pageX || e.touches[0].pageX;
+          const diffX = currentX - startX; 
+          
+          const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
+          const imageDelta = Math.round(diffX / dragAmountPerImage);
+          
+          const newIndex = startImageIndex - imageDelta; 
+
+          if (newIndex !== current) {
+            showImage(newIndex);
+          }
+        }
+
+        // ドラッグ終了ハンドラ
+        function endDrag() {
+          if (!isDragging) return;
+
+          isDragging = false;
+          viewer.classList.remove('dragging');
+          
+          document.removeEventListener('mousemove', onDragMove);
+          document.removeEventListener('touchmove', onDragMove);
+          document.removeEventListener('mouseup', endDrag);
+          document.removeEventListener('touchend', endDrag);
+        }
+
+        // 初期イベントリスナーの設定
+        viewer.addEventListener('mousedown', startDrag);
+        viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+        
+        // 初期表示
+        showImage(0);
+    });
+</script>
+</body>
 </html>
-
-
-
-
-
-
-
