@@ -15,6 +15,42 @@
             /* ヒーローセクションを全画面に表示し、下にコンテンツが続く構造を想定 */
             min-height: 250vh; 
         }
+
+        /* ---------------------------------------------------------------------- */
+        /* 【新しいロゴのSVGコードを反映させるためのCSS】 */
+        /* ---------------------------------------------------------------------- */
+        .innovators-a1-logo {
+            display: inline-block;
+            text-align: center;
+            width: 150px; 
+            margin-top: 50px; 
+            margin-bottom: 20px; /* 見栄えを良くするための調整 */
+        }
+        .innovators-a1-logo svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+        /* SVG内のパス（線）のスタイル: 全ての線に適用 */
+        .innovators-a1-logo svg path {
+            stroke: black; 
+            /* fill: none; はHTMLのpath属性で設定済み */
+        }
+        .logo-text {
+            font-family: serif; 
+            font-size: 16px;
+            margin-top: 5px;
+            color: black;
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* 【既存のロゴアニメーション用CSSクラスを一時的に非表示】 */
+        /* ---------------------------------------------------------------------- */
+        /* ヒーローセクションで静的なSVGロゴを使用するため、既存のアニメーション要素は非表示 */
+        .innovators-logo-container {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -49,23 +85,34 @@
     
 
 <section class="hero">
-    <div class="innovators-logo-container" id="logo-animation-container">
-        <div class="logo-wrapper" id="logo-animation">
-            <div class="s-logo">
-                <div class="line line-1"></div>
-                <div class="line line-2"></div>
-                <div class="line line-3"></div>
-                <div class="line line-4"></div>
-            </div>
-            <div class="s-logo second">
-                <div class="line line-5"></div>
-                <div class="line line-6"></div>
-                <div class="line line-7"></div>
-                <div class="line line-8"></div>
-            </div>
-        </div>
+    <div class="innovators-a1-logo" id="logo-static">
+        <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+            <path
+                class="path-under"
+                d="M 50 25 
+                   L 70 45 L 95 25 L 75 5 
+                   M 25 5 L 5 25 L 25 45 L 50 25"
+                stroke-width="5"
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="miter"
+                stroke-linecap="square"
+            />
+            
+            <path
+                class="path-over"
+                d="M 25 5 L 75 45 
+                   M 75 5 L 25 45"
+                stroke-width="5"
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="miter"
+                stroke-linecap="square"
+            />
+        </svg>
+        <p class="logo-text">Innovators A1</p>
     </div>
-    
+
     <h1>創成プロジェクト　A1班</h1>
     <h2>課題を達成するモビリティの創造。</h2>
     <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
@@ -584,7 +631,7 @@ void loop(void) {
             startImageIndex = current;
             
             document.addEventListener('mousemove', onDragMove);
-            document.addEventListener('addEventListener', onDragMove);
+            document.addEventListener('touchmove', onDragMove); // イベントリスナー名を修正
             document.addEventListener('mouseup', endDrag);
             document.addEventListener('touchend', endDrag);
         }
@@ -632,60 +679,32 @@ void loop(void) {
     
 <script>
     // ----------------------------------------------------  
-    // ナビバーの透明化と【新しいロゴアニメーション】
+    // ナビバーの透明化と【以前のロゴアニメーション処理を削除/無効化】
     // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const navbar = document.querySelector('.navbar');
-        // ロゴの線要素を取得
-        const logoContainer = document.getElementById('logo-animation');
-        const lines = logoContainer ? logoContainer.querySelectorAll('.line') : [];
-        const totalLines = lines.length;
+        // ロゴの線要素を取得 - 静的SVGに切り替えたため、この行は影響しません
+        // const logoContainer = document.getElementById('logo-animation');
+        // const lines = logoContainer ? logoContainer.querySelectorAll('.line') : [];
+        // const totalLines = lines.length;
         
         const scrollThreshold = 50; 
 
-        // アニメーションの開始と完了のスクロール位置
-        const triggerStart = 100; // 100pxスクロールで開始
-        const triggerEnd = 600;   // 600pxスクロールで完了（線の数に応じて調整）
-        const scrollRange = triggerEnd - triggerStart;
+        // 以前のロゴアニメーション関連の定数も使用しません
+        // const triggerStart = 100; 
+        // const triggerEnd = 600; 
+        // const scrollRange = triggerEnd - triggerStart;
 
         function handleScroll() {
             const scrollY = window.scrollY;
             const isScrolled = scrollY > scrollThreshold;
             
-            // ナビバーの透明/不透明の切り替え
+            // ナビバーの透明/不透明の切り替え (このロジックは維持)
             navbar.classList.toggle('transparent', !isScrolled);
             document.body.classList.toggle('scrolled', isScrolled); 
 
-            // ------------------------------------
-            // 新しい【線が抜けていく】アニメーション
-            // ------------------------------------
-            if (totalLines > 0 && scrollY > triggerStart) {
-                // スクロール進行度 (0.0 から 1.0)
-                const progress = Math.min(1, (scrollY - triggerStart) / scrollRange);
-                
-                const segment = 1 / totalLines; // 各線が消えるためのスクロール進行度の区間
-
-                lines.forEach((line, index) => {
-                    const lineStartProgress = index * segment;
-                    const lineEndProgress = (index + 1) * segment;
-
-                    if (progress >= lineEndProgress) {
-                        // 完了した線は完全に透明 (抜けた状態)
-                        line.style.opacity = 0;
-                    } else if (progress > lineStartProgress) {
-                        // 進行中の線: 1から0に徐々に透明になる
-                        const lineProgress = (progress - lineStartProgress) / segment;
-                        line.style.opacity = Math.max(0, 1 - lineProgress);
-                    } else {
-                        // 未開始の線は完全に不透明
-                        line.style.opacity = 1;
-                    }
-                });
-
-            } else if (totalLines > 0) {
-                // アニメーション開始前は全て不透明
-                lines.forEach(line => line.style.opacity = 1);
-            }
+            // 以前の【線が抜けていく】アニメーションのロジックは、
+            // HTMLから要素を削除したため、ここから削除しました。
         }
         
         handleScroll();
