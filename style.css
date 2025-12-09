@@ -18,7 +18,7 @@
     }
 }
 
-/* ★新規追加★ 360度ビューア操作ヒント用アニメーション */
+/* 360度ビューア操作ヒント用アニメーション */
 @keyframes subtleShake {
     0%, 100% {
         transform: translateX(0);
@@ -97,7 +97,7 @@ body {
     background-color: var(--color-background-light);
 }
 
-/* ★ 新規追加: スムーズスクロールの導入 ★ */
+/* スムーズスクロールの導入 */
 html {
     scroll-behavior: smooth;
 }
@@ -127,7 +127,7 @@ html {
     color: var(--color-dark-bg-heading);
 }
 
-/* ★ 新規追加: アクセシビリティのためのフォーカスインジケータ改善 ★ */
+/* アクセシビリティのためのフォーカスインジケータ改善 */
 a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     outline: 2px solid var(--color-primary); /* プライマリカラーの青色 */
     outline-offset: 3px;
@@ -138,13 +138,13 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
  * 3. ヒーローセクション
  * ========================================================================== */
 .hero {
-    /* ★ 背景画像を '3.jpg' に変更済み ★ */
+    /* 背景画像を '3.jpg' に変更済み */
     background-image: url('./3.jpg');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
     
-    /* 固定ナビバー（.navbar）の高さ（約100px）を考慮してパディングを調整（80px -> 100pxに修正） */
+    /* 固定ナビバーの高さ（約100px）を考慮してパディングを調整 */
     padding: calc(150px + 100px) 5% 100px;
     text-align: center;
     min-height: 70vh;
@@ -179,7 +179,6 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
 .hero h1 { animation-delay: 0.3s; }
 .hero h2 { animation-delay: 0.6s; }
 .hero p { animation-delay: 0.9s; }
-/* .hero-tabs-container のアニメーション設定は全て削除します */
 
 .hero h1 {
     font-size: 3.5rem;
@@ -212,7 +211,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     text-align: left;
 }
 
-/* ★修正・追加★ goal-item-small にトランジションと初期状態を設定 */
+/* goal-item-small にトランジションと初期状態を設定 */
 .goal-item-small {
     padding: 25px;
     border-radius: 10px;
@@ -233,7 +232,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     transform: translateY(-5px);
 }
 
-/* ★追加★ visibleクラスが適用されたときのアニメーション */
+/* visibleクラスが適用されたときのアニメーション */
 .goal-item-small.visible {
     opacity: 1;
     transform: translateY(0);
@@ -281,18 +280,6 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     margin-top: 20px;
 }
 
-/* 核心技術セクションのアニメーション (汎用クラスを削除し、個別クラスで制御) */
-/* .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1.6s ease-out;
-}
-
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-*/
 
 /* ==========================================================================
  * 6. 製作プロセス (ヒストリー)
@@ -314,7 +301,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     text-align: left;
 }
 
-/* ★修正・追加★ 製作ステップ (タイムライン) にアニメーションを設定 */
+/* 製作ステップ (タイムライン) にアニメーションを設定 */
 .process-container .step {
     flex: 1;
     padding: 0 0 0 40px;
@@ -331,7 +318,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus {
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* ★追加★ visibleクラスが適用されたときのアニメーション */
+/* visibleクラスが適用されたときのアニメーション */
 .process-container .step.visible {
     opacity: 1;
     transform: translateX(0);
@@ -463,22 +450,6 @@ footer {
     color: var(--color-secondary-text);
 }
 
-/* スマホ対応 */
-@media (max-width: 768px) {
-    .site-footer {
-        padding: 40px var(--space-page-padding-horizontal) 0;
-    }
-    .footer-container {
-        flex-direction: column; /* 縦並びに */
-        align-items: flex-start;
-    }
-    .footer-section {
-        width: 100%;
-        margin-right: 0; /* PC用マージンをリセット */
-        margin-bottom: 20px;
-    }
-}
-
 /* ==========================================================================
  * 9. コードブロック
  * ========================================================================== */
@@ -557,7 +528,7 @@ footer {
     box-shadow: none;
     /* アニメーションの時間を設定 */
     transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
-    /* ★修正点1: ナビバーのテキスト色を白に強制 ★ */
+    /* ナビバーのテキスト色を白に強制 */
     color: var(--color-text-light);
 }
 
@@ -573,7 +544,7 @@ footer {
     color: #fff;
     width: 100%;
     /* ナビゲーションバーを上部に固定 */
-    position: fixed;    
+    position: fixed; 
     top: 0;
     left: 0;
     z-index: 1000;
@@ -606,7 +577,7 @@ footer {
 .hero-tab-button {
     flex-grow: 1;
     text-align: center;
-    /* ★修正点2: .navbar.transparent の color: white を継承するため、ここを調整★ */
+    /* .navbar.transparent の color: white を継承するため、inherit を利用 */
     color: inherit; 
     text-decoration: none;
     padding: 14px 0;
@@ -619,64 +590,128 @@ footer {
     background-color: rgba(255,255,255,0.05);
 }
 
-/* モバイルメニューアイコン */
-.menu-icon {
-    font-size: 2rem;
+
+/* ==========================================================================
+ * 11. ハンバーガーメニュー (SPBTN_NavR) スタイル
+ * ========================================================================== */
+
+/* ボタンコンテナ (PCでは非表示) */
+.menu-trigger, .spBTN_NavR {
+    /* 既存の .menu-icon のスタイルを上書き */
+    position: relative;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    padding: 5px;
-    /* 右端に寄せる */
-    margin-left: auto;     
-    display: none; /* PCでは非表示 */
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: auto; /* 右寄せ */
+    z-index: 1010; /* ナビバーよりも上、モバイルメニューよりも下 */
+    display: none; /* デフォルトでは非表示 (メディアクエリで表示) */
 }
 
-/* モバイルメニュー本体 */
-.mobile-menu {
-    /* 初期状態: 非表示（height: 0） */
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out; /* 開閉アニメーション */
-    flex-direction: column;
-    background-color: #111;
+/* アイコンの線 */
+.menu-trigger span, .spBTN_NavR span {
+    position: absolute;
     width: 100%;
-    position: absolute; /* .navbar内を基準 */
-    top: 100%; /* ナビバーの直下に配置 */
+    height: 3px;
+    background-color: var(--color-text-light); /* 白い線 */
+    border-radius: 3px;
     left: 0;
-    z-index: 999;
+    transition: all 0.3s ease;
 }
 
-/* 展開状態 */
-.mobile-menu.is-open {
-    max-height: 500px; /* 展開時に十分な高さを設定 */
-    transition: max-height 0.5s ease-in;
+/* 1本目の線（上） */
+.menu-trigger span:nth-of-type(1) {
+    top: 0;
 }
 
-/* ★ 新規追加: 開閉時のリンクのフェードイン/アウトアニメーション ★ */
-.mobile-menu a {
-    /* 現在のスタイルを維持 */
-    color: var(--color-text-light);
-    padding: 15px 20px;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s;
-    
-    /* 初期状態: 非表示 */
+/* 2本目の線（中央） */
+.menu-trigger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 3本目の線（下） */
+.menu-trigger span:nth-of-type(3) {
+    bottom: 0;
+}
+
+/* 展開時 (.active クラスが付いたとき) のアニメーション (X印へ変形) */
+.menu-trigger.active span:nth-of-type(1),
+.spBTN_NavR.active span:nth-of-type(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* 2本目の線（中央）: 透明化して非表示 */
+.menu-trigger.active span:nth-of-type(2),
+.spBTN_NavR.active span:nth-of-type(2) {
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out, background-color 0.3s;
 }
 
-/* 開いた状態のアニメーション */
-.mobile-menu.is-open a {
-    opacity: 1;
-    transform: translateY(0);
+/* 3本目の線（下）: -45度回転してXの下半分 */
+.menu-trigger.active span:nth-of-type(3),
+.spBTN_NavR.active span:nth-of-type(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
 }
 
-/* 複数のリンクにディレイをかける (CSSのみで実現) */
-.mobile-menu.is-open a:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.is-open a:nth-child(2) { transition-delay: 0.15s; }
-.mobile-menu.is-open a:nth-child(3) { transition-delay: 0.2s; }
-.mobile-menu.is-open a:nth-child(4) { transition-delay: 0.25s; }
-.mobile-menu.is-open a:nth-child(5) { transition-delay: 0.3s; }
+
+/* ==========================================================================
+ * 12. モバイルメニューパネル (スライドイン)
+ * ========================================================================== */
+
+/* モバイルメニュー本体 (スライドインパネル) */
+.mobile-menu {
+    /* 既存の .mobile-menu のスタイルを完全に上書き */
+    position: fixed; /* 画面全体に固定 */
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* スライドインの初期位置 (画面右外に隠す) */
+    transform: translateX(100%);
+    
+    /* 半透明の黒いオーバーレイ (初期は透明) */
+    background-color: rgba(0, 0, 0, 0.0);
+    
+    /* 見えないようにする */
+    visibility: hidden;
+    
+    /* ナビバーよりも前面 */
+    z-index: 1000;
+    
+    /* アニメーション設定 */
+    transition: transform 0.4s ease-out, background-color 0.4s ease-out, visibility 0s 0.4s;
+    
+    /* メニューコンテンツの背景色を適用するためのコンテナ */
+    padding-top: 70px; /* ナビバーの高さ分を避ける */
+    background-color: var(--color-background-dark); /* メニュー自体の背景 */
+    width: 75%; /* スライドインしたときのメニューの幅 */
+    max-width: 350px; /* 最大幅の制限 */
+    margin-left: auto; /* 右寄せ */
+    
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; 
+}
+
+/* 展開状態 (.is-open クラスが付いたとき) */
+.mobile-menu.is-open {
+    /* スライドイン */
+    transform: translateX(0);
+    
+    /* 背景オーバーレイを表示 */
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    /* 見えるようにする (visibilityの遅延をリセット) */
+    visibility: visible;
+    
+    /* visibilityの遅延をなくす */
+    transition: transform 0.4s ease-out, background-color 0.4s ease-out, visibility 0s 0s;
+}
 
 /* モバイルメニュー内のリンク */
 .mobile-menu a {
@@ -685,6 +720,7 @@ footer {
     text-decoration: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s;
+    display: block; /* クリック領域を広げる */
 }
 
 .mobile-menu a:last-child {
@@ -696,7 +732,7 @@ footer {
 }
 
 /* ==========================================================================
- * 11. レスポンシブ対応 (モバイルフレンドリー)
+ * 13. レスポンシブ対応 (モバイルフレンドリー)
  * ========================================================================== */
 
 /* PC版（901px以上）: ここでタブの表示を確定させる */
@@ -706,8 +742,12 @@ footer {
         display: flex; 
         flex: 1; 
     }
-    .menu-icon { 
+    .menu-trigger, .spBTN_NavR { 
         display: none; 
+    }
+    /* PCではモバイルメニューを非表示 */
+    .mobile-menu {
+        display: none !important;
     }
 }
 
@@ -718,11 +758,9 @@ footer {
     
     /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
     .hero-tabs-container { display: none; } 
-    .menu-icon { display: block; }
+    /* ハンバーガーアイコンを表示 */
+    .menu-trigger, .spBTN_NavR { display: block; } 
 
-    /* モバイルメニューの display を明示し、開閉を可能にする */
-    .mobile-menu { display: flex; }
-    
     /* ナビバーのロゴサイズを小さくする（900px以下） */
     .navbar .logo {      
         width: 50px; 
@@ -731,262 +769,45 @@ footer {
 
 /* スマホサイズ以下（768px以下） */
 @media (max-width: 768px) {
-    /* ヒーローセクションの文字サイズを調整 (既存) */
+    /* フッター */
+    .site-footer {
+        padding: 40px var(--space-page-padding-horizontal) 0;
+    }
+    .footer-container {
+        flex-direction: column; /* 縦並びに */
+        align-items: flex-start;
+    }
+    .footer-section {
+        width: 100%;
+        margin-right: 0; 
+        margin-bottom: 20px;
+    }
+
+    /* ヒーローセクションの文字サイズを調整 */
     .hero h1 { 
-        font-size: 2.8rem; /* 2.5remから少し大きく */
-        line-height: 1.1;  /* 行間を詰める */
+        font-size: 2.8rem; 
+        line-height: 1.1; 
     } 
     .hero h2 { 
-        font-size: 1.3rem; /* 1.5remから少し小さく */
-        margin-bottom: 20px; /* 下のマージンを詰める */
+        font-size: 1.3rem; 
+        margin-bottom: 20px; 
     } 
     
-    /* 補足文 (pタグ) の調整 */
     .hero p {
         font-size: 1rem;
-        padding: 0 5%; /* 両サイドのパディングを維持 */
+        padding: 0 5%; 
         line-height: 1.5;
-        /* 中央にある長いタイトルから少しスペースを空ける */
         margin-top: 20px; 
     }
     
-    /* ナビゲーションバーとの距離を維持するため、トップパディングは維持 */
-    /* .hero { padding-top: calc(100px + 80px); } */
-
-
     /* グリッドを1列に変更 */
     .goal-list-container { grid-template-columns: 1fr; }
     
-    /* プロセスと目標アイテムの幅を調整 */
-    .goal-item-small, .process-container .step {
-        max-width: none;
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .process-container .step { padding-left: 30px; }
-    
-    /* 技術概要セクションを縦並びにする（旧スタイル） */
-    .overview-content { flex-direction: column; }
-    /* .tech-spec, .tech-detail はタブコンテンツ内にあるため、このスタイルは無視されるはずだが、念のため残す */
-    .tech-spec, .tech-detail { width: 100%; }
-
-    /* スマホ用フッターロゴをさらに小さく（768px以下） */
-    footer .logo {
-        max-width: 27px; /* 30pxから27pxに縮小 */
-    }
-    
-    /* ヒーローセクションのトップパディングをスマホ向けに調整 */
-    .hero {
-        padding-top: calc(100px + 80px);
-    }
-    
-    /* 製作ヒストリーのタイムライン調整（モバイル用） */
-    .process-container .step {
-        /* 左側のパディング: 青い線とコンテンツの距離を維持 */
-        padding-left: 35px;    
-        
-        /* ページ全体の横パディング (--space-page-padding-horizontal: 5%) に合わせる */
-        padding-right: 5%;    
-        
-        /* max-width は不要か、または max-width: none でコンテンツを広げる設定を維持 */
-        max-width: none;
-    }
-    .process-container .step:before {
-        left: -8px;      /* 丸印を線の位置に揃える */
-        top: -8px;           /* 丸を線の上端に置く */
-    }
-    
-    /* ステップ内のメディア要素が親要素のパディングを無視して広がるのを防ぐ */
-    .process-container .step .process-media,
-    .process-container .step .code-block-wrapper {
-        max-width: 100%;
-        box-sizing: border-box;    
-        margin: 0;    
-    }
-    
-    /* コードブロック内の pre タグの幅を明示的に制限し、既存の設定を統合 */
-    .code-block pre {
-        font-size: 0.85em;
-        padding: 8px;
-        white-space: pre-wrap; /* モバイルでは折り返しを許可 */
-        width: 100%;
-        box-sizing: border-box;
-    }
-}
-/* ページ全体の横スクロール禁止 */
-html, body {
-    overflow-x: hidden;
-}
-
-/* コードブロックの横スクロールを内部だけに限定 */
-.code-container {
-    overflow-x: hidden;      /* 親では横スクロール禁止 */
-}
-/* .code-block の overflow-x: auto は .code-block-wrapper .code-block に統合されました */
-/* .code-block pre の white-space: pre; は .code-block-wrapper pre に統合されました */
-
-
-/* モバイル用調整 (768px以下) */
-@media (max-width: 768px) {
-    /* タイムラインの丸印の再調整 */
-    .process-container .step:before {
-        left: -8px;      /* 丸印を線の位置に揃える */
-        top: -8px;           /* 丸を線の上端に置く */
-        width: 16px;
-        height: 16px;
-        background-color: var(--color-primary);
-        border-radius: 50%;
-    }
-}
-
-/* ==========================================================================
- * タブ構造のスタイル定義（全画面サイズで適用される）
- * ========================================================================== */
-
-/* タブボタンのコンテナ (横並び) */
-.tab-buttons {
-    display: flex;
-    justify-content: center;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    border-bottom: 2px solid #ccc;
-}
-
-/* タブボタン */
-.tab-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    color: var(--color-secondary-text);
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-/* アクティブなタブ */
-.tab-button.active {
-    color: var(--color-primary); /* Blue */
-    border-bottom: 3px solid var(--color-primary);
-}
-
-.tab-button:hover:not(.active) {
-    color: var(--color-text-dark); /* ホバー時 */
-}
-
-/* タブコンテンツのコンテナ */
-.tab-content-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: left;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: var(--color-background-light); /* 背景を白に戻す */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* 各タブコンテンツ (初期は非表示) */
-.tab-content {
-    display: none;
-    padding: 20px 0;
-}
-
-/* アクティブなタブコンテンツ */
-.tab-content.active {
-    display: block;
-}
-
-/* ==========================================================================
- * 技術概要 - コンテンツ内の整形
- * ========================================================================== */
-
-/* 車体スペック (テーブル形式で整形) */
-.spec-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.spec-table th, .spec-table td {
-    padding: 15px;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 1.1rem;
-    vertical-align: top;
-}
-
-.spec-table th {
-    width: 30%;
-    background-color: #f7f7f7;
-    font-weight: 700;
-    color: var(--color-text-dark);
-    text-align: left;
-}
-
-.spec-table td {
-    width: 70%;
-    color: var(--color-secondary-text);
-}
-
-/* 核心技術のカードスタイル */
-.tech-card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2列グリッド */
-    gap: 30px;
-    margin-top: 20px;
-}
-
-/* ★修正・追加★ tech-card にトランジションと初期状態を設定 */
-.tech-card {
-    padding: 25px;
-    border: 1px solid #e0e0e0;
-    border-left: 5px solid var(--color-primary);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-    
-    /* ホバーアニメーション */
-    transition: transform 0.3s;
-
-    /* スクロールアニメーションの初期状態 */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s, border 0.3s;
-}
-
-.tech-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* ★追加★ visibleクラスが適用されたときのアニメーション */
-.tech-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.tech-card h4 {
-    color: var(--color-primary);
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-}
-
-.tech-card p {
-    font-size: 1rem;
-    color: var(--color-secondary-text);
-    margin-bottom: 0;
-}
-
-/* タブコンテンツ内のレスポンシブ対応 */
-@media (max-width: 768px) {
-    .tab-button {
-        padding: 15px 15px;
-        font-size: 1rem;
-    }
+    /* 技術概要のカードを1列に変更 */
     .tech-card-container {
-        grid-template-columns: 1fr; /* スマホでは1列 */
+        grid-template-columns: 1fr;
     }
+    
     /* スペックテーブルを縦に積み上げる */
     .spec-table th, .spec-table td {
         display: block;
@@ -1004,85 +825,35 @@ html, body {
         padding-top: 5px;
         margin-bottom: 10px;
     }
-}
-/* ==========================================================================
- * 12. 360度ビューア スタイル
- * ========================================================================== */
 
-/* ビューアを配置するセクションラッパー */
-.viewer-section-wrapper {
-    max-width: 1000px;
-    margin: 60px auto 0; /* 上にマージンを追加 */
-    text-align: center;
-}
-
-.viewer-section-wrapper h4 {
-    font-size: 1.8rem;
-    color: var(--color-text-dark);
-    margin-bottom: 30px;
-}
-
-.viewer {
-    width: 90%; /* レスポンシブ対応 */
-    max-width: 700px; /* 最大幅を少し広めに設定 */
-    height: 450px;  /* 高さを調整 */
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-    background: #333;
-    border: 5px solid var(--color-primary); /* ボーダーをプライマリカラーに変更 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    cursor: grab;
-    border-radius: 10px;
-
-    /* ★新規追加★ ドラッグを促すアニメーション */
-    animation: subtleShake 3s ease-in-out 1s 2; /* 1秒後に開始し、2回繰り返す */
-}
+    /* プロセス（ヒストリー）の調整 */
+    .process-container .step {
+        max-width: none;
+        margin-bottom: 20px;
+        text-align: left;
+        padding-left: 35px;
+        padding-right: 5%;
+    }
+    .process-container .step:before {
+        left: -8px;
+        top: -8px;
+    }
     
-/* ★新規追加★ ドラッグ中はアニメーションを停止 */
-.viewer.dragging {
-    cursor: grabbing;
-    animation: none; /* ドラッグ開始でアニメーションを停止 */
-}
-
-.viewer img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.05s ease-out; 
-    user-select: none;
-    -webkit-user-drag: none;
-}
+    /* コードブロックの折り返し調整 */
+    .code-block pre {
+        font-size: 0.85em;
+        padding: 8px;
+        white-space: pre-wrap; /* モバイルでは折り返しを許可 */
+        width: 100%;
+        box-sizing: border-box;
+    }
     
-.viewer img.active {
-    opacity: 1;
-}
-    
-.viewer.dragging {
-    cursor: grabbing;
-}
-
-/* 画像がない場合のプレースホルダーテキストのスタイル */
-.viewer .image-placeholder-text {
-    color: var(--color-text-light);
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    padding: 0 10px;
-}
-
-@media (max-width: 768px) {
+    /* 360度ビューアの高さを縮小 */
     .viewer {
-        height: 300px; /* モバイルでは高さを縮小 */
+        height: 300px; 
     }
 }
-
-
-
+/* ページ全体の横スクロール禁止 */
+html, body {
+    overflow-x: hidden;
+}
