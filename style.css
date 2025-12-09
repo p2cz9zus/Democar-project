@@ -3,8 +3,7 @@
  * 目的: 元のCSSセレクタを維持しつつ、CSS変数で管理性を向上
  * モバイルメニューの表示制御をクラスベース（.is-open）に統一し、レスポンシブ対応を完了。
  * 変更点: モバイルメニュー (.mobile-menu) の背景色を #001f40 (濃いネイビーブルー) に修正。
- * ヒーローセクションにギャラクシーロゴのスタイルとスクロールアニメーションを追加。
- * ➡ 修正点: ヒーローセクションの背景をグラデーションに変更し、ロゴを新しい幾何学アニメーション（.innovators-logo-container）に置き換えました。
+ * ヒーローセクションの背景をグラデーションに変更し、**静的なSVGロゴ**に対応するようスタイルを整理しました。
  */
 
 /* ==========================================================================
@@ -76,10 +75,8 @@
     --color-hero-text-secondary: rgba(255, 255, 255, 0.8);
     --color-dark-bg-heading: #f5f5f7;
     
-    /* ❗ ロゴ関連カラー（ギャラクシー風） ❗ */
-    --color-logo-purple: #8A2BE2; /* 青紫 */
-    --color-logo-blue: #4169E1; /* ロイヤルブルー */
-    --color-logo-pink: #FF69B4; /* ホットピンク */
+    /* ❗ ロゴ関連カラー（静的SVGロゴの線色に使用） ❗ */
+    --color-logo-stroke: var(--color-text-light); /* SVGの線の色を白に設定 */
 
     /* スペーシング */
     --space-section-padding: 80px;
@@ -208,106 +205,41 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
 
 
 /* ==================================== */
-/* 新しいロゴとアニメーションのスタイル */
+/* 静的なSVGロゴのスタイル（新しい） */
 /* ==================================== */
-
-/* 以前の .logo-texture および body.scrolled .logo-texture のスタイルは削除されました。 */
-
-/*==================================================
-  [B] 新しいロゴとアニメーションのスタイル
-==================================================*/
-
-/* ロゴ全体を画面中央に固定 */
-.innovators-logo-container {
+.innovators-a1-logo {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    /* ヒーローコンテンツの下に配置し、スクロールしても動かないように */
-    z-index: 5; 
-    transition: opacity 0.5s ease;
+    transform: translate(-50%, -50%) scale(1.5); /* 拡大して中央配置 */
+    display: inline-block;
+    text-align: center;
+    width: 150px; 
+    z-index: 5;
+    
+    /* 初期は非表示にし、ヒーローのテキストと同時にフェードイン */
+    opacity: 0;
+    animation: slideInUp 1.0s ease-out forwards;
+    animation-delay: 0.3s;
 }
-
-.logo-wrapper {
-    position: relative;
-    width: 200px; /* ロゴの全体幅 */
-    height: 200px; /* ロゴの全体高さ */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.innovators-a1-logo svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    color: var(--color-logo-stroke); /* currentColorをCSS変数で制御 */
 }
-
-.s-logo {
-    position: absolute;
-    width: 100px; /* 内側の四角形の幅 */
-    height: 100px; /* 内側の四角形の高さ */
-    transform: rotate(45deg); /* ひし形に回転 */
-    top: calc(50% - 50px);
-    left: calc(50% - 50px);
+/* SVG内のパス（線）のスタイル: 全ての線に適用 */
+.innovators-a1-logo svg path {
+    stroke: currentColor; 
+    transition: stroke 0.3s ease;
 }
-
-/* 2つ目の四角形を少しずらして重ね、絡み合う形を表現 */
-.s-logo.second {
-    transform: rotate(45deg) translate(8px, 8px); 
-    z-index: -1; /* 奥側にあるように見せる */
+.logo-text {
+    font-family: serif; 
+    font-size: 16px;
+    margin-top: 5px;
+    color: var(--color-text-light);
 }
-
-/* 各線（div）の共通スタイル */
-.s-logo .line {
-    position: absolute;
-    border: 3px solid transparent; /* 線幅 */
-    /* JavaScriptで制御するopacity変化を滑らかにする */
-    transition: opacity 0.2s linear; 
-}
-
-/* -------------------
-    カラフルな線: 四角形A (手前側)
-    ------------------- */
-.s-logo .line-1 {
-    top: 0; left: 0;
-    width: 100%; height: 0;
-    border-top-color: #FF0077; /* ピンク */
-}
-.s-logo .line-2 {
-    top: 0; right: 0;
-    width: 0; height: 100%;
-    border-right-color: #00E5FF; /* シアン */
-}
-.s-logo .line-3 {
-    bottom: 0; right: 0;
-    width: 100%; height: 0;
-    border-bottom-color: #00FF88; /* 緑 */
-}
-.s-logo .line-4 {
-    bottom: 0; left: 0;
-    width: 0; height: 100%;
-    border-left-color: #FFFF00; /* 黄色 */
-}
-
-/* -------------------
-    カラフルな線: 四角形B (奥側)
-    ------------------- */
-.s-logo.second .line-5 {
-    top: 0; left: 0;
-    width: 100%; height: 0;
-    border-top-color: #FF8800; /* オレンジ */
-}
-.s-logo.second .line-6 {
-    top: 0; right: 0;
-    width: 0; height: 100%;
-    border-right-color: #FF00FF; /* マゼンタ */
-}
-.s-logo.second .line-7 {
-    bottom: 0; right: 0;
-    width: 100%; height: 0;
-    border-bottom-color: #4400FF; /* 青 */
-}
-.s-logo.second .line-8 {
-    bottom: 0; left: 0;
-    width: 0; height: 100%;
-    border-left-color: #00AAFF; /* ライトブルー */
-}
-
 
 /* ==========================================================================
  * 4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
@@ -629,7 +561,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
     content: '';
     position: absolute;
     left: -8px;      /* 線の中央に丸を揃える */
-    top: -8px;      /* 丸を線の上端に置く */
+    top: -8px;       /* 丸を線の上端に置く */
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
@@ -1034,7 +966,7 @@ footer {
     .menu-trigger, .spBTN_NavR { display: block; } 
 
     /* ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {      
+    .navbar .logo {     
         width: 50px; 
     }
 }
