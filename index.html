@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* スクロールによる線抜きアニメーションを適用するために、
+           bodyの高さを確保します。 */
+        body {
+            /* ヒーローセクションを全画面に表示し、下にコンテンツが続く構造を想定 */
+            min-height: 250vh; 
+        }
+    </style>
 </head>
 <body>
 
@@ -41,15 +49,22 @@
     
 
 <section class="hero">
-    <svg width="0" height="0" style="position: absolute;">
-        <defs>
-            <clipPath id="logoShape">
-                <path d="M50 0L100 50L50 100L0 50Z" transform="scale(3.5)" /> 
-            </clipPath>
-        </defs>
-    </svg>
-    
-    <div class="logo-texture"></div> 
+    <div class="innovators-logo-container" id="logo-animation-container">
+        <div class="logo-wrapper" id="logo-animation">
+            <div class="s-logo">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+                <div class="line line-4"></div>
+            </div>
+            <div class="s-logo second">
+                <div class="line line-5"></div>
+                <div class="line line-6"></div>
+                <div class="line line-7"></div>
+                <div class="line line-8"></div>
+            </div>
+        </div>
+    </div>
     
     <h1>創成プロジェクト　A1班</h1>
     <h2>課題を達成するモビリティの創造。</h2>
@@ -569,7 +584,7 @@ void loop(void) {
             startImageIndex = current;
             
             document.addEventListener('mousemove', onDragMove);
-            document.addEventListener('touchmove', onDragMove);
+            document.addEventListener('addEventListener', onDragMove);
             document.addEventListener('mouseup', endDrag);
             document.addEventListener('touchend', endDrag);
         }
@@ -617,13 +632,21 @@ void loop(void) {
     
 <script>
     // ----------------------------------------------------  
-    // ナビバーの透明化とロゴのスクロール変形アニメーション
+    // ナビバーの透明化と【新しいロゴアニメーション】
     // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const navbar = document.querySelector('.navbar');
-        // ロゴのアニメーション対象要素を取得
-        const logoElement = document.querySelector('.logo-texture'); 
+        // ロゴの線要素を取得
+        const logoContainer = document.getElementById('logo-animation');
+        const lines = logoContainer ? logoContainer.querySelectorAll('.line') : [];
+        const totalLines = lines.length;
+        
         const scrollThreshold = 50; 
+
+        // アニメーションの開始と完了のスクロール位置
+        const triggerStart = 100; // 100pxスクロールで開始
+        const triggerEnd = 600;   // 600pxスクロールで完了（線の数に応じて調整）
+        const scrollRange = triggerEnd - triggerStart;
 
         function handleScroll() {
             const scrollY = window.scrollY;
@@ -631,27 +654,37 @@ void loop(void) {
             
             // ナビバーの透明/不透明の切り替え
             navbar.classList.toggle('transparent', !isScrolled);
-            
-            // body に scrolled クラスを付与/除去 (ナビバー/ロゴのスタイル変更用)
             document.body.classList.toggle('scrolled', isScrolled); 
 
-            // ロゴの変形アニメーションを直接制御
-            if (logoElement) {
-                // スクロール量に基づいた変形率 (0.0 から 1.0 までの値)
-                // 最大で 500px スクロールしたときに変形が完了するように設定
-                const maxScroll = 500; 
-                const ratio = Math.min(scrollY / maxScroll, 1); 
+            // ------------------------------------
+            // 新しい【線が抜けていく】アニメーション
+            // ------------------------------------
+            if (totalLines > 0 && scrollY > triggerStart) {
+                // スクロール進行度 (0.0 から 1.0)
+                const progress = Math.min(1, (scrollY - triggerStart) / scrollRange);
                 
-                // 縮小 (初期 0.9 から 最大 0.5 まで縮小)
-                const initialScale = 0.9;
-                const minScale = 0.5;
-                const scale = initialScale - (ratio * (initialScale - minScale));
-                
-                // 回転 (最大 180deg 回転)
-                const rotation = ratio * 180; 
+                const segment = 1 / totalLines; // 各線が消えるためのスクロール進行度の区間
 
-                // translate(-50%, -50%) で中央を維持しつつ、scaleとrotateを適用
-                logoElement.style.transform = `translate(-50%, -50%) scale(${scale}) rotate(${rotation}deg)`;
+                lines.forEach((line, index) => {
+                    const lineStartProgress = index * segment;
+                    const lineEndProgress = (index + 1) * segment;
+
+                    if (progress >= lineEndProgress) {
+                        // 完了した線は完全に透明 (抜けた状態)
+                        line.style.opacity = 0;
+                    } else if (progress > lineStartProgress) {
+                        // 進行中の線: 1から0に徐々に透明になる
+                        const lineProgress = (progress - lineStartProgress) / segment;
+                        line.style.opacity = Math.max(0, 1 - lineProgress);
+                    } else {
+                        // 未開始の線は完全に不透明
+                        line.style.opacity = 1;
+                    }
+                });
+
+            } else if (totalLines > 0) {
+                // アニメーション開始前は全て不透明
+                lines.forEach(line => line.style.opacity = 1);
             }
         }
         
