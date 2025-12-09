@@ -8,54 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* スクロールによる線抜きアニメーションを適用するために、
-           bodyの高さを確保します。 */
-        body {
-            /* ヒーローセクションを全画面に表示し、下にコンテンツが続く構造を想定 */
-            min-height: 250vh; 
-        }
-
-        /* ---------------------------------------------------------------------- */
-        /* 【新しいロゴのSVGコードを反映させるためのCSS】 */
-        /* ---------------------------------------------------------------------- */
-        .innovators-a1-logo {
-            display: inline-block;
-            text-align: center;
-            width: 150px; 
-            margin-top: 50px; 
-            margin-bottom: 20px; /* 見栄えを良くするための調整 */
-        }
-        .innovators-a1-logo svg {
-            display: block;
-            width: 100%;
-            height: auto;
-            overflow: visible;
-        }
-        /* SVG内のパス（線）のスタイル: 全ての線に適用 */
-        .innovators-a1-logo svg path {
-            stroke: black; 
-            /* fill: none; はHTMLのpath属性で設定済み */
-        }
-        .logo-text {
-            font-family: serif; 
-            font-size: 16px;
-            margin-top: 5px;
-            color: black;
-        }
-
-        /* ---------------------------------------------------------------------- */
-        /* 【既存のロゴアニメーション用CSSクラスを一時的に非表示】 */
-        /* ---------------------------------------------------------------------- */
-        /* ヒーローセクションで静的なSVGロゴを使用するため、既存のアニメーション要素は非表示 */
-        .innovators-logo-container {
-            display: none !important;
-        }
-    </style>
 </head>
 <body>
 
-<header class="navbar transparent">
+<header class="navbar">
     <div class="navbar-container">
         <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
             <img src="A1.png" alt="プロジェクトロゴ" class="logo">
@@ -85,34 +41,6 @@
     
 
 <section class="hero">
-    <div class="innovators-a1-logo" id="logo-static">
-        <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-            <path
-                class="path-under"
-                d="M 50 25 
-                   L 70 45 L 95 25 L 75 5 
-                   M 25 5 L 5 25 L 25 45 L 50 25"
-                stroke-width="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="miter"
-                stroke-linecap="square"
-            />
-            
-            <path
-                class="path-over"
-                d="M 25 5 L 75 45 
-                   M 75 5 L 25 45"
-                stroke-width="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="miter"
-                stroke-linecap="square"
-            />
-        </svg>
-        <p class="logo-text">Innovators A1</p>
-    </div>
-
     <h1>創成プロジェクト　A1班</h1>
     <h2>課題を達成するモビリティの創造。</h2>
     <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
@@ -288,7 +216,7 @@
 
         <div class="step animate-on-scroll">
             <span class="step-number">初期フェーズ（方針転換後）</span>
-            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮） </h4>
+            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮）</h4>
             <p>初期フェーズ①で設計した車体をさらに改良しました。サーボモータの設置位置・前輪タイヤの動きを考慮して再度、設計しました。</p>
             <img src="./zenntaizu2.jpeg" alt="車体全体の設計図" class="process-media">
             <video controls class="process-media">
@@ -531,37 +459,32 @@ void loop(void) {
 </footer>
 
 <script>
-    // ----------------------------------------------------  
-    // Intersection Observer スクリプト
-    // ----------------------------------------------------
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
     });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 </script>
 
 <script>
-    // ----------------------------------------------------  
-    // モバイルメニューの表示/非表示を切り替える関数
-    // ----------------------------------------------------
+    // メニューの表示/非表示を切り替える関数
     function toggleMenu() {
         const menu = document.getElementById("mobileMenu");
+        // ❗ 修正: アイコン要素を取得 ❗
         const trigger = document.getElementById("menuTrigger"); 
 
+        // クラスをトグルすることで、CSSの .is-open と .active を適用させる
         menu.classList.toggle("is-open"); 
         trigger.classList.toggle("active");
     }
 </script>
 
 <script>
-    // ----------------------------------------------------  
-    // タブ切り替え機能
-    // ----------------------------------------------------
+    /* タブ切り替え機能 */
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -588,13 +511,15 @@ void loop(void) {
 </script>
     
 <script>
-    // ----------------------------------------------------  
-    // 360° Car Viewer スクリプト
+    // ---------------------------------------------------- 
+    // 360° Car Viewer スクリプトの追加
     // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const viewer = document.getElementById('viewer');
+        // ビューア要素が見つからない場合は処理を中断
         if (!viewer) return;
 
+        // `img`要素のみを選択（メッセージ用のpタグを除外するため）
         const images = viewer.querySelectorAll('img'); 
         const totalImages = images.length;
 
@@ -608,64 +533,64 @@ void loop(void) {
         let startX = 0;
         let startImageIndex = 0;
 
-        // 💡 感度調整のための定数
+        // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
         const SENSITIVITY = 1.0; 
 
         // 指定されたインデックスの画像を表示する関数
         function showImage(index) {
-            images[current].classList.remove('active');
-            // モジュロ演算でインデックスをループさせる
-            current = (index % totalImages + totalImages) % totalImages;
-            images[current].classList.add('active');
+          images[current].classList.remove('active');
+          // モジュロ演算でインデックスをループさせる (負の値にも対応)
+          current = (index % totalImages + totalImages) % totalImages;
+          images[current].classList.add('active');
         }
 
         // ドラッグ開始ハンドラ
         function startDrag(e) {
-            if (e.type === 'touchstart' && e.touches.length > 1) return;
-            
-            e.preventDefault();
-            isDragging = true;
-            viewer.classList.add('dragging');
+          if (e.type === 'touchstart' && e.touches.length > 1) return;
+          
+          e.preventDefault();
+          isDragging = true;
+          viewer.classList.add('dragging');
 
-            startX = e.pageX || e.touches[0].pageX;
-            startImageIndex = current;
-            
-            document.addEventListener('mousemove', onDragMove);
-            document.addEventListener('touchmove', onDragMove); // イベントリスナー名を修正
-            document.addEventListener('mouseup', endDrag);
-            document.addEventListener('touchend', endDrag);
+          startX = e.pageX || e.touches[0].pageX;
+          startImageIndex = current;
+          
+          document.addEventListener('mousemove', onDragMove);
+          document.addEventListener('touchmove', onDragMove);
+          document.addEventListener('mouseup', endDrag);
+          document.addEventListener('touchend', endDrag);
         }
 
         // ドラッグ中のハンドラ
         function onDragMove(e) {
-            if (!isDragging) return;
-            
-            if (e.type === 'touchmove' && e.touches.length > 1) return;
+          if (!isDragging) return;
+          
+          if (e.type === 'touchmove' && e.touches.length > 1) return;
 
-            const currentX = e.pageX || e.touches[0].pageX;
-            const diffX = currentX - startX; 
-            
-            const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
-            const imageDelta = Math.round(diffX / dragAmountPerImage);
-            
-            const newIndex = startImageIndex - imageDelta; 
+          const currentX = e.pageX || e.touches[0].pageX;
+          const diffX = currentX - startX; 
+          
+          const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
+          const imageDelta = Math.round(diffX / dragAmountPerImage);
+          
+          const newIndex = startImageIndex - imageDelta; 
 
-            if (newIndex !== current) {
-                showImage(newIndex);
-            }
+          if (newIndex !== current) {
+            showImage(newIndex);
+          }
         }
 
         // ドラッグ終了ハンドラ
         function endDrag() {
-            if (!isDragging) return;
+          if (!isDragging) return;
 
-            isDragging = false;
-            viewer.classList.remove('dragging');
-            
-            document.removeEventListener('mousemove', onDragMove);
-            document.removeEventListener('touchmove', onDragMove);
-            document.removeEventListener('mouseup', endDrag);
-            document.removeEventListener('touchend', endDrag);
+          isDragging = false;
+          viewer.classList.remove('dragging');
+          
+          document.removeEventListener('mousemove', onDragMove);
+          document.removeEventListener('touchmove', onDragMove);
+          document.removeEventListener('mouseup', endDrag);
+          document.removeEventListener('touchend', endDrag);
         }
 
         // 初期イベントリスナーの設定
@@ -674,41 +599,6 @@ void loop(void) {
         
         // 初期表示
         showImage(0);
-    });
-</script>
-    
-<script>
-    // ----------------------------------------------------  
-    // ナビバーの透明化と【以前のロゴアニメーション処理を削除/無効化】
-    // ----------------------------------------------------
-    document.addEventListener('DOMContentLoaded', () => {
-        const navbar = document.querySelector('.navbar');
-        // ロゴの線要素を取得 - 静的SVGに切り替えたため、この行は影響しません
-        // const logoContainer = document.getElementById('logo-animation');
-        // const lines = logoContainer ? logoContainer.querySelectorAll('.line') : [];
-        // const totalLines = lines.length;
-        
-        const scrollThreshold = 50; 
-
-        // 以前のロゴアニメーション関連の定数も使用しません
-        // const triggerStart = 100; 
-        // const triggerEnd = 600; 
-        // const scrollRange = triggerEnd - triggerStart;
-
-        function handleScroll() {
-            const scrollY = window.scrollY;
-            const isScrolled = scrollY > scrollThreshold;
-            
-            // ナビバーの透明/不透明の切り替え (このロジックは維持)
-            navbar.classList.toggle('transparent', !isScrolled);
-            document.body.classList.toggle('scrolled', isScrolled); 
-
-            // 以前の【線が抜けていく】アニメーションのロジックは、
-            // HTMLから要素を削除したため、ここから削除しました。
-        }
-        
-        handleScroll();
-        window.addEventListener('scroll', handleScroll);
     });
 </script>
 </body>
