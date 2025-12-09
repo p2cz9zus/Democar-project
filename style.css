@@ -3,6 +3,7 @@
  * 目的: 元のCSSセレクタを維持しつつ、CSS変数で管理性を向上
  * モバイルメニューの表示制御をクラスベース（.is-open）に統一し、レスポンシブ対応を完了。
  * 変更点: モバイルメニュー (.mobile-menu) の背景色を #001f40 (濃いネイビーブルー) に修正。
+ * ヒーローセクションにギャラクシーロゴのスタイルとスクロールアニメーションを追加。
  */
 
 /* ==========================================================================
@@ -73,6 +74,11 @@
     --color-hero-overlay: rgba(0, 0, 0, 0.4);
     --color-hero-text-secondary: rgba(255, 255, 255, 0.8);
     --color-dark-bg-heading: #f5f5f7;
+    
+    /* ❗ 追加: ロゴ関連カラー（ギャラクシー風） ❗ */
+    --color-logo-purple: #8A2BE2; /* 青紫 */
+    --color-logo-blue: #4169E1; /* ロイヤルブルー */
+    --color-logo-pink: #FF69B4; /* ホットピンク */
 
     /* スペーシング */
     --space-section-padding: 80px;
@@ -161,14 +167,23 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
     width: 100%;
     height: 100%;
     background-color: var(--color-hero-overlay);
-    z-index: 1;
+    /* ❗ 修正: ロゴテクスチャ(z-index: 2)より下にする ❗ */
+    z-index: 1; 
 }
 
 /* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
 .hero h1, .hero h2, .hero p {
     color: var(--color-text-light);
     position: relative;
-    z-index: 2;
+    /* ❗ 修正: ロゴテクスチャ(z-index: 2)より上にするため z-index: 3 に変更 ❗ */
+    z-index: 3; 
+    
+    /* ↓↓↓ 【視認性向上】テキストシャドウを追加 ↓↓↓ */
+    text-shadow: 
+        0 0 8px rgba(0, 0, 0, 0.7), 
+        0 0 15px rgba(0, 0, 0, 0.5);
+    /* ↑↑↑ 【視認性向上】 ↑↑↑ */
+    
     /* 初期状態を非表示にする（アニメーション開始前） */
     opacity: 0; 
     /* フェードインアニメーションを適用 */
@@ -197,6 +212,46 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
     margin-bottom: 40px;
     color: var(--color-hero-text-secondary);
 }
+
+/* ==================================== */
+/* ギャラクシーロゴテクスチャとクリッピング (追加) */
+/* ==================================== */
+
+.logo-texture {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* 中央寄せ + 初期状態の変形 */
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9); 
+    
+    width: 350px; /* ロゴの表示サイズ */
+    height: 350px;
+    z-index: 2; /* テキスト(3)より下、オーバーレイ(1)より上 */
+
+    /* ギャラクシー色をグラデーションで表現 */
+    background: linear-gradient(
+        135deg, 
+        var(--color-logo-purple) 0%, 
+        var(--color-logo-blue) 50%, 
+        var(--color-logo-pink) 100%
+    );
+    
+    /* 形状の切り抜き (HTMLで定義したSVGのID #logoShape を参照) */
+    -webkit-clip-path: url(#logoShape);
+    clip-path: url(#logoShape);
+    
+    /* スクロールアニメーションのための準備 */
+    transition: transform 30s linear, opacity 0.5s ease-out; /* 回転に長い時間を設定 */
+    opacity: 0.75; /* テキストの視認性確保のため、半透明に */
+}
+
+/* bodyに .scrolled クラスが付いたときのアニメーション */
+body.scrolled .logo-texture {
+    /* スクロールしたらゆっくりと360度回転・少し拡大 */
+    transform: translate(-50%, -50%) rotate(360deg) scale(1.1);
+    opacity: 0.9; /* スクロールに合わせて少し濃くする */
+}
+
 
 /* ==========================================================================
  * 4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
@@ -925,6 +980,12 @@ footer {
     .navbar .logo {      
         width: 50px; 
     }
+    
+    /* ❗ 追加: ロゴサイズをタブレット向けに縮小 ❗ */
+    .logo-texture {
+        width: 250px; 
+        height: 250px;
+    }
 }
 
 /* スマホサイズ以下（768px以下） */
@@ -958,6 +1019,12 @@ footer {
         padding: 0 5%; 
         line-height: 1.5;
         margin-top: 20px; 
+    }
+    
+    /* ❗ 追加: ロゴサイズをスマホ向けに縮小 ❗ */
+    .logo-texture {
+        width: 200px; /* モバイルでさらに縮小 */
+        height: 200px;
     }
     
     /* グリッドを1列に変更 */
