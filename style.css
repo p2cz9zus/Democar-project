@@ -3,7 +3,6 @@
  * 目的: 元のCSSセレクタを維持しつつ、CSS変数で管理性を向上
  * モバイルメニューの表示制御をクラスベース（.is-open）に統一し、レスポンシブ対応を完了。
  * 変更点: モバイルメニュー (.mobile-menu) の背景色を #001f40 (濃いネイビーブルー) に修正。
- * ヒーローセクションの背景をグラデーションに変更し、**静的なSVGロゴ**に対応するようスタイルを整理しました。
  */
 
 /* ==========================================================================
@@ -74,9 +73,6 @@
     --color-hero-overlay: rgba(0, 0, 0, 0.4);
     --color-hero-text-secondary: rgba(255, 255, 255, 0.8);
     --color-dark-bg-heading: #f5f5f7;
-    
-    /* ❗ ロゴ関連カラー（静的SVGロゴの線色に使用） ❗ */
-    --color-logo-stroke: var(--color-text-light); /* SVGの線の色を白に設定 */
 
     /* スペーシング */
     --space-section-padding: 80px;
@@ -142,103 +138,64 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
 /* ==========================================================================
  * 3. ヒーローセクション
  * ========================================================================== */
-
-/*==================================================
-  [A] ヒーローセクションのスタイル修正
-==================================================*/
 .hero {
-    /* 以前の背景画像、オーバーレイ、パディングを上書き */
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-image: url('./3.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    
+    /* 固定ナビバーの高さ（約70px）を考慮してパディングを調整 */
+    padding: calc(150px + 70px) 5% 100px;
     text-align: center;
-    color: var(--color-text-light); /* ヒーロー内の文字色 */
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* 背景を宇宙風に */
-    overflow: hidden; /* ロゴがはみ出さないように */
+    min-height: 70vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景画像の上に暗いオーバーレイをかけ、テキストの視認性を高める */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-hero-overlay);
     z-index: 1;
 }
 
-/* ヒーロー内のテキストとボタンをロゴより手前に表示 */
+/* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
 .hero h1, .hero h2, .hero p {
     color: var(--color-text-light);
     position: relative;
-    /* 新しいロゴ(z-index: 5)より上にするため z-index: 10 に変更 */
-    z-index: 10; 
-    
-    /* 【視認性向上】テキストシャドウを追加 (元のスタイルから保持) */
-    text-shadow: 
-        0 0 8px rgba(0, 0, 0, 0.7), 
-        0 0 15px rgba(0, 0, 0, 0.5);
-    
-    /* 初期状態を非表示にする（アニメーション開始前） (元のスタイルから保持) */
+    z-index: 2;
+    /* 初期状態を非表示にする（アニメーション開始前） */
     opacity: 0; 
-    /* フェードインアニメーションを適用 (元のスタイルから保持) */
+    /* フェードインアニメーションを適用 */
     animation: slideInUp 1.0s ease-out forwards; 
 }
 
-/* 要素ごとに遅延を設定して順番に表示 (元のスタイルから保持) */
+/* 要素ごとに遅延を設定して順番に表示 */
 .hero h1 { animation-delay: 0.3s; }
 .hero h2 { animation-delay: 0.6s; }
 .hero p { animation-delay: 0.9s; }
 
 .hero h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 .hero h2 {
-    font-size: clamp(1rem, 2.5vw, 1.8rem);
-    font-weight: 300;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 30px;
 }
 
 .hero p {
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    max-width: 700px;
+    font-size: 1.2rem;
     margin-bottom: 40px;
     color: var(--color-hero-text-secondary);
-}
-
-
-/* ==================================== */
-/* 静的なSVGロゴのスタイル（新しい） */
-/* ==================================== */
-.innovators-a1-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.5); /* 拡大して中央配置 */
-    display: inline-block;
-    text-align: center;
-    width: 150px; 
-    z-index: 5;
-    
-    /* 初期は非表示にし、ヒーローのテキストと同時にフェードイン */
-    opacity: 0;
-    animation: slideInUp 1.0s ease-out forwards;
-    animation-delay: 0.3s;
-}
-.innovators-a1-logo svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    color: var(--color-logo-stroke); /* currentColorをCSS変数で制御 */
-}
-/* SVG内のパス（線）のスタイル: 全ての線に適用 */
-.innovators-a1-logo svg path {
-    stroke: currentColor; 
-    transition: stroke 0.3s ease;
-}
-.logo-text {
-    font-family: serif; 
-    font-size: 16px;
-    margin-top: 5px;
-    color: var(--color-text-light);
 }
 
 /* ==========================================================================
@@ -510,7 +467,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    padding: 10px;
+    padding: 0 10px;
 }
 
 
@@ -741,7 +698,6 @@ footer {
 .navbar:not(.transparent) {
     background-color: #000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    color: #fff; /* テキスト色を白に統一 */
 }
 
 /* ナビバー全体 */
@@ -966,7 +922,7 @@ footer {
     .menu-trigger, .spBTN_NavR { display: block; } 
 
     /* ナビバーのロゴサイズを小さくする（900px以下） */
-    .navbar .logo {     
+    .navbar .logo {      
         width: 50px; 
     }
 }
@@ -988,7 +944,6 @@ footer {
     }
 
     /* ヒーローセクションの文字サイズを調整 */
-    /* 新しいclamp値を使用しているため、ここでは調整を維持 */
     .hero h1 { 
         font-size: 2.8rem; 
         line-height: 1.1; 
