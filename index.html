@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<header class="navbar">
+<header class="navbar transparent">
     <div class="navbar-container">
         <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
             <img src="A1.png" alt="プロジェクトロゴ" class="logo">
@@ -226,7 +226,7 @@
 
         <div class="step animate-on-scroll">
             <span class="step-number">初期フェーズ（方針転換後）</span>
-            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮） </h4>
+            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮） </h4>
             <p>初期フェーズ①で設計した車体をさらに改良しました。サーボモータの設置位置・前輪タイヤの動きを考慮して再度、設計しました。</p>
             <img src="./zenntaizu2.jpeg" alt="車体全体の設計図" class="process-media">
             <video controls class="process-media">
@@ -469,32 +469,37 @@ void loop(void) {
 </footer>
 
 <script>
+    // ----------------------------------------------------  
+    // Intersection Observer スクリプト
+    // ----------------------------------------------------
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
     });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 </script>
 
 <script>
-    // メニューの表示/非表示を切り替える関数
+    // ----------------------------------------------------  
+    // モバイルメニューの表示/非表示を切り替える関数
+    // ----------------------------------------------------
     function toggleMenu() {
         const menu = document.getElementById("mobileMenu");
-        // ❗ 修正: アイコン要素を取得 ❗
         const trigger = document.getElementById("menuTrigger"); 
 
-        // クラスをトグルすることで、CSSの .is-open と .active を適用させる
         menu.classList.toggle("is-open"); 
         trigger.classList.toggle("active");
     }
 </script>
 
 <script>
-    /* タブ切り替え機能 */
+    // ----------------------------------------------------  
+    // タブ切り替え機能
+    // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -522,14 +527,12 @@ void loop(void) {
     
 <script>
     // ----------------------------------------------------  
-    // 360° Car Viewer スクリプトの追加
+    // 360° Car Viewer スクリプト
     // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const viewer = document.getElementById('viewer');
-        // ビューア要素が見つからない場合は処理を中断
         if (!viewer) return;
 
-        // `img`要素のみを選択（メッセージ用のpタグを除外するため）
         const images = viewer.querySelectorAll('img'); 
         const totalImages = images.length;
 
@@ -543,64 +546,64 @@ void loop(void) {
         let startX = 0;
         let startImageIndex = 0;
 
-        // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
+        // 💡 感度調整のための定数
         const SENSITIVITY = 1.0; 
 
         // 指定されたインデックスの画像を表示する関数
         function showImage(index) {
-          images[current].classList.remove('active');
-          // モジュロ演算でインデックスをループさせる (負の値にも対応)
-          current = (index % totalImages + totalImages) % totalImages;
-          images[current].classList.add('active');
+            images[current].classList.remove('active');
+            // モジュロ演算でインデックスをループさせる
+            current = (index % totalImages + totalImages) % totalImages;
+            images[current].classList.add('active');
         }
 
         // ドラッグ開始ハンドラ
         function startDrag(e) {
-          if (e.type === 'touchstart' && e.touches.length > 1) return;
-          
-          e.preventDefault();
-          isDragging = true;
-          viewer.classList.add('dragging');
+            if (e.type === 'touchstart' && e.touches.length > 1) return;
+            
+            e.preventDefault();
+            isDragging = true;
+            viewer.classList.add('dragging');
 
-          startX = e.pageX || e.touches[0].pageX;
-          startImageIndex = current;
-          
-          document.addEventListener('mousemove', onDragMove);
-          document.addEventListener('touchmove', onDragMove);
-          document.addEventListener('mouseup', endDrag);
-          document.addEventListener('touchend', endDrag);
+            startX = e.pageX || e.touches[0].pageX;
+            startImageIndex = current;
+            
+            document.addEventListener('mousemove', onDragMove);
+            document.addEventListener('touchmove', onDragMove);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
         }
 
         // ドラッグ中のハンドラ
         function onDragMove(e) {
-          if (!isDragging) return;
-          
-          if (e.type === 'touchmove' && e.touches.length > 1) return;
+            if (!isDragging) return;
+            
+            if (e.type === 'touchmove' && e.touches.length > 1) return;
 
-          const currentX = e.pageX || e.touches[0].pageX;
-          const diffX = currentX - startX; 
-          
-          const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
-          const imageDelta = Math.round(diffX / dragAmountPerImage);
-          
-          const newIndex = startImageIndex - imageDelta; 
+            const currentX = e.pageX || e.touches[0].pageX;
+            const diffX = currentX - startX; 
+            
+            const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
+            const imageDelta = Math.round(diffX / dragAmountPerImage);
+            
+            const newIndex = startImageIndex - imageDelta; 
 
-          if (newIndex !== current) {
-            showImage(newIndex);
-          }
+            if (newIndex !== current) {
+                showImage(newIndex);
+            }
         }
 
         // ドラッグ終了ハンドラ
         function endDrag() {
-          if (!isDragging) return;
+            if (!isDragging) return;
 
-          isDragging = false;
-          viewer.classList.remove('dragging');
-          
-          document.removeEventListener('mousemove', onDragMove);
-          document.removeEventListener('touchmove', onDragMove);
-          document.removeEventListener('mouseup', endDrag);
-          document.removeEventListener('touchend', endDrag);
+            isDragging = false;
+            viewer.classList.remove('dragging');
+            
+            document.removeEventListener('mousemove', onDragMove);
+            document.removeEventListener('touchmove', onDragMove);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchend', endDrag);
         }
 
         // 初期イベントリスナーの設定
@@ -613,21 +616,45 @@ void loop(void) {
 </script>
     
 <script>
+    // ----------------------------------------------------  
+    // ナビバーの透明化とロゴのスクロール変形アニメーション
+    // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         const navbar = document.querySelector('.navbar');
-        const scrollThreshold = 10; 
+        // ロゴのアニメーション対象要素を取得
+        const logoElement = document.querySelector('.logo-texture'); 
+        const scrollThreshold = 50; 
 
         function handleScroll() {
-            const isScrolled = window.scrollY > scrollThreshold;
+            const scrollY = window.scrollY;
+            const isScrolled = scrollY > scrollThreshold;
             
-            // ロゴアニメーション用のクラスをbodyに付与/除去 (CSSの body.scrolled に対応)
-            document.body.classList.toggle('scrolled', isScrolled);
-
             // ナビバーの透明/不透明の切り替え
             navbar.classList.toggle('transparent', !isScrolled);
+            
+            // body に scrolled クラスを付与/除去 (ナビバー/ロゴのスタイル変更用)
+            document.body.classList.toggle('scrolled', isScrolled); 
+
+            // ロゴの変形アニメーションを直接制御
+            if (logoElement) {
+                // スクロール量に基づいた変形率 (0.0 から 1.0 までの値)
+                // 最大で 500px スクロールしたときに変形が完了するように設定
+                const maxScroll = 500; 
+                const ratio = Math.min(scrollY / maxScroll, 1); 
+                
+                // 縮小 (初期 0.9 から 最大 0.5 まで縮小)
+                const initialScale = 0.9;
+                const minScale = 0.5;
+                const scale = initialScale - (ratio * (initialScale - minScale));
+                
+                // 回転 (最大 180deg 回転)
+                const rotation = ratio * 180; 
+
+                // translate(-50%, -50%) で中央を維持しつつ、scaleとrotateを適用
+                logoElement.style.transform = `translate(-50%, -50%) scale(${scale}) rotate(${rotation}deg)`;
+            }
         }
         
-        // 初期状態のチェックとイベントリスナーの設定
         handleScroll();
         window.addEventListener('scroll', handleScroll);
     });
