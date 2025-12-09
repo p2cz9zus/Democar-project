@@ -41,6 +41,16 @@
     
 
 <section class="hero">
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <clipPath id="logoShape">
+                <path d="M50 0L100 50L50 100L0 50Z" transform="scale(3.5)" /> 
+            </clipPath>
+        </defs>
+    </svg>
+    
+    <div class="logo-texture"></div> 
+    
     <h1>創成プロジェクト　A1班</h1>
     <h2>課題を達成するモビリティの創造。</h2>
     <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
@@ -216,7 +226,7 @@
 
         <div class="step animate-on-scroll">
             <span class="step-number">初期フェーズ（方針転換後）</span>
-            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮）</h4>
+            <h4>⑥ 車体の再設計：全体部分（サーボモータ部分も考慮） </h4>
             <p>初期フェーズ①で設計した車体をさらに改良しました。サーボモータの設置位置・前輪タイヤの動きを考慮して再度、設計しました。</p>
             <img src="./zenntaizu2.jpeg" alt="車体全体の設計図" class="process-media">
             <video controls class="process-media">
@@ -511,7 +521,7 @@ void loop(void) {
 </script>
     
 <script>
-    // ---------------------------------------------------- 
+    // ----------------------------------------------------  
     // 360° Car Viewer スクリプトの追加
     // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
@@ -599,6 +609,27 @@ void loop(void) {
         
         // 初期表示
         showImage(0);
+    });
+</script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.querySelector('.navbar');
+        const scrollThreshold = 10; 
+
+        function handleScroll() {
+            const isScrolled = window.scrollY > scrollThreshold;
+            
+            // ロゴアニメーション用のクラスをbodyに付与/除去 (CSSの body.scrolled に対応)
+            document.body.classList.toggle('scrolled', isScrolled);
+
+            // ナビバーの透明/不透明の切り替え
+            navbar.classList.toggle('transparent', !isScrolled);
+        }
+        
+        // 初期状態のチェックとイベントリスナーの設定
+        handleScroll();
+        window.addEventListener('scroll', handleScroll);
     });
 </script>
 </body>
