@@ -601,5 +601,33 @@ void loop(void) {
         showImage(0);
     });
 </script>
+<script>
+    // ----------------------------------------------------
+    // ナビゲーションバーのスクロールに応じた透明化切り替え
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.querySelector('.navbar');
+        const heroHeight = document.querySelector('.hero').offsetHeight;
+
+        // ページ読み込み時に一度チェックし、ナビバーの初期状態を設定
+        if (window.scrollY < 20) {
+            navbar.classList.add('transparent');
+        }
+
+        window.addEventListener('scroll', () => {
+            // ヒーローセクションの高さの約1/3、または50pxスクロールしたら色を付ける
+            const scrollThreshold = Math.min(heroHeight / 3, 50); 
+            
+            if (window.scrollY > scrollThreshold) {
+                // スクロール量がしきい値を超えたら透明クラスを削除（黒背景に戻す）
+                navbar.classList.remove('transparent');
+            } else {
+                // スクロール量がしきい値未満なら透明クラスを付与
+                navbar.classList.add('transparent');
+            }
+        });
+    });
+</script>
 </body>
 </html>
+
