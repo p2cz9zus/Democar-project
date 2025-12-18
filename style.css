@@ -1152,6 +1152,18 @@ html, body {
         padding: 1rem 0; /* 上下の余白を確保 */
     }
 }
+/* ファイルの最下部に追加 */
+@media (max-width: 768px) {
+    .code-block {
+        overflow-x: auto !important;
+        touch-action: pan-x; /* 横方向のタッチ操作を明示的に許可 */
+    }
+    .code-block pre, .code-block code {
+        white-space: pre !important;
+        width: max-content !important;
+    }
+}
+
 
 
 
