@@ -1023,3 +1023,71 @@ footer {
 html, body {
     overflow-x: hidden;
 }
+
+/* ==========================================================================
+ * 14. トランジスタ詳細スタイル (追加分)
+ * ========================================================================== */
+
+/* トランジスタ情報のグリッドレイアウト */
+.transistor-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+/* 各ピンのカードスタイル */
+.transistor-card {
+    background: rgba(255, 255, 255, 0.05); /* 濃い背景に馴染む微かな白 */
+    border-top: 3px solid var(--color-primary); /* 上部にアクセントライン */
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.transistor-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ピンのラベル (E, B, C) */
+.pin-label {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.transistor-card h5 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: var(--color-dark-bg-heading);
+}
+
+.transistor-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-hero-text-secondary);
+}
+
+/* 補足説明テキスト */
+.transistor-note {
+    font-size: 0.9rem;
+    color: #ff9500; /* 警告や重要事項と同じオレンジ系 */
+    border-left: 2px solid #ff9500;
+    padding-left: 15px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* レスポンシブ対応：スマホでは1列にする */
+@media (max-width: 768px) {
+    .transistor-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
