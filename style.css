@@ -1006,13 +1006,23 @@ footer {
     }
     
     /* コードブロックの折り返し調整 */
-    .code-block pre {
-        font-size: 0.85em;
-        padding: 8px;
-        white-space: pre-wrap; /* モバイルでは折り返しを許可 */
-        width: 100%;
-        box-sizing: border-box;
-    }
+    .code-block-wrapper .code-block pre {
+    font-size: 0.85rem;
+    padding: 10px;
+    white-space: pre;      /* 折り返さず、元のレイアウトを維持 */
+    overflow-x: auto;      /* 横方向にはみ出したらスクロールさせる */
+    width: auto;           /* 幅を固定しない */
+    display: block;
+}
+
+/* スクロールバーのデザイン（任意：スマホで見やすくするため） */
+.code-block::-webkit-scrollbar {
+    height: 6px;
+}
+.code-block::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+}
     
     /* 360度ビューアの高さを縮小 */
     .viewer {
@@ -1091,3 +1101,4 @@ html, body {
         grid-template-columns: 1fr;
     }
 }
+
