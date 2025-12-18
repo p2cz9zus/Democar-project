@@ -652,12 +652,22 @@ footer {
 }
 
 /* コードブロック本体（スクロールバーの制御とフォント設定） */
+/* 修正後 */
 .code-block-wrapper .code-block {
     max-height: 400px;
-    overflow-y: auto;
-    /* コードブロック内の pre タグに横スクロールを許可 */
-    overflow-x: auto;
+    width: 100%;            /* 横幅を親要素に合わせる */
+    display: block;         /* ブロック要素として扱う */
+    overflow-y: auto;       /* 縦スクロール */
+    overflow-x: scroll !important; /* 横スクロールを強制的に有効化 */
     -webkit-overflow-scrolling: touch; 
+    position: relative;
+}
+
+.code-block-wrapper pre {
+    white-space: pre !important;  /* 改行させない */
+    display: block;               /* ブロック表示 */
+    width: max-content;           /* 中身の長さに合わせて横幅を広げる */
+    min-width: 100%;              /* 背景が途切れないようにする */
 }
 
 /* コードブロック内の見出し */
@@ -1142,6 +1152,7 @@ html, body {
         padding: 1rem 0; /* 上下の余白を確保 */
     }
 }
+
 
 
 
