@@ -998,22 +998,32 @@ footer {
         margin-bottom: 20px;
         text-align: left;
         padding-left: 35px;
-        padding-right: 5%;
+        padding-right: 0;        /* 右の余白を0にして、幅計算を安定させる */
+        width: 100%;             /* 親に固定 */
+        box-sizing: border-box;  /* パディングを含めた幅に固定 */
     }
+
+    /* 線と丸の位置を固定（ズレ防止） */
     .process-container .step:before {
-        left: -8px;
-        top: -8px;
+        left: -10px; /* 線の太さに合わせて微調整 */
+        top: 5px;    /* 1行目の高さに合わせる */
     }
-    
-    /* コードブロックの折り返し調整 */
-    .code-block pre {
-        font-size: 0.85em;
-        padding: 8px;
-        white-space: pre-wrap; /* モバイルでは折り返しを許可 */
-        width: 100%;
-        box-sizing: border-box;
+
+    /* ★ここが重要：コードブロックの修正 */
+    .code-block-wrapper .code-block {
+        overflow-x: auto;       /* 横にスライドできるようにする */
+        -webkit-overflow-scrolling: touch; /* スマホでヌルヌル動かす */
     }
-    
+
+    .code-block-wrapper .code-block pre {
+        font-size: 0.8rem;
+        padding: 10px;
+        white-space: pre;       /* ★折り返さない！ */
+        width: max-content;     /* 内容に合わせて幅を確保 */
+        min-width: 100%;        /* 背景色が途切れないようにする */
+        display: block;
+    }
+
     /* 360度ビューアの高さを縮小 */
     .viewer {
         height: 300px; 
@@ -1091,3 +1101,4 @@ html, body {
         grid-template-columns: 1fr;
     }
 }
+
