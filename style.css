@@ -1122,15 +1122,15 @@ html, body {
     overflow: hidden; /* 子要素がはみ出すのを防ぐ */
 }
 
-/* 2. 中のスクロールエリアの設定 */
-.code-block-wrapper .code-block {
+/* 2. 中のスクロールエリアの設定（詳細度を上げて強制適用） */
+.code-block-wrapper div.code-block {
     display: block;
     width: 100%;
-    max-height: 400px;           /* 縦の高さを制限してスクロール可能にする */
-    overflow-x: auto !important; 
-    overflow-y: auto !important; /* 縦スクロールを許可 */
-    -webkit-overflow-scrolling: touch;
-    background-color: var(--color-code-bg);
+    max-height: 400px;           /* 縦の高さを固定 */
+    overflow-y: auto !important; /* 縦スクロールを最優先で許可 */
+    overflow-x: auto !important; /* 横スクロールを許可 */
+    -webkit-overflow-scrolling: touch; /* iOSでの滑らかなスクロール */
+    overscroll-behavior: contain;      /* スクロール連鎖の防止 */
 }
 
 /* 3. preタグが折り返さないようにし、中身の長さを維持する */
@@ -1153,6 +1153,7 @@ html, body {
         padding: 1rem 0; /* 上下の余白を確保 */
     }
 }
+
 
 
 
