@@ -411,6 +411,34 @@ void loop(void) {
             </div>
         </div>
     </div>
+    <div class="step animate-on-scroll">
+    <span class="step-number">中期フェーズ（方針転換後）</span>
+    <h4>⑨ トランジスタの特定とスイッチング回路</h4>
+    <p>モーターの駆動制御に使用するトランジスタの種類とピン配置を特定しました。
+    平たい面を正面にして、左から<strong>エミッタ(E)・ベース(B)・コレクタ(C)</strong>の配列であることを確認し、以下の通り接続を行いました。</p>
+    
+    <div class="transistor-info-grid">
+        <div class="transistor-card">
+            <span class="pin-label">E (Emitter)</span>
+            <h5>エミッタ</h5>
+            <p>電流の放出端子として<strong>GND（アース）</strong>へ接続</p>
+        </div>
+        <div class="transistor-card">
+            <span class="pin-label">B (Base)</span>
+            <h5>ベース</h5>
+            <p>制御端子として<strong>Arduinoの D5ピン</strong>へ接続</p>
+        </div>
+        <div class="transistor-card">
+            <span class="pin-label">C (Collector)</span>
+            <h5>コレクタ</h5>
+            <p>電流の収集端子として<strong>モータのマイナス側</strong>へ接続</p>
+        </div>
+    </div>
+    
+    
+    
+    <p class="transistor-note">※この接続により、Arduinoからの微弱な信号で大きなモータ電流を制御（スイッチング）しています。</p>
+</div>
     
 </section>
 
@@ -636,5 +664,6 @@ void loop(void) {
 </script>
 </body>
 </html>
+
 
 
