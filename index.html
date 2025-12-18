@@ -236,14 +236,13 @@
         </div>
 
         <div class="step animate-on-scroll">
-    <span class="step-number">中期フェーズ（最新版）</span>
-    <h4>⑧ 制御コードの作成とシーケンス実装</h4>
-    <p>12/18の試走で動作が確認された最新のArduino (C++) コードです。フラグ管理（isFinished）を用いることで、「直進」→「一時停止」→「Uターン旋回」→「自律走行継続」という一連のシーケンスを確実に実行するロジックを実装しています。</p>
-
-    <div class="code-display">
-        <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino、12/18試走成功版)</h5>
-        <div class="code-block-wrapper">
-            <div class="code-block">
+            <span class="step-number">中期フェーズ（方針転換後）</span>
+            <h4>⑧ 制御コードの作成とシーケンス実装</h4>
+            <p>12/18の試走で動作が確認された最新のArduino (C++) コードです。フラグ管理（isFinished）を用いることで、「直進」→「一時停止」→「Uターン旋回」→「自律走行継続」という一連のシーケンスを確実に実行するロジックを実装しています。</p>
+            <div class="code-display">
+                <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino、調整前、12/18試走成功版)</h5>
+                <div class="code-block-wrapper">
+                    <div class="code-block">
 <pre><code>#include &lt;Arduino.h&gt;
 #include &lt;Servo.h&gt;
 
@@ -259,7 +258,7 @@ const int PIN_SERVO     = 9; // サーボモーターの制御
 // ******************************************************
 const int SPEED          = 255; // 走る速さ (0〜255)
 const int ANGLE_STRAIGHT = 90;  // まっすぐの角度
-const int ANGLE_TURN     = 45;  // 曲がる角度 (数値を大きくすると左、小さくすると右)
+const int ANGLE_TURN     = 45; // 曲がる角度 (数値を大きくすると左、小さくすると右)
 
 // ******************************************************
 // ③ 時間の設定 (1000 = 1秒)
@@ -325,11 +324,12 @@ void loop() {
     // 完了フラグを立てる (これ以降ここには戻らない)
     isFinished = true;
   }
-}</code></pre>
+}
+</code></pre>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
         
     <div class="step animate-on-scroll">
     <span class="step-number">中期フェーズ（方針転換後）</span>
@@ -595,6 +595,7 @@ void loop() {
 </script>
 </body>
 </html>
+
 
 
 
