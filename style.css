@@ -1101,20 +1101,47 @@ html, body {
         grid-template-columns: 1fr;
     }
 }
-/* コードブロックのはみ出し対策 */
-.code-block {
-    overflow-x: auto;       /* 横方向に長すぎる場合はスクロールバーを出す */
-    white-space: pre;       /* 改行設定：元のコードの改行を維持 */
-    word-wrap: normal;      /* 単語の途中で無理やり折らない */
-    max-width: 100%;        /* 親要素（画面幅）を超えないように制限 */
-    -webkit-overflow-scrolling: touch; /* iPhone等でのスクロールを滑らかにする */
+/* ==========================================================================
+ * コードブロックの横スクロール完全対応
+ * ========================================================================== */
+
+/* 1. 外側の枠を画面幅（親要素）に固定する */
+.code-block-wrapper {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; /* 子要素がはみ出すのを防ぐ */
 }
 
-/* 中のコード自体も突き抜けないように設定 */
-.code-block code {
+/* 2. 中のスクロールエリアの設定 */
+.code-block-wrapper .code-block {
     display: block;
-    width: max-content;     /* 中身の長さに合わせて横幅を確保（スクロール用） */
-    min-width: 100%;
+    width: 100%;
+    overflow-x: auto !important; /* 横スクロールを強制 */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* iOSでのスムーズなスクロール */
+    background-color: var(--color-code-bg);
 }
+
+/* 3. preタグが折り返さないようにし、中身の長さを維持する */
+.code-block-wrapper pre,
+.code-block-wrapper code {
+    white-space: pre !important;    /* 自動改行を禁止 */
+    word-break: normal !important;   /* 単語での改行も禁止 */
+    overflow-wrap: normal !important;
+    display: block;
+    width: max-content;             /* 中身のコードの長さに合わせる */
+    min-width: 100%;                /* 短い時でも背景を埋める */
+}
+
+/* スマホ等でスクロールバーを常に意識させるための余白調整 */
+@media (max-width: 768px) {
+    .code-block-wrapper {
+        padding: 0.5rem;
+    }
+    .code-block-wrapper pre {
+        padding: 1rem 0; /* 上下の余白を確保 */
+    }
+}
+
 
 
