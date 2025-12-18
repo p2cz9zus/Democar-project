@@ -1101,4 +1101,20 @@ html, body {
         grid-template-columns: 1fr;
     }
 }
+/* コードブロックのはみ出し対策 */
+.code-block {
+    overflow-x: auto;       /* 横方向に長すぎる場合はスクロールバーを出す */
+    white-space: pre;       /* 改行設定：元のコードの改行を維持 */
+    word-wrap: normal;      /* 単語の途中で無理やり折らない */
+    max-width: 100%;        /* 親要素（画面幅）を超えないように制限 */
+    -webkit-overflow-scrolling: touch; /* iPhone等でのスクロールを滑らかにする */
+}
+
+/* 中のコード自体も突き抜けないように設定 */
+.code-block code {
+    display: block;
+    width: max-content;     /* 中身の長さに合わせて横幅を確保（スクロール用） */
+    min-width: 100%;
+}
+
 
