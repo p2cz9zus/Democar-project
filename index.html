@@ -433,10 +433,22 @@ void loop() {
     <section id="faq" class="section light-bg" style="background-color: #ffffff; color: #000000;">
     <h3 style="color: #000000;">よくある質問</h3>
     <div class="faq-container animate-on-scroll" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q1. 車体はどのような構造になっていますか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>車体は「前輪部」「駆動部」「電子回路部」の3つのモジュールに分割して設計しています。 これにより、故障箇所の特定や部品交換が容易になり、整備性が大幅に向上しています。</p>
+            </div>
+        </div>
         
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q1. なぜ途中で“ファン駆動”から“タイヤ駆動”へ方針転換したのですか？</span>
+                <span class="accordion-title">Q2. なぜ途中で“ファン駆動”から“タイヤ駆動”へ方針転換したのですか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -448,7 +460,7 @@ void loop() {
 
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q2. 制御にはどのようなマイコンやプログラムを使っていますか？</span>
+                <span class="accordion-title">Q3. 制御にはどのようなマイコンやプログラムを使っていますか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -460,7 +472,7 @@ void loop() {
 
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q3. 電源構成はどのように工夫していますか？</span>
+                <span class="accordion-title">Q4. 電源構成はどのように工夫していますか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -472,7 +484,7 @@ void loop() {
 
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q4. モーター制御にはどのような回路を使っていますか？</span>
+                <span class="accordion-title">Q5. モーター制御にはどのような回路を使っていますか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -484,7 +496,19 @@ void loop() {
 
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q5. 車体設計で工夫した点はありますか？</span>
+                <span class="accordion-title">Q6. 回路の誤配線を防ぐためにどんな工夫をしていますか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>トランジスタのE-B-C配置を間違えないよう、実物写真と回路図を作成しています。 新人メンバーでも安全に作業できるよう配慮しています。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q7. 車体設計で工夫した点はありますか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -496,7 +520,19 @@ void loop() {
 
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q6. 実際の走行テストではどのような成果がありましたか？</span>
+                <span class="accordion-title">Q8. 開発で特に苦労した点は何ですか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>ファン駆動からタイヤ駆動への方針転換、サーボ角度の調整、電源構成の安定化など、 試走を重ねながら問題点を一つずつ解決していくプロセスに時間を要しました。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q9. 実際の走行テストではどのような成果がありましたか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -508,7 +544,7 @@ void loop() {
 
         <div class="accordion-item">
             <button class="accordion-button" aria-expanded="false">
-                <span class="accordion-title">Q7. プロジェクトに関する問い合わせはどこにすればよいですか？</span>
+                <span class="accordion-title">Q10. プロジェクトに関する問い合わせはどこにすればよいですか？</span>
                 <span class="accordion-icon">
                     <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
                 </span>
@@ -750,6 +786,7 @@ document.querySelectorAll('.accordion-button').forEach(button => {
 </script>
 </body>
 </html>
+
 
 
 
