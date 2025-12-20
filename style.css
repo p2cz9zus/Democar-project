@@ -1157,17 +1157,17 @@ html, body {
  * 15. FAQ (アコーディオン) スタイル - ダークモード版
  * ========================================================================== */
 
-/* FAQコンテナの背景を透明にしてセクションの黒を活かす */
+/* FAQコンテナの背景を透明にする */
 .faq-container {
     max-width: 800px;
     margin: 0 auto;
     text-align: left;
-    background-color: transparent !important; /* 背景を透明に強制 */
+    background-color: transparent !important;
 }
 
-/* 各項目の境界線を白系に変更 */
+/* 各項目の境界線 */
 .accordion-item {
-    border-bottom: 1px solid #333333 !important; 
+    border-bottom: 1px solid #333333 !important;
 }
 
 /* 質問ボタンの文字色を白に */
@@ -1177,36 +1177,50 @@ html, body {
     justify-content: space-between;
     align-items: center;
     padding: 24px 0;
-    background: none;
-    border: none;
+    background: none !important;
+    border: none !important;
     cursor: pointer;
     text-align: left;
-    color: #ffffff !important; /* 文字色を白に強制 */
+    color: #ffffff !important;
 }
 
 /* 質問タイトルの文字色 */
 .accordion-title {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #ffffff !important; /* ここを白にしないと読めません */
+    color: #ffffff !important;
     line-height: 1.4;
+    pointer-events: none; /* ボタン自体のクリックを優先させる */
 }
 
-/* 矢印アイコンの色を白に */
+/* アイコンの色 */
 .accordion-icon {
     color: #ffffff !important;
+    transition: transform 0.4s ease;
 }
 
-/* 矢印SVG自体の線の色 */
 .icon-line {
     stroke: #ffffff !important;
 }
 
-/* 回答テキストの色を明るいグレーに（読みやすさのため） */
+/* 【重要】回答コンテンツの初期状態（隠す） */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: transparent !important;
+}
+
+/* 回答テキストの色 */
 .accordion-content p {
     padding: 0 0 24px 0;
     margin: 0;
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #d1d1d6 !important; /* 白に近いグレー */
+    color: #d1d1d6 !important;
+}
+
+/* アイコンの回転（開いている時） */
+.accordion-button[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
 }
