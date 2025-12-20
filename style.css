@@ -1153,6 +1153,95 @@ html, body {
         padding: 1rem 0; /* 上下の余白を確保 */
     }
 }
+/* ==========================================================================
+ * 15. FAQ (アコーディオン) スタイル
+ * ========================================================================== */
+
+/* FAQコンテナの基本設定 */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: #ffffff; /* 背景を白に固定 */
+}
+
+/* 各アコーディオン項目 */
+.accordion-item {
+    border-bottom: 1px solid #d2d2d7; /* Appleらしい薄いグレーの線 */
+}
+
+/* 質問ボタン部分 */
+.accordion-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.3s ease;
+}
+
+.accordion-button:hover {
+    opacity: 0.7; /* ホバー時に少し透明にするApple風エフェクト */
+}
+
+/* 質問のタイトル（Q...） */
+.accordion-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1d1d1f; /* 濃い黒 */
+    line-height: 1.4;
+    padding-right: 20px;
+}
+
+/* 開閉アイコン（矢印） */
+.accordion-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #86868b;
+}
+
+/* 展開時のアイコン回転 */
+.accordion-button[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* 回答コンテンツのラッパー */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+}
+
+/* 回答テキストのスタイル */
+.accordion-content p {
+    padding: 0 0 24px 0;
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #424245; /* 少し柔らかい黒 */
+}
+
+/* JSで展開された時の高さ（JSで動的に制御されますが、ベースとして） */
+.accordion-button[aria-expanded="true"] + .accordion-content {
+    max-height: 500px; /* 十分な高さを確保 */
+}
+
+/* レスポンシブ調整（スマホ） */
+@media (max-width: 768px) {
+    .accordion-title {
+        font-size: 1.1rem;
+    }
+    .accordion-content p {
+        font-size: 1rem;
+    }
+}
+
 
 
 
