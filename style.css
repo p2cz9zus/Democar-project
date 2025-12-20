@@ -1154,23 +1154,23 @@ html, body {
     }
 }
 /* ==========================================================================
- * 15. FAQ (アコーディオン) スタイル - ダークモード版
+ * 15. FAQ (アコーディオン) スタイル - 黒背景・動作修正版
  * ========================================================================== */
 
-/* FAQコンテナの背景を透明にする */
+/* FAQコンテナ：背景を透明にしてセクションの黒を活かす */
 .faq-container {
     max-width: 800px;
     margin: 0 auto;
     text-align: left;
-    background-color: transparent !important;
+    background-color: transparent !important; /* 強制的に透明に */
 }
 
-/* 各項目の境界線 */
+/* 各項目の境界線：明るすぎないグレーで区切る */
 .accordion-item {
     border-bottom: 1px solid #333333 !important;
 }
 
-/* 質問ボタンの文字色を白に */
+/* 質問ボタン */
 .accordion-button {
     width: 100%;
     display: flex;
@@ -1181,29 +1181,44 @@ html, body {
     border: none !important;
     cursor: pointer;
     text-align: left;
-    color: #ffffff !important;
+    outline: none;
+    transition: opacity 0.3s ease;
 }
 
-/* 質問タイトルの文字色 */
+.accordion-button:hover {
+    opacity: 0.7;
+}
+
+/* 質問タイトル：文字を白に */
 .accordion-title {
     font-size: 1.3rem;
     font-weight: 600;
     color: #ffffff !important;
     line-height: 1.4;
-    pointer-events: none; /* ボタン自体のクリックを優先させる */
+    padding-right: 20px;
+    pointer-events: none; /* ボタンのクリックを邪魔しない */
 }
 
-/* アイコンの色 */
+/* 矢印アイコン */
 .accordion-icon {
-    color: #ffffff !important;
-    transition: transform 0.4s ease;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #ffffff !important; /* アイコンも白 */
 }
 
+/* アイコン内の線の色 */
 .icon-line {
     stroke: #ffffff !important;
 }
 
-/* 【重要】回答コンテンツの初期状態（隠す） */
+/* 展開時のアイコン回転 */
+.accordion-button[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* 【最重要】回答コンテンツ：JSで制御するため初期は 0 に */
 .accordion-content {
     max-height: 0;
     overflow: hidden;
@@ -1211,16 +1226,21 @@ html, body {
     background-color: transparent !important;
 }
 
-/* 回答テキストの色 */
+/* 回答テキスト：少しだけグレーを混ぜて読みやすく */
 .accordion-content p {
     padding: 0 0 24px 0;
     margin: 0;
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #d1d1d6 !important;
+    color: #a1a1a6 !important; 
 }
 
-/* アイコンの回転（開いている時） */
-.accordion-button[aria-expanded="true"] .accordion-icon {
-    transform: rotate(180deg);
+/* スマホ用調整 */
+@media (max-width: 768px) {
+    .accordion-title {
+        font-size: 1.1rem;
+    }
+    .accordion-content p {
+        font-size: 1rem;
+    }
 }
