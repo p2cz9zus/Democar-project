@@ -1157,20 +1157,20 @@ html, body {
  * 15. FAQ (アコーディオン) スタイル - ダークモード版
  * ========================================================================== */
 
-/* FAQコンテナの基本設定 */
+/* FAQコンテナの背景を透明にしてセクションの黒を活かす */
 .faq-container {
     max-width: 800px;
     margin: 0 auto;
     text-align: left;
-    background-color: #000000; /* 背景を黒に固定 */
+    background-color: transparent !important; /* 背景を透明に強制 */
 }
 
-/* 各アコーディオン項目 */
+/* 各項目の境界線を白系に変更 */
 .accordion-item {
-    border-bottom: 1px solid #333333; /* 暗い背景に馴染む細い線 */
+    border-bottom: 1px solid #333333 !important; 
 }
 
-/* 質問ボタン部分 */
+/* 質問ボタンの文字色を白に */
 .accordion-button {
     width: 100%;
     display: flex;
@@ -1181,68 +1181,32 @@ html, body {
     border: none;
     cursor: pointer;
     text-align: left;
-    transition: opacity 0.3s ease;
+    color: #ffffff !important; /* 文字色を白に強制 */
 }
 
-.accordion-button:hover {
-    opacity: 0.7; /* ホバー時に少し透明にするエフェクト */
-}
-
-/* 質問のタイトル（Q...） */
+/* 質問タイトルの文字色 */
 .accordion-title {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #ffffff; /* 文字を白に変更 */
+    color: #ffffff !important; /* ここを白にしないと読めません */
     line-height: 1.4;
-    padding-right: 20px;
 }
 
-/* 開閉アイコン（矢印） */
+/* 矢印アイコンの色を白に */
 .accordion-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    color: #ffffff; /* アイコンを白に変更 */
+    color: #ffffff !important;
 }
 
-/* SVGの線自体を白く指定 */
-.accordion-icon .icon-line {
+/* 矢印SVG自体の線の色 */
+.icon-line {
     stroke: #ffffff !important;
 }
 
-/* 展開時のアイコン回転 */
-.accordion-button[aria-expanded="true"] .accordion-icon {
-    transform: rotate(180deg);
-}
-
-/* 回答コンテンツのラッパー */
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
-}
-
-/* 回答テキストのスタイル */
+/* 回答テキストの色を明るいグレーに（読みやすさのため） */
 .accordion-content p {
     padding: 0 0 24px 0;
     margin: 0;
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #a1a1a6; /* 回答は少しだけグレーにすると読みやすくなります */
-}
-
-/* JSで展開された時の高さ */
-.accordion-button[aria-expanded="true"] + .accordion-content {
-    max-height: 500px;
-}
-
-/* レスポンシブ調整（スマホ） */
-@media (max-width: 768px) {
-    .accordion-title {
-        font-size: 1.1rem;
-    }
-    .accordion-content p {
-        font-size: 1rem;
-    }
+    color: #d1d1d6 !important; /* 白に近いグレー */
 }
