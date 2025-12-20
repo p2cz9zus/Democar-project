@@ -1196,10 +1196,9 @@ html, body {
     color: #ffffff !important;
     line-height: 1.4;
     padding-right: 20px;
-    pointer-events: none; /* ボタンのクリックを邪魔しない */
 }
 
-/* 矢印アイコン */
+/* 矢印（開閉）アイコン */
 .accordion-icon {
     width: 18px;
     height: 18px;
@@ -1209,7 +1208,7 @@ html, body {
 }
 
 /* アイコン内の線の色 */
-.icon-line {
+.accordion-icon .icon-line {
     stroke: #ffffff !important;
 }
 
@@ -1222,7 +1221,7 @@ html, body {
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
     background-color: transparent !important;
 }
 
@@ -1235,6 +1234,11 @@ html, body {
     color: #a1a1a6 !important; 
 }
 
+/* JSで展開された時の高さ */
+.accordion-button[aria-expanded="true"] + .accordion-content {
+    max-height: 500px;
+}
+
 /* スマホ用調整 */
 @media (max-width: 768px) {
     .accordion-title {
@@ -1244,3 +1248,4 @@ html, body {
         font-size: 1rem;
     }
 }
+
