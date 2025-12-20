@@ -139,7 +139,7 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
  * 3. ヒーローセクション
  * ========================================================================== */
 .hero {
-    background-image: url('./3.jpg');
+    background-image: url('./4.jpg');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
@@ -1248,4 +1248,5 @@ html, body {
         font-size: 1rem;
     }
 }
+
 
