@@ -389,6 +389,96 @@ void loop() {
     </div>
 </section>
 
+    <section id="faq" class="section light-bg" style="background-color: #ffffff; color: #000000;">
+    <h3 style="color: #000000;">よくある質問</h3>
+    <div class="faq-container animate-on-scroll" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+        
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q1. なぜ途中で“ファン駆動”から“タイヤ駆動”へ方針転換したのですか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>試作段階で、ファン駆動では十分な推進力が得られず、安定した走行が難しいことが分かったためです。より確実な推進力と制御性を得るため、タイヤ駆動方式へ切り替えました。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q2. 制御にはどのようなマイコンやプログラムを使っていますか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>Arduino を使用し、C/C++で制御コードを実装しています。サーボモータの旋回、直進、一時停止、Uターンなどをフラグ管理でシーケンス化し、安定した自律走行を実現しています。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q3. 電源構成はどのように工夫していますか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>初期は単3電池6本を使用していましたが、電池ケースの不具合により9V電池へ変更しました。また、マイコンとサーボモータは同一電源、DCモータは別系統とすることで誤動作を防いでいます。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q4. モーター制御にはどのような回路を使っていますか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>トランジスタ（E-B-C 配列）を用いたスイッチング回路を採用しています。Arduino のD5ピンからの微弱な信号で、モータの大電流を安全に制御できるように設計しています。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q5. 車体設計で工夫した点はありますか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>サーボモータの設置位置や前輪の動きを考慮し、初期設計から再度車体を改良しました。また、配線の色分けにより視認性を高め、再設計や修正が容易になるよう工夫しています。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q6. 実際の走行テストではどのような成果がありましたか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>12/18 の試走では、直進 → 停止 → Uターン → 再直進という一連の動作が正常に実行され、自律走行が成功しました。</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false">
+                <span class="accordion-title">Q7. プロジェクトに関する問い合わせはどこにすればよいですか？</span>
+                <span class="accordion-icon">
+                    <svg viewBox="0 0 17 8.85"><polyline class="icon-line" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" points="15 1.13 8.5 7.72 2 1.13"></polyline></svg>
+                </span>
+            </button>
+            <div class="accordion-content">
+                <p>各担当者へ直接ご連絡いただけます。</p>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 <footer class="site-footer dark-footer">
     <div class="footer-container">
@@ -595,6 +685,7 @@ void loop() {
 </script>
 </body>
 </html>
+
 
 
 
