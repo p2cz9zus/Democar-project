@@ -857,7 +857,7 @@ footer {
     /* メニューコンテンツの背景色を適用するためのコンテナ */
     padding-top: 70px; /* ナビバーの高さ分を避ける */
     /* 🎨 修正ポイント: プライマリカラーのアクセントを追加した濃いネイビーブルーに変更 */
-    background-color: #001f40; 
+    background-color: #000000; 
     width: 75%; /* スライドインしたときのメニューの幅 */
     max-width: 350px; /* 最大幅の制限 */
     margin-left: auto; /* 右寄せ */
@@ -1312,3 +1312,4 @@ html, body {
 body.no-scroll {
     overflow: hidden;
 }
+
