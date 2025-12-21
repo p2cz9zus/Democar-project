@@ -1296,7 +1296,7 @@ html, body {
 .main-content {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1s ease 0.3s; /* 少し遅れて表示開始 */
+    transition: opacity 0.5s ease 0.1s; /* 少し遅れて表示開始 */
 }
 
 .main-content.is-visible {
@@ -1307,5 +1307,6 @@ html, body {
 body.no-scroll {
     overflow: hidden;
 }
+
 
 
