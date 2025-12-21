@@ -1249,23 +1249,26 @@ html, body {
     }
 }
 
-/* スプラッシュ画面：白背景・黒文字設定 */
+/* スプラッシュ画面：背景の設定 */
 .splash {
     position: fixed;
     inset: 0;
-    background-color: #ffffff; /* 白背景 */
-    color: #000000;            /* 黒文字 */
+    background-color: #ffffff;
+    color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1); 
+    /* 背景自体の消え方：ふわっと消す設定 */
+    transition: opacity 0.6s ease, visibility 0.6s; 
 }
 
+/* ロゴと文字を包む要素：ここを横にスワイプさせる */
 .splash-inner {
     display: flex;
     align-items: center;
     gap: 15px;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
 }
 
 .splash-logo {
@@ -1280,16 +1283,25 @@ html, body {
     margin: 0;
 }
 
-/* 上へスワイプして消える動き */
+/* --- アニメーション実行時の動き --- */
+
+/* 背景を消す */
 .splash.is-hidden {
-    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
 }
 
-/* メインコンテンツの表示切り替え */
+/* ロゴと文字だけが右（または左）にスワイプする */
+.splash.is-hidden .splash-inner {
+    transform: translateX(100px); /* 右に100px流れる（左なら -100px） */
+    opacity: 0; /* 消えながら流れる */
+}
+
+/* メインコンテンツのフェードイン */
 .main-content {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.8s ease;
+    transition: opacity 1s ease 0.3s; /* 少し遅れて表示開始 */
 }
 
 .main-content.is-visible {
@@ -1297,11 +1309,6 @@ html, body {
     visibility: visible;
 }
 
-/* 表示中に後ろが動かないようにする */
 body.no-scroll {
     overflow: hidden;
 }
-
-
-
-
