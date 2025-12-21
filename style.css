@@ -1249,5 +1249,59 @@ html, body {
     }
 }
 
+/* スプラッシュ画面：白背景・黒文字設定 */
+.splash {
+    position: fixed;
+    inset: 0;
+    background-color: #ffffff; /* 白背景 */
+    color: #000000;            /* 黒文字 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1); 
+}
+
+.splash-inner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.splash-logo {
+    width: 100px;
+    height: auto;
+}
+
+.splash-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+/* 上へスワイプして消える動き */
+.splash.is-hidden {
+    transform: translateY(-100%);
+}
+
+/* メインコンテンツの表示切り替え */
+.main-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease;
+}
+
+.main-content.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 表示中に後ろが動かないようにする */
+body.no-scroll {
+    overflow: hidden;
+}
+
+
 
 
