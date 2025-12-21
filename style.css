@@ -869,17 +869,12 @@ footer {
 
 /* 展開状態 (.is-open クラスが付いたとき) */
 .mobile-menu.is-open {
-    /* スライドイン */
     transform: translateX(0);
-    
-    /* 背景オーバーレイを表示 */
-    background-color: rgba(0, 0, 0, 0.7);
-    
-    /* 見えるようにする (visibilityの遅延をリセット) */
     visibility: visible;
-    
-    /* visibilityの遅延をなくす */
-    transition: transform 0.4s ease-out, background-color 0.4s ease-out, visibility 0s 0s;
+    transition: transform 0.4s ease-out, visibility 0s 0s;
+
+    /* 背景の透過をなくし、完全に不透明な黒にする場合 */
+    background-color: #000000;
 }
 
 /* モバイルメニュー内のリンク */
@@ -1312,4 +1307,5 @@ html, body {
 body.no-scroll {
     overflow: hidden;
 }
+
 
