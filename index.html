@@ -11,6 +11,12 @@
 </head>
 <body>
 
+<div id="splash" class="splash">
+    <div class="splash-inner">
+        <img src="A1.png" alt="Innovators A1 ロゴ" class="splash-logo">
+        <h1 class="splash-title">Innovators A1</h1>
+    </div>
+</div>    
 <header class="navbar">
     <div class="navbar-container">
         <a href="https://p2cz9zus.github.io/Democar-project/" class="logo">
@@ -795,8 +801,24 @@ document.querySelectorAll('.accordion-button').forEach(button => {
     });
 });
 </script>
+
+<script>    
+window.addEventListener("load", () => {
+    const splash = document.getElementById("splash");
+    const mainContent = document.getElementById("main-content");
+    
+    document.body.classList.add("no-scroll");
+
+    setTimeout(() => {
+        splash.classList.add("is-hidden");
+        mainContent.classList.add("is-visible");
+        document.body.classList.remove("no-scroll");
+    }, 2500);
+});    
+</script>    
 </body>
 </html>
+
 
 
 
