@@ -25,9 +25,10 @@
         <img src="A1.png" alt="Innovators A1 ロゴ" class="splash-logo">
         <h1 class="splash-title">Innovators A1</h1>
     </div>
-</div>    
+</div>
 
 <div id="main-content" class="main-content">
+    </div>
     
 <header class="navbar">
     <div class="navbar-container">
@@ -819,17 +820,23 @@ window.addEventListener("load", () => {
     const splash = document.getElementById("splash");
     const mainContent = document.getElementById("main-content");
     
+    // スクロール禁止
     document.body.classList.add("no-scroll");
 
+    // 2500ミリ秒（2.5秒）後に実行
     setTimeout(() => {
+        // スプラッシュを非表示にする
         splash.classList.add("is-hidden");
+        // メインコンテンツを表示する
         mainContent.classList.add("is-visible");
+        // スクロール禁止を解除
         document.body.classList.remove("no-scroll");
     }, 2500);
-});    
+});   
 </script>    
 </body>
 </html>
+
 
 
 
