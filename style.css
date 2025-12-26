@@ -1255,7 +1255,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.8s ease;
+    transition: opacity 0.8s ease, visibility 0.8s;
 }
 
 /* ロゴとタイトルの配置 */
@@ -1270,6 +1270,9 @@ html, body {
     margin-bottom: 20px;
     /* 鼓動するようにふわふわさせる */
     animation: pulse 2s infinite ease-in-out;
+    /* 滑らかにするための追加 */
+    will-change: transform, opacity; /* アニメーションをGPUに任せる */
+    backface-visibility: hidden;    /* 描画のチラつきを抑える */
 }
 
 /* タイトルのスタイル */
@@ -1312,3 +1315,4 @@ html, body {
 body.no-scroll {
     overflow: hidden;
 }
+
