@@ -1245,68 +1245,70 @@ html, body {
 }
 
 /* スプラッシュ画面：背景の設定 */
+/* 画面全体を覆う黒い背景 */
 .splash {
     position: fixed;
-    inset: 0;
-    background-color: #ffffff;
-    color: #000000;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* 他の要素より一番上に表示 */
+    background: #000;
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 9999;
-    /* 背景自体の消え方：ふわっと消す設定 */
-    transition: opacity 0.6s ease, visibility 0.6s; 
-}
-
-/* ロゴと文字を包む要素：ここを横にスワイプさせる */
-.splash-inner {
-    display: flex;
     align-items: center;
-    gap: 15px;
-    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
+    transition: all 0.8s ease;
 }
 
+/* ロゴとタイトルの配置 */
+.splash-inner {
+    text-align: center;
+}
+
+/* ロゴのサイズとアニメーション */
 .splash-logo {
-    width: 100px;
+    width: 120px; /* 必要に応じてサイズ調整 */
     height: auto;
+    margin-bottom: 20px;
+    /* 鼓動するようにふわふわさせる */
+    animation: pulse 2s infinite ease-in-out;
 }
 
+/* タイトルのスタイル */
 .splash-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    font-size: 1.2rem;
     margin: 0;
 }
 
-/* --- アニメーション実行時の動き --- */
-
-/* 背景を消す */
+/* 非表示にするためのクラス（JSで付与） */
 .splash.is-hidden {
     opacity: 0;
     visibility: hidden;
 }
 
-/* ロゴと文字だけが右（または左）にスワイプする */
-.splash.is-hidden .splash-inner {
-    transform: translateX(100px); /* 右に100px流れる（左なら -100px） */
-    opacity: 0; /* 消えながら流れる */
+/* 鼓動アニメーションの定義 */
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.7; }
 }
 
-/* メインコンテンツのフェードイン */
+/* メインコンテンツの初期状態（少し下に下げて透明に） */
 .main-content {
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease 0.1s; /* 少し遅れて表示開始 */
+    transform: translateY(20px);
+    transition: all 1s ease;
 }
 
+/* メインコンテンツ表示時の状態 */
 .main-content.is-visible {
     opacity: 1;
-    visibility: visible;
+    transform: translateY(0);
 }
 
+/* スプラッシュ表示中はスクロールを禁止 */
 body.no-scroll {
     overflow: hidden;
 }
-
-
-
