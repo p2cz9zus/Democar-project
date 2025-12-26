@@ -1246,36 +1246,36 @@ html, body {
 
 /* スプラッシュ画面：背景の設定 */
 /* 画面全体を覆う黒い背景 */
+/* スプラッシュ画面：背景の設定 */
 .splash {
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 9999; /* 他の要素より一番上に表示 */
+    z-index: 9999;
     background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease, visibility 0.8s;
+    /* transitionを特定のプロパティに限定して負荷を軽減 */
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
 }
 
-/* ロゴとタイトルの配置 */
 .splash-inner {
     text-align: center;
 }
 
-/* ロゴのサイズとアニメーション */
+/* ★ロゴのスタイル：ここを書き換えました */
 .splash-logo {
-    width: 120px; /* 必要に応じてサイズ調整 */
+    width: 120px;
     height: auto;
     margin-bottom: 20px;
-    /* 鼓動するようにふわふわさせる */
-    animation: pulse 2s infinite ease-in-out;
-    /* 滑らかにするための追加 */
-    will-change: transform, opacity; /* アニメーションをGPUに任せる */
-    backface-visibility: hidden;    /* 描画のチラつきを抑える */
+    /* ゆったりした秒数と滑らかなベジェ曲線に変更 */
+    animation: pulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    /* GPUに処理を任せてカクつきを防止 */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
 }
 
-/* タイトルのスタイル */
 .splash-title {
     color: #fff;
     font-family: 'Noto Sans JP', sans-serif;
@@ -1285,19 +1285,18 @@ html, body {
     margin: 0;
 }
 
-/* 非表示にするためのクラス（JSで付与） */
 .splash.is-hidden {
     opacity: 0;
     visibility: hidden;
 }
 
-/* 鼓動アニメーションの定義 */
+/* ★アニメーションの定義：ここも書き換えました */
 @keyframes pulse {
-    0% { transform: scale(0.95); opacity: 0.7; }
-    50% { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(0.95); opacity: 0.7; }
+    /* 変化の幅を小さく（0.98〜1.02）することで計算を軽く、滑らかに */
+    0% { transform: scale(0.98); opacity: 0.7; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(0.98); opacity: 0.7; }
 }
-
 /* メインコンテンツの初期状態（少し下に下げて透明に） */
 .main-content {
     opacity: 0;
@@ -1315,4 +1314,5 @@ html, body {
 body.no-scroll {
     overflow: hidden;
 }
+
 
