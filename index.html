@@ -583,6 +583,56 @@ void loop() {
         </div>
 
     </div>
+        <section class="special-features-section">
+    <div class="container">
+        <h2 class="section-title">特集</h2>
+        <div class="special-slider-viewport">
+            <div class="special-slider-track">
+                
+                <div class="special-card">
+                    <a href="sousei.html" class="card-link">
+                        <div class="card-image"><img src="image1.jpg" alt="創成って何だろう"></div>
+                        <div class="card-content"><h3>創成って何だろう</h3></div>
+                    </a>
+                </div>
+                
+                <div class="special-card">
+                    <a href="https://p2cz9zus.github.io/democaravoid1/" class="card-link">
+                        <div class="card-image"><img src="image2.jpg" alt="Arduinoを使った物体認識"></div>
+                        <div class="card-content"><h3>障害物回避アルゴリズム<br>障害物検知機能への拡張</h3></div>
+                    </a>
+                </div>
+                
+                <div class="special-card">
+                    <a href="story.html" class="card-link">
+                        <div class="card-image"><img src="image3.jpg" alt="制作秘話"></div>
+                        <div class="card-content"><h3>制作秘話</h3></div>
+                    </a>
+                </div>
+
+                <div class="special-card">
+                    <a href="sousei.html" class="card-link">
+                        <div class="card-image"><img src="image1.jpg" alt="創成って何だろう"></div>
+                        <div class="card-content"><h3>創成って何だろう</h3></div>
+                    </a>
+                </div>
+                <div class="special-card">
+                    <a href="https://p2cz9zus.github.io/democaravoid1/" class="card-link">
+                        <div class="card-image"><img src="image2.jpg" alt="Arduinoを使った物体認識"></div>
+                        <div class="card-content"><h3>障害物回避アルゴリズム<br>障害物検知機能への拡張</h3></div>
+                    </a>
+                </div>
+                <div class="special-card">
+                    <a href="story.html" class="card-link">
+                        <div class="card-image"><img src="image3.jpg" alt="制作秘話"></div>
+                        <div class="card-content"><h3>制作秘話</h3></div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 </section>
 
 <footer class="site-footer dark-footer">
@@ -833,9 +883,54 @@ window.addEventListener("load", () => {
         document.body.classList.remove("no-scroll");
     }, 2500);
 });   
+</script>
+
+<script> 
+/* 特集セクション全体 */
+.special-features {
+  background-color: #ffffff; /* 背景は白 */
+  padding: 60px 0;
+}
+
+/* カードの設定 */
+.feature-card {
+  width: 280px;
+  margin: 0 15px;
+  background: #ffffff;
+  border-radius: 12px;
+  /* ほんの少しだけ影をつけて立体感を出す */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+  border: 1px solid #eee; /* 薄い枠線で境界をはっきりさせる */
+  transition: transform 0.3s ease; /* 動きを滑らかに */
+}
+
+/* マウスを乗せた時の動き */
+.feature-card:hover {
+  transform: translateY(-5px); /* 少し上に浮き上がる */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* テキストの設定 */
+.card-content h3 {
+  font-size: 1.1rem;
+  color: #222; /* 真っ黒より少しだけ柔らかい黒 */
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+// PCでもハンバーガーボタンを動かすための記述
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active'); // メニューの開閉
+    menuToggle.classList.toggle('is-active'); // ボタンのアニメーション
+});
 </script>    
+    
 </body>
 </html>
+
 
 
 
