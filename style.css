@@ -1393,5 +1393,28 @@ body.no-scroll {
     overflow: hidden;
 }
 
+/* ==========================================================================
+ * FAQと特集の間の余白を強制的に広げる
+ * ========================================================================== */
+
+/* 1. よくある質問セクション自体の下の余白を広げる */
+.faq-section {
+    padding-top: 80px !important;
+    padding-bottom: 120px !important; /* ここを大きくする */
+    background-color: var(--color-background-dark) !important;
+}
+
+/* 2. FAQの中身の箱の下にも余白を追加 */
+.faq-container {
+    margin-bottom: 60px !important;
+    padding-bottom: 0 !important; /* 重複を防ぐため一旦0に */
+}
+
+/* 3. 次に続く「特集セクション」の上の余白も確保する */
+.special-features-section {
+    margin-top: 0 !important;
+    padding-top: 100px !important; /* 特集タイトルの上の余白 */
+}
+
 
 
