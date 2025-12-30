@@ -1400,7 +1400,7 @@ body.no-scroll {
 /* 1. よくある質問セクション自体の下の余白を広げる */
 .faq-section {
     padding-top: 80px !important;
-    padding-bottom: 120px !important; /* ここを大きくする */
+    padding-bottom: 150px !important; /* ここを大きくする */
     background-color: var(--color-background-dark) !important;
 }
 
@@ -1415,6 +1415,7 @@ body.no-scroll {
     margin-top: 0 !important;
     padding-top: 100px !important; /* 特集タイトルの上の余白 */
 }
+
 
 
 
