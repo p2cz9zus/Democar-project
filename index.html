@@ -1462,6 +1462,82 @@ body.no-scroll {
     padding-top: 100px !important; /* 特集タイトルの上の余白 */
 }
 
+/* Award-class Link Button Styles */
+.award-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 18px 40px;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+}
+
+.award-btn span {
+    position: relative;
+    z-index: 2;
+    margin-right: 12px;
+}
+
+.award-btn svg {
+    position: relative;
+    z-index: 2;
+    fill: none;
+    stroke: #1a1a1a;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    width: 18px;
+    height: 12px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateX(0);
+}
+
+/* Background Hover Effect */
+.award-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+}
+
+/* Hover Action */
+.award-btn:hover {
+    color: #ffffff;
+    border-color: #1a1a1a;
+}
+
+.award-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.award-btn:hover svg {
+    stroke: #ffffff;
+    transform: translateX(8px);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .award-btn {
+        padding: 14px 28px;
+        font-size: 14px;
+    }
+}        
     </style>
 </head>
 <body>
@@ -1515,6 +1591,24 @@ body.no-scroll {
     <h2>課題を達成するモビリティの創造。</h2>
     <p>軽量、低コスト、そして成功率90%以上を目指す高精度な自律走行を実現する。</p>
 </section>
+
+<section id="creation" class="section light-bg">
+    <div class="container">
+        <h3 class="section-title">「創成」って何だろう？</h3>
+        <p class="section-description">
+            「創成プロジェクト」の本質について、考えました。
+        </p>
+        <div class="btn-container" style="text-align: center; margin-top: 40px;">
+            <a href="https://p2cz9zus.github.io/What-is-GENESIS" class="award-btn">
+                <span>View More</span>
+                <svg viewBox="0 0 13 10">
+                    <path d="M1,5 L11,5"></path>
+                    <polyline points="8 1 12 5 8 9"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>    
 
 
 <section id="goals" class="section dark-bg">
@@ -2274,6 +2368,7 @@ window.addEventListener("load", () => {
     
 </body>
 </html>
+
 
 
 
