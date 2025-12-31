@@ -16,8 +16,1420 @@
     <title>創成プロジェクト A1班: 軽量・低コストな自律走行モビリティ開発</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <style>
+        /* ==========================================================================
+ * 0. アニメーションキーフレーム定義
+ * ========================================================================== */
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 360度ビューア操作ヒント用アニメーション */
+@keyframes subtleShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(3px); /* わずかに右へ */
+    }
+    75% {
+        transform: translateX(-3px); /* わずかに左へ */
+    }
+}
+
+/* ==================================== */
+/* アニメーション関連 CSS (animate-on-scroll) */
+/* ==================================== */
+
+/* 1. アニメーション開始前の初期状態を定義 */
+/* 画面外または非表示の状態 */
+.animate-on-scroll {
+    /* 不透明度を0にして完全に非表示にする */
+    opacity: 0; 
+    /* 要素をY軸（垂直方向）に20px下に移動させる（下からスライドインの準備） */
+    transform: translateY(20px); 
+    /* アニメーション（トランジション）の時間を設定 */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+}
+
+/* 2. 要素が画面内に入ったときの状態を定義（visibleクラスがJSにより追加される） */
+.animate-on-scroll.visible {
+    /* 不透明度を1にして完全に表示する */
+    opacity: 1; 
+    /* 元の位置に戻す */
+    transform: translateY(0); 
+}
+
+/* ==========================================================================
+ * 1. カスタムプロパティ (変数) 定義
+ * ========================================================================== */
+:root {
+    /* カラーパレット */
+    --color-primary: #007aff; /* Blue (Apple Blue) */
+    --color-primary-hover: #006ddf;
+    --color-text-dark: #1d1d1f;
+    --color-text-light: #ffffff;
+    --color-background-light: #ffffff;
+    --color-background-dark: #000000;
+    --color-background-footer: #f5f5f7;
+    --color-secondary-text: #6e6e73;
+    --color-card-dark: #1d1d1f;
+    --color-placeholder-bg: #e5e5e5;
+    --color-hero-overlay: rgba(0, 0, 0, 0.2);
+    --color-hero-text-secondary: rgba(255, 255, 255, 0.8);
+    --color-dark-bg-heading: #f5f5f7;
+
+    /* スペーシング */
+    --space-section-padding: 80px;
+    --space-page-padding-horizontal: 5%;
+    --space-title-margin-bottom: 60px;
+    --space-grid-gap: 30px;
+
+    /* コードブロック用 */
+    --color-code-bg: #2d2d2d; /* Monaco Dark */
+    --color-code-text: #f8f8f2;
+}
+/* ==========================================================================
+ * 2. ベーススタイル
+ * ========================================================================== */
+
+/* 基本リセットとフォント設定 */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    background-color: var(--color-background-light);
+}
+
+/* スムーズスクロールの導入 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- セクション共通スタイル --- */
+.section {
+    padding: var(--space-section-padding) var(--space-page-padding-horizontal);
+    text-align: center;
+}
+
+.section h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-title-margin-bottom);
+}
+
+.light-bg {
+    background-color: var(--color-background-light);
+}
+
+.dark-bg {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+}
+
+.dark-bg h3 {
+    color: var(--color-dark-bg-heading);
+}
+
+/* アクセシビリティのためのフォーカスインジケータ改善 */
+a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:focus {
+    outline: 2px solid var(--color-primary); /* プライマリカラーの青色 */
+    outline-offset: 3px;
+    border-radius: 4px; /* 角丸を適用 */
+}
+
+/* ==========================================================================
+ * 3. ヒーローセクション
+ * ========================================================================== */
+.hero {
+    background-image: url('./4.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    
+    /* 固定ナビバーの高さ（約70px）を考慮してパディングを調整 */
+    padding: calc(150px + 70px) 5% 100px;
+    text-align: center;
+    min-height: 70vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景画像の上に暗いオーバーレイをかけ、テキストの視認性を高める */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-hero-overlay);
+    z-index: 1;
+}
+
+/* ヒーロー内のテキストとボタンをオーバーレイより手前に表示 */
+.hero h1, .hero h2, .hero p {
+    color: var(--color-text-light);
+    position: relative;
+    z-index: 2;
+    /* 初期状態を非表示にする（アニメーション開始前） */
+    opacity: 0; 
+    /* フェードインアニメーションを適用 */
+    animation: slideInUp 1.0s ease-out forwards; 
+}
+
+/* 要素ごとに遅延を設定して順番に表示 */
+.hero h1 { animation-delay: 0.3s; }
+.hero h2 { animation-delay: 0.6s; }
+.hero p { animation-delay: 0.9s; }
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: var(--color-hero-text-secondary);
+}
+
+/* ==========================================================================
+ * 4. プロジェクト目標グリッド (7項目対応のための新規スタイル)
+ * ========================================================================== */
+.goal-list-container {
+    display: grid;
+    /* PCでは3列のグリッドにする */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.goal-item-small {
+    padding: 25px;
+    border-radius: 10px;
+    background-color: var(--color-card-dark);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+    /* ホバーアニメーション */
+    transition: transform 0.3s;
+    
+    /* スクロールアニメーションの初期状態 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s, border 0.3s;
+}
+
+.goal-item-small:hover {
+    transform: translateY(-5px);
+}
+
+/* visibleクラスが適用されたときのアニメーション */
+.goal-item-small.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.goal-number-small {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.goal-item-small h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--color-dark-bg-heading);
+}
+
+.goal-item-small p {
+    font-size: 1rem;
+    color: var(--color-hero-text-secondary);
+}
+
+.goal-grid {
+    display: none;
+}
+
+
+/* ==========================================================================
+ * 5. 技術概要セクション（タブ・カード・テーブルスタイル）
+ * ========================================================================== */
+
+.diagram-placeholder {
+    height: 250px;
+    background-color: var(--color-placeholder-bg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary-text);
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* --- タブ構造のスタイル定義 --- */
+
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    border-bottom: 2px solid #ccc;
+}
+
+.tab-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--color-secondary-text);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.tab-button.active {
+    color: var(--color-primary); /* Blue */
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.tab-button:hover:not(.active) {
+    color: var(--color-text-dark); /* ホバー時 */
+}
+
+.tab-content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--color-background-light); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* --- 車体スペック (テーブル形式) --- */
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.spec-table th, .spec-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.1rem;
+    vertical-align: top;
+}
+
+.spec-table th {
+    width: 30%;
+    background-color: #f7f7f7;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    text-align: left;
+}
+
+.spec-table td {
+    width: 70%;
+    color: var(--color-secondary-text);
+}
+
+/* --- 核心技術のカードスタイル --- */
+.tech-card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2列グリッド */
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.tech-card {
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-left: 5px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    
+    /* ホバーアニメーション */
+    transition: transform 0.3s;
+
+    /* スクロールアニメーションの初期状態 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s, border 0.3s;
+}
+
+.tech-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* visibleクラスが適用されたときのアニメーション */
+.tech-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tech-card h4 {
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.tech-card p {
+    font-size: 1rem;
+    color: var(--color-secondary-text);
+    margin-bottom: 0;
+}
+
+/* --- 360度ビューア スタイル --- */
+
+.viewer-section-wrapper {
+    max-width: 1000px;
+    margin: 60px auto 0;
+    text-align: center;
+}
+
+.viewer-section-wrapper h4 {
+    font-size: 1.8rem;
+    color: var(--color-text-dark);
+    margin-bottom: 30px;
+}
+
+.viewer {
+    width: 90%;
+    max-width: 700px;
+    height: 450px; 
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: #333;
+    border: 5px solid var(--color-primary);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    border-radius: 10px;
+
+    /* ドラッグを促すアニメーション */
+    animation: subtleShake 3s ease-in-out 1s 2;
+}
+    
+/* ドラッグ中はアニメーションを停止 */
+.viewer.dragging {
+    cursor: grabbing;
+    animation: none;
+}
+
+.viewer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.05s ease-out; 
+    user-select: none;
+    -webkit-user-drag: none;
+}
+    
+.viewer img.active {
+    opacity: 1;
+}
+
+.viewer .image-placeholder-text {
+    color: var(--color-text-light);
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0 10px;
+}
+
+/* ==========================================================================
+ * 6. 特集セクション（完全に左右全幅・背景白）
+ * ========================================================================== */
+
+/* ここが重要：画面の端から端まで白くする設定 */
+.special-features-section {
+    width: 100vw;             /* 画面の横幅いっぱいに強制 */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); /* 親要素の幅を無視して画面端まで広げる */
+    background-color: #ffffff;  /* 背景を真っ白に */
+    padding: 80px 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* タイトルサイズを他のセクション（h2）と統一 */
+.special-features-section .section-title {
+    text-align: center;
+    color: var(--color-text-dark);
+    margin-bottom: 50px;
+    font-size: 2.5rem; 
+    font-weight: 700;
+}
+
+/* スライダーの表示窓（containerの中に収める） */
+.special-slider-viewport {
+    max-width: 1100px; /* 他のコンテンツと合わせる */
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* 横に流れるレール */
+.special-slider-track {
+    display: flex;
+    width: calc((300px + 20px) * 6); /* カード幅+余白 × 枚数 */
+    animation: special-loop 25s linear infinite;
+}
+
+.special-slider-track:hover {
+    animation-play-state: paused;
+}
+
+/* カードのデザイン */
+.special-card {
+    width: 300px;
+    margin: 0 10px;
+    background-color: #f9f9f9; /* 少しだけ色を変えてカードを際立たせる */
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.special-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+.special-card .card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.special-card .card-content h3 {
+    color: #333;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* ループアニメーション */
+@keyframes special-loop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-960px); } /* 320px * 3枚分 */
+}
+
+
+/* ==========================================================================
+ * 6. 製作プロセス (ヒストリー)
+ * ========================================================================== */
+.process-preamble {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+}
+
+.process-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* 製作ステップ (タイムライン) にアニメーションを設定 */
+.process-container .step {
+    flex: 1;
+    padding: 0 0 0 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    /* 縦並びのタイムライン装飾 */
+    border-top: none;
+    border-left: 3px solid var(--color-primary);
+
+    /* スクロールアニメーションの初期状態 */
+    opacity: 0;
+    transform: translateX(-30px); /* 左からスライドイン */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* visibleクラスが適用されたときのアニメーション */
+.process-container .step.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ステップの丸印 */
+.process-container .step:before {
+    content: '';
+    position: absolute;
+    left: -8px;      /* 線の中央に丸を揃える */
+    top: -8px;       /* 丸を線の上端に置く */
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+
+.process-container .step h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.step-number {
+    display: block;
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.major-change-note, .major-change-reason {
+    color: #ff9500;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/* 挿入された画像/動画のスタイル */
+.process-media {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+/* ==========================================================================
+ * 7. フッター（新規マルチカラム対応）
+ * ========================================================================== */
+
+/* 既存の footer スタイルを上書きし、新しい .site-footer に適用 */
+footer {
+    padding: 0; 
+    background-color: transparent; 
+}
+
+/* フッター全体 */
+.site-footer {
+    background-color: var(--color-background-dark); 
+    color: var(--color-text-light); 
+    padding: 60px var(--space-page-padding-horizontal) 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-align: left;
+}
+
+/* コンテナ */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+/* 各セクション */
+.footer-section {
+    flex: 1 1 200px; 
+    margin: 15px 15px 15px 0;
+    min-width: 150px;
+}
+
+.footer-section h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--color-primary); 
+    padding-bottom: 6px;
+    color: var(--color-dark-bg-heading);
+}
+
+/* リスト */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 10px 0;
+}
+
+.footer-section ul li a {
+    color: var(--color-hero-text-secondary); 
+    text-decoration: none;
+    transition: color 0.3s, padding-left 0.3s;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-primary); 
+    padding-left: 5px;
+}
+
+/* フッター下部（コピーライト） */
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-secondary-text);
+}
+
+/* ==========================================================================
+ * 9. コードブロック
+ * ========================================================================== */
+
+/* コードブロックのラッパー（相対位置の基準） */
+.code-block-wrapper {
+    position: relative;
+    background-color: var(--color-code-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    color: var(--color-code-text);
+    margin-top: 1rem;
+    text-align: left;
+}
+
+/* コードブロック本体（スクロールバーの制御とフォント設定） */
+/* 修正後 */
+.code-block-wrapper .code-block {
+    max-height: 400px;
+    width: 100%;            /* 横幅を親要素に合わせる */
+    display: block;         /* ブロック要素として扱う */
+    overflow-y: auto;       /* 縦スクロール */
+    overflow-x: scroll !important; /* 横スクロールを強制的に有効化 */
+    -webkit-overflow-scrolling: touch; 
+    position: relative;
+}
+
+.code-block-wrapper pre {
+    white-space: pre !important;  /* 改行させない */
+    display: block;               /* ブロック表示 */
+    width: max-content;           /* 中身の長さに合わせて横幅を広げる */
+    min-width: 100%;              /* 背景が途切れないようにする */
+}
+
+/* コードブロック内の見出し */
+.code-display h5 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark-bg-heading); 
+    text-align: left;
+    padding: 0;
+}
+
+.code-block-wrapper pre {
+    white-space: pre; 
+    font-size: 0.875rem;
+    line-height: 1.625;
+    margin: 0;
+    padding-top: 1.5rem; 
+    max-width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+
+
+/* ==========================================================================
+ * 10. ナビバー（ロゴ＋タブ）スタイル
+ * ========================================================================== */
+
+/* スクロールしていないときの初期状態（JSでこのクラスが付与される） */
+.navbar.transparent {
+    background-color: transparent;
+    box-shadow: none;
+    transition: background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    color: var(--color-text-light);
+}
+
+/* スクロール後（背景を黒に戻す） */
+.navbar:not(.transparent) {
+    background-color: #000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* ナビバー全体 */
+.navbar {
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* コンテナ（ロゴ＋タブ＋メニューアイコン） */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    padding: 6px 20px;
+    min-height: 70px;
+}
+
+/* ロゴ */
+.logo {
+    width: 120px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+/* PC用タブコンテナ */
+.hero-tabs-container {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+    margin-left: 40px;
+}
+
+/* タブボタン */
+.hero-tab-button {
+    flex-grow: 1;
+    text-align: center;
+    color: inherit; 
+    text-decoration: none;
+    padding: 14px 0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.hero-tab-button:hover {
+    border: 2px solid var(--color-primary);
+    background-color: rgba(255,255,255,0.05);
+}
+
+
+/* ==========================================================================
+ * 11. ハンバーガーメニュー (SPBTN_NavR) スタイル
+ * ========================================================================== */
+
+/* ボタンコンテナ (PCでは非表示) */
+.menu-trigger, .spBTN_NavR {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: auto; /* 右寄せ */
+    z-index: 1010; 
+    display: none; /* デフォルトでは非表示 (メディアクエリで表示) */
+}
+
+/* アイコンの線 */
+.menu-trigger span, .spBTN_NavR span {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-text-light); /* 白い線 */
+    border-radius: 3px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+/* 1本目の線（上） */
+.menu-trigger span:nth-of-type(1) {
+    top: 0;
+}
+
+/* 2本目の線（中央） */
+.menu-trigger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 3本目の線（下） */
+.menu-trigger span:nth-of-type(3) {
+    bottom: 0;
+}
+
+/* 展開時 (.active クラスが付いたとき) のアニメーション (X印へ変形) */
+.menu-trigger.active span:nth-of-type(1),
+.spBTN_NavR.active span:nth-of-type(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* 2本目の線（中央）: 透明化して非表示 */
+.menu-trigger.active span:nth-of-type(2),
+.spBTN_NavR.active span:nth-of-type(2) {
+    opacity: 0;
+}
+
+/* 3本目の線（下）: -45度回転してXの下半分 */
+.menu-trigger.active span:nth-of-type(3),
+.spBTN_NavR.active span:nth-of-type(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+
+/* ==========================================================================
+ * 12. モバイルメニューパネル (スライドイン)
+ * ========================================================================== */
+
+/* モバイルメニュー本体 (スライドインパネル) */
+.mobile-menu {
+    position: fixed; 
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* スライドインの初期位置 (画面右外に隠す) */
+    transform: translateX(100%);
+    
+    /* 半透明の黒いオーバーレイ (初期は透明) */
+    background-color: rgba(0, 0, 0, 0.0);
+    
+    /* 見えないようにする */
+    visibility: hidden;
+    
+    /* ナビバーよりも前面 */
+    z-index: 1000;
+    
+    /* アニメーション設定 */
+    transition: transform 0.4s ease-out, background-color 0.4s ease-out, visibility 0s 0.4s;
+    
+    /* メニューコンテンツの背景色を適用するためのコンテナ */
+    padding-top: 70px; /* ナビバーの高さ分を避ける */
+    /* 🎨 修正ポイント: プライマリカラーのアクセントを追加した濃いネイビーブルーに変更 */
+    background-color: #000000; 
+    width: 75%; /* スライドインしたときのメニューの幅 */
+    max-width: 350px; /* 最大幅の制限 */
+    margin-left: auto; /* 右寄せ */
+    
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; 
+}
+
+/* 展開状態 (.is-open クラスが付いたとき) */
+.mobile-menu.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.4s ease-out, visibility 0s 0s;
+
+    /* 背景の透過をなくし、完全に不透明な黒にする場合 */
+    background-color: #000000;
+}
+
+/* モバイルメニュー内のリンク */
+.mobile-menu a {
+    color: var(--color-text-light);
+    padding: 15px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+    display: block; /* クリック領域を広げる */
+}
+
+.mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+ * 13. レスポンシブ対応 (モバイルフレンドリー)
+ * ========================================================================== */
+
+/* PC版（901px以上）: ここでタブの表示を確定させる */
+@media (min-width: 901px) {
+    /* PCではPC用タブを表示し、モバイル用アイコンとメニューを非表示 */
+    .hero-tabs-container { 
+        display: flex; 
+        flex: 1; 
+    }
+    .menu-trigger, .spBTN_NavR { 
+        display: none; 
+    }
+    /* PCではモバイルメニューを非表示 */
+    .mobile-menu {
+        /* is-openがない場合でも非表示にする（念のため） */
+        display: none !important; 
+    }
+}
+
+
+/* タブレットサイズ以下（900px以下）: モバイルレイアウトに切り替える */
+@media (max-width: 900px) {
+    .goal-list-container { grid-template-columns: repeat(2, 1fr); }
+    
+    /* タブレット以下ではPC用タブを非表示にし、アイコンを表示 */
+    .hero-tabs-container { display: none; } 
+    /* ハンバーガーアイコンを表示 */
+    .menu-trigger, .spBTN_NavR { display: block; } 
+
+    /* ナビバーのロゴサイズを小さくする（900px以下） */
+    .navbar .logo {      
+        width: 50px; 
+    }
+}
+
+/* スマホサイズ以下（768px以下） */
+@media (max-width: 768px) {
+    /* フッター */
+    .site-footer {
+        padding: 40px var(--space-page-padding-horizontal) 0;
+    }
+    .footer-container {
+        flex-direction: column; /* 縦並びに */
+        align-items: flex-start;
+    }
+    .footer-section {
+        width: 100%;
+        margin-right: 0; 
+        margin-bottom: 20px;
+    }
+
+    /* ヒーローセクションの文字サイズを調整 */
+    .hero h1 { 
+        font-size: 2.8rem; 
+        line-height: 1.1; 
+    } 
+    .hero h2 { 
+        font-size: 1.3rem; 
+        margin-bottom: 20px; 
+    } 
+    
+    .hero p {
+        font-size: 1rem;
+        padding: 0 5%; 
+        line-height: 1.5;
+        margin-top: 20px; 
+    }
+    
+    /* グリッドを1列に変更 */
+    .goal-list-container { grid-template-columns: 1fr; }
+    
+    /* タブボタン */
+    .tab-button {
+        padding: 15px 15px;
+        font-size: 1rem;
+    }
+
+    /* 技術概要のカードを1列に変更 */
+    .tech-card-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* スペックテーブルを縦に積み上げる */
+    .spec-table th, .spec-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .spec-table th {
+        background-color: transparent;
+        border-bottom: none;
+        padding-bottom: 0;
+        color: var(--color-text-dark);
+    }
+    .spec-table td {
+        text-align: left;
+        padding-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    /* プロセス（ヒストリー）の調整 */
+    .process-container .step {
+        max-width: none;
+        margin-bottom: 20px;
+        text-align: left;
+        padding-left: 35px;
+        padding-right: 0;        /* 右の余白を0にして、幅計算を安定させる */
+        width: 100%;             /* 親に固定 */
+        box-sizing: border-box;  /* パディングを含めた幅に固定 */
+    }
+
+    /* 線と丸の位置を固定（ズレ防止） */
+    .process-container .step:before {
+        left: -10px; /* 線の太さに合わせて微調整 */
+        top: 5px;    /* 1行目の高さに合わせる */
+    }
+
+    /* ★ここが重要：コードブロックの修正 */
+    .code-block-wrapper .code-block {
+        overflow-x: auto;       /* 横にスライドできるようにする */
+        -webkit-overflow-scrolling: touch; /* スマホでヌルヌル動かす */
+    }
+
+    .code-block-wrapper .code-block pre {
+        font-size: 0.8rem;
+        padding: 10px;
+        white-space: pre;       /* ★折り返さない！ */
+        width: max-content;     /* 内容に合わせて幅を確保 */
+        min-width: 100%;        /* 背景色が途切れないようにする */
+        display: block;
+    }
+
+    /* 360度ビューアの高さを縮小 */
+    .viewer {
+        height: 300px; 
+    }
+}
+/* ページ全体の横スクロール禁止 */
+html, body {
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+ * 14. トランジスタ詳細スタイル (追加分)
+ * ========================================================================== */
+
+/* トランジスタ情報のグリッドレイアウト */
+.transistor-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+/* 各ピンのカードスタイル */
+.transistor-card {
+    background: rgba(255, 255, 255, 0.05); /* 濃い背景に馴染む微かな白 */
+    border-top: 3px solid var(--color-primary); /* 上部にアクセントライン */
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.transistor-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ピンのラベル (E, B, C) */
+.pin-label {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.transistor-card h5 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: var(--color-dark-bg-heading);
+}
+
+.transistor-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-hero-text-secondary);
+}
+
+/* 補足説明テキスト */
+.transistor-note {
+    font-size: 0.9rem;
+    color: #ff9500; /* 警告や重要事項と同じオレンジ系 */
+    border-left: 2px solid #ff9500;
+    padding-left: 15px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* レスポンシブ対応：スマホでは1列にする */
+@media (max-width: 768px) {
+    .transistor-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================================================================
+ * コードブロックの横スクロール完全対応
+ * ========================================================================== */
+
+/* 1. 外側の枠を画面幅（親要素）に固定する */
+.code-block-wrapper {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; /* 子要素がはみ出すのを防ぐ */
+}
+
+/* 2. 中のスクロールエリアの設定（詳細度を上げて強制適用） */
+.code-block-wrapper div.code-block {
+    display: block;
+    width: 100%;
+    max-height: 400px;           /* 縦の高さを固定 */
+    overflow-y: auto !important; /* 縦スクロールを最優先で許可 */
+    overflow-x: auto !important; /* 横スクロールを許可 */
+    -webkit-overflow-scrolling: touch; /* iOSでの滑らかなスクロール */
+    overscroll-behavior: contain;      /* スクロール連鎖の防止 */
+}
+
+/* 3. preタグが折り返さないようにし、中身の長さを維持する */
+.code-block-wrapper pre,
+.code-block-wrapper code {
+    white-space: pre !important;    /* 自動改行を禁止 */
+    word-break: normal !important;   /* 単語での改行も禁止 */
+    overflow-wrap: normal !important;
+    display: block;
+    width: max-content;             /* 中身のコードの長さに合わせる */
+    min-width: 100%;                /* 短い時でも背景を埋める */
+}
+
+/* スマホ等でスクロールバーを常に意識させるための余白調整 */
+@media (max-width: 768px) {
+    .code-block-wrapper {
+        padding: 0.5rem;
+    }
+    .code-block-wrapper pre {
+        padding: 1rem 0; /* 上下の余白を確保 */
+    }
+}
+/* ==========================================================================
+ * 15. FAQ (アコーディオン) スタイル - 黒背景・動作修正版
+ * ========================================================================== */
+
+/* FAQコンテナ：背景を透明にしてセクションの黒を活かす */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: transparent !important; /* 強制的に透明に */
+}
+
+/* 各項目の境界線：明るすぎないグレーで区切る */
+.accordion-item {
+    border-bottom: 1px solid #333333 !important;
+}
+
+/* 質問ボタン */
+.accordion-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+    transition: opacity 0.3s ease;
+}
+
+.accordion-button:hover {
+    opacity: 0.7;
+}
+
+/* 質問タイトル：文字を白に */
+.accordion-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    line-height: 1.4;
+    padding-right: 20px;
+}
+
+/* 矢印（開閉）アイコン */
+.accordion-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #ffffff !important; /* アイコンも白 */
+}
+
+/* アイコン内の線の色 */
+.accordion-icon .icon-line {
+    stroke: #ffffff !important;
+}
+
+/* 展開時のアイコン回転 */
+.accordion-button[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* 【最重要】回答コンテンツ：JSで制御するため初期は 0 に */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+    background-color: transparent !important;
+}
+
+/* 回答テキスト：少しだけグレーを混ぜて読みやすく */
+.accordion-content p {
+    padding: 0 0 24px 0;
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #a1a1a6 !important; 
+}
+
+/* JSで展開された時の高さ */
+.accordion-button[aria-expanded="true"] + .accordion-content {
+    max-height: 500px;
+}
+
+/* スマホ用調整 */
+@media (max-width: 768px) {
+    .accordion-title {
+        font-size: 1.1rem;
+    }
+    .accordion-content p {
+        font-size: 1rem;
+    }
+}
+
+/* スプラッシュ画面：背景の設定 */
+/* 画面全体を覆う黒い背景 */
+/* スプラッシュ画面：背景の設定 */
+.splash {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transitionを特定のプロパティに限定して負荷を軽減 */
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
+
+.splash-inner {
+    text-align: center;
+}
+
+/* ★ロゴのスタイル：ここを書き換えました */
+.splash-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 20px;
+    /* ゆったりした秒数と滑らかなベジェ曲線に変更 */
+    animation: pulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    /* GPUに処理を任せてカクつきを防止 */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+.splash-title {
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.splash.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ★アニメーションの定義：ここも書き換えました */
+@keyframes pulse {
+    /* 変化の幅を小さく（0.98〜1.02）することで計算を軽く、滑らかに */
+    0% { transform: scale(0.98); opacity: 0.7; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(0.98); opacity: 0.7; }
+}
+/* メインコンテンツの初期状態（少し下に下げて透明に） */
+.main-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+}
+
+/* メインコンテンツ表示時の状態 */
+.main-content.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* スプラッシュ表示中はスクロールを禁止 */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ==========================================================================
+ * FAQと特集の間の余白を強制的に広げる
+ * ========================================================================== */
+
+/* 1. よくある質問セクション自体の下の余白を広げる */
+.faq-section {
+    padding-top: 80px !important;
+    padding-bottom: 150px !important; /* ここを大きくする */
+    background-color: var(--color-background-dark) !important;
+}
+
+/* 2. FAQの中身の箱の下にも余白を追加 */
+.faq-container {
+    margin-bottom: 60px !important;
+    padding-bottom: 0 !important; /* 重複を防ぐため一旦0に */
+}
+
+/* 3. 次に続く「特集セクション」の上の余白も確保する */
+.special-features-section {
+    margin-top: 0 !important;
+    padding-top: 100px !important; /* 特集タイトルの上の余白 */
+}
+
+    </style>
 </head>
 <body>
 
@@ -936,6 +2348,7 @@ menuToggle.addEventListener('click', () => {
     
 </body>
 </html>
+
 
 
 
