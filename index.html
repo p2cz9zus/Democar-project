@@ -2173,94 +2173,76 @@ void loop() {
 </script>
     
 <script>
-    // ---------------------------------------------------- 
-    // 360° Car Viewer スクリプトの追加
-    // ----------------------------------------------------
-    document.addEventListener('DOMContentLoaded', () => {
-        const viewer = document.getElementById('viewer');
-        // ビューア要素が見つからない場合は処理を中断
-        if (!viewer) return;
+    // --- 360° Car Viewer 修正版 ---
+document.addEventListener('DOMContentLoaded', () => {
+    const viewer = document.getElementById('viewer');
+    if (!viewer) return;
 
-        // `img`要素のみを選択（メッセージ用のpタグを除外するため）
-        const images = viewer.querySelectorAll('img'); 
-        const totalImages = images.length;
-
-        if (totalImages === 0) {
-            console.error("360度ビューア用の画像が見つかりませんでした。");
-            return; 
-        }
-
-        let current = 0;
-        let isDragging = false;
-        let startX = 0;
-        let startImageIndex = 0;
-
-        // 💡 感度調整のための定数: 値が小さいほど敏感に動きます
-        const SENSITIVITY = 1.0; 
-
-        // 指定されたインデックスの画像を表示する関数
-        function showImage(index) {
-          images[current].classList.remove('active');
-          // モジュロ演算でインデックスをループさせる (負の値にも対応)
-          current = (index % totalImages + totalImages) % totalImages;
-          images[current].classList.add('active');
-        }
-
-        // ドラッグ開始ハンドラ
-        function startDrag(e) {
-          if (e.type === 'touchstart' && e.touches.length > 1) return;
-          
-          e.preventDefault();
-          isDragging = true;
-          viewer.classList.add('dragging');
-
-          startX = e.pageX || e.touches[0].pageX;
-          startImageIndex = current;
-          
-          document.addEventListener('mousemove', onDragMove);
-          document.addEventListener('touchmove', onDragMove);
-          document.addEventListener('mouseup', endDrag);
-          document.addEventListener('touchend', endDrag);
-        }
-
-        let viewerWidth = 0; // 幅を保存する変数を用意
-        function startDrag(e) {
-        // ... 前の処理
-        viewerWidth = viewer.offsetWidth; // ✅ ドラッグ開始時に1回だけ取得
-        // ...
-        }
-
-        function onDragMove(e) {
-           if (!isDragging) return;
-           const currentX = e.pageX || e.touches[0].pageX;
-           const diffX = currentX - startX; 
+    const images = viewer.querySelectorAll('img'); 
+    const totalImages = images.length;
+    let current = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startImageIndex = 0;
     
-           // ✅ 保存しておいた viewerWidth を使う（リフローが発生しない）
-           const dragAmountPerImage = viewerWidth / totalImages * SENSITIVITY;
-           const imageDelta = Math.round(diffX / dragAmountPerImage);
-           // ...
-        }
+    // 【重要】ドラッグ中に何度も計算させないための変数
+    let viewerWidth = 0; 
+    const SENSITIVITY = 1.0; 
 
-        // ドラッグ終了ハンドラ
-        function endDrag() {
-          if (!isDragging) return;
+    function showImage(index) {
+        images[current].classList.remove('active');
+        current = (index % totalImages + totalImages) % totalImages;
+        images[current].classList.add('active');
+    }
 
-          isDragging = false;
-          viewer.classList.remove('dragging');
-          
-          document.removeEventListener('mousemove', onDragMove);
-          document.removeEventListener('touchmove', onDragMove);
-          document.removeEventListener('mouseup', endDrag);
-          document.removeEventListener('touchend', endDrag);
-        }
-
-        // 初期イベントリスナーの設定
-        viewer.addEventListener('mousedown', startDrag);
-        viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+    function startDrag(e) {
+        if (e.type === 'touchstart' && e.touches.length > 1) return;
         
-        // 初期表示
-        showImage(0);
-    });
+        // --- 修正ポイント：ここで一度だけ測る ---
+        viewerWidth = viewer.offsetWidth; 
+
+        isDragging = true;
+        viewer.classList.add('dragging');
+        startX = e.pageX || e.touches[0].pageX;
+        startImageIndex = current;
+        
+        document.addEventListener('mousemove', onDragMove);
+        document.addEventListener('touchmove', onDragMove);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+    }
+
+    function onDragMove(e) {
+        if (!isDragging) return;
+        
+        const currentX = e.pageX || e.touches[0].pageX;
+        const diffX = currentX - startX; 
+        
+        // --- 修正ポイント：保存した viewerWidth を使う（リフローが発生しない） ---
+        const dragAmountPerImage = (viewerWidth / totalImages) * SENSITIVITY;
+        const imageDelta = Math.round(diffX / dragAmountPerImage);
+        
+        const newIndex = startImageIndex - imageDelta; 
+
+        if (newIndex !== current) {
+            showImage(newIndex);
+        }
+    }
+
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        viewer.classList.remove('dragging');
+        document.removeEventListener('mousemove', onDragMove);
+        document.removeEventListener('touchmove', onDragMove);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchend', endDrag);
+    }
+
+    viewer.addEventListener('mousedown', startDrag);
+    viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+    showImage(0);
+});
 </script>
 <script>
     // ----------------------------------------------------
@@ -2347,6 +2329,7 @@ menuToggle.addEventListener('click', () => {
     
 </body>
 </html>
+
 
 
 
