@@ -16,13 +16,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">>
 </head>
 <body>
 
 <div id="splash" class="splash">
     <div class="splash-inner">
-        <img src="A1.png" alt="Innovators A1 ロゴ" class="splash-logo">
+        <img src="A1.png" alt="Innovators A1 ロゴ" class="splash-logo" fetchpriority="high">
         <h1 class="splash-title">Innovators A1</h1>
     </div>
 </div>
@@ -930,6 +930,7 @@ menuToggle.addEventListener('click', () => {
     
 </body>
 </html>
+
 
 
 
