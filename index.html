@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
-        /* ==========================================================================
+/* ==========================================================================
  * 0. アニメーションキーフレーム定義
  * ========================================================================== */
 @keyframes slideInUp {
@@ -487,6 +487,38 @@ a:focus, button:focus, .hero-tab-button:focus, .menu-icon:focus, .menu-trigger:f
  * 6. 特集セクション（完全に左右全幅・背景白）
  * ========================================================================== */
 
+/* 特集セクション全体 */
+.special-features {
+  background-color: #ffffff; /* 背景は白 */
+  padding: 60px 0;
+}
+
+/* カードの設定 */
+.feature-card {
+  width: 280px;
+  margin: 0 15px;
+  background: #ffffff;
+  border-radius: 12px;
+  /* ほんの少しだけ影をつけて立体感を出す */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+  border: 1px solid #eee; /* 薄い枠線で境界をはっきりさせる */
+  transition: transform 0.3s ease; /* 動きを滑らかに */
+}
+
+/* マウスを乗せた時の動き */
+.feature-card:hover {
+  transform: translateY(-5px); /* 少し上に浮き上がる */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* テキストの設定 */
+.card-content h3 {
+  font-size: 1.1rem;
+  color: #222; /* 真っ黒より少しだけ柔らかい黒 */
+  line-height: 1.5;
+  font-weight: bold;
+}
+        
 /* ここが重要：画面の端から端まで白くする設定 */
 .special-features-section {
     width: 100vw;             /* 画面の横幅いっぱいに強制 */
@@ -2303,38 +2335,6 @@ window.addEventListener("load", () => {
 </script>
 
 <script> 
-/* 特集セクション全体 */
-.special-features {
-  background-color: #ffffff; /* 背景は白 */
-  padding: 60px 0;
-}
-
-/* カードの設定 */
-.feature-card {
-  width: 280px;
-  margin: 0 15px;
-  background: #ffffff;
-  border-radius: 12px;
-  /* ほんの少しだけ影をつけて立体感を出す */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
-  border: 1px solid #eee; /* 薄い枠線で境界をはっきりさせる */
-  transition: transform 0.3s ease; /* 動きを滑らかに */
-}
-
-/* マウスを乗せた時の動き */
-.feature-card:hover {
-  transform: translateY(-5px); /* 少し上に浮き上がる */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* テキストの設定 */
-.card-content h3 {
-  font-size: 1.1rem;
-  color: #222; /* 真っ黒より少しだけ柔らかい黒 */
-  line-height: 1.5;
-  font-weight: bold;
-}
-
 // PCでもハンバーガーボタンを動かすための記述
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -2347,6 +2347,7 @@ menuToggle.addEventListener('click', () => {
     
 </body>
 </html>
+
 
 
 
