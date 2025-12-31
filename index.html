@@ -2191,23 +2191,22 @@ void loop() {
           document.addEventListener('touchend', endDrag);
         }
 
-        // ドラッグ中のハンドラ
+        let viewerWidth = 0; // 幅を保存する変数を用意
+        function startDrag(e) {
+        // ... 前の処理
+        viewerWidth = viewer.offsetWidth; // ✅ ドラッグ開始時に1回だけ取得
+        // ...
+        }
+
         function onDragMove(e) {
-          if (!isDragging) return;
-          
-          if (e.type === 'touchmove' && e.touches.length > 1) return;
-
-          const currentX = e.pageX || e.touches[0].pageX;
-          const diffX = currentX - startX; 
-          
-          const dragAmountPerImage = viewer.offsetWidth / totalImages * SENSITIVITY;
-          const imageDelta = Math.round(diffX / dragAmountPerImage);
-          
-          const newIndex = startImageIndex - imageDelta; 
-
-          if (newIndex !== current) {
-            showImage(newIndex);
-          }
+           if (!isDragging) return;
+           const currentX = e.pageX || e.touches[0].pageX;
+           const diffX = currentX - startX; 
+    
+           // ✅ 保存しておいた viewerWidth を使う（リフローが発生しない）
+           const dragAmountPerImage = viewerWidth / totalImages * SENSITIVITY;
+           const imageDelta = Math.round(diffX / dragAmountPerImage);
+           // ...
         }
 
         // ドラッグ終了ハンドラ
@@ -2348,6 +2347,7 @@ menuToggle.addEventListener('click', () => {
     
 </body>
 </html>
+
 
 
 
