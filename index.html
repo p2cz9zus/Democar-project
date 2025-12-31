@@ -2120,74 +2120,71 @@ void loop() {
     </div>
 </footer>
 
-</div> <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-</script>
-
+</div> 
 <script>
-    // メニューの表示/非表示を切り替える関数
-    function toggleMenu() {
-        const menu = document.getElementById("mobileMenu");
-        // ❗ 修正: アイコン要素を取得 ❗
-        const trigger = document.getElementById("menuTrigger"); 
+// 1. スクロール連動アニメーション
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
 
-        // クラスをトグルすることで、CSSの .is-open と .active を適用させる
-        menu.classList.toggle("is-open"); 
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// 2. メニュー制御（モバイル・PC共通）
+function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    const trigger = document.getElementById("menuTrigger");
+    if (menu && trigger) {
+        menu.classList.toggle("is-open");
         trigger.classList.toggle("active");
     }
-</script>
+}
 
-<script>
-    /* タブ切り替え機能 */
-    document.addEventListener('DOMContentLoaded', () => {
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetTabId = button.getAttribute('data-tab');
-
-                // すべてのボタンとコンテンツから active クラスを削除
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                // クリックされたボタンを active に
-                button.classList.add('active');
-
-                // 対応するコンテンツを active に
-                const targetContent = document.getElementById(targetTabId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-            });
+// PC用ハンバーガー（ID違いへの対応）
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuToggle.classList.toggle('is-active');
         });
-    }); 
-</script>
-    
-<script>
-    // --- 360° Car Viewer 修正版 ---
+    }
+});
+
+// 3. タブ切り替え
+document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTabId = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
+            const targetContent = document.getElementById(targetTabId);
+            if (targetContent) targetContent.classList.add('active');
+        });
+    });
+});
+
+// 4. 360° Car Viewer（リフロー対策済み）
 document.addEventListener('DOMContentLoaded', () => {
     const viewer = document.getElementById('viewer');
     if (!viewer) return;
 
-    const images = viewer.querySelectorAll('img'); 
+    const images = viewer.querySelectorAll('img');
     const totalImages = images.length;
     let current = 0;
     let isDragging = false;
     let startX = 0;
     let startImageIndex = 0;
-    
-    // 【重要】ドラッグ中に何度も計算させないための変数
     let viewerWidth = 0; 
-    const SENSITIVITY = 1.0; 
+    const SENSITIVITY = 1.0;
 
     function showImage(index) {
         images[current].classList.remove('active');
@@ -2197,15 +2194,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startDrag(e) {
         if (e.type === 'touchstart' && e.touches.length > 1) return;
-        
-        // --- 修正ポイント：ここで一度だけ測る ---
-        viewerWidth = viewer.offsetWidth; 
-
+        viewerWidth = viewer.offsetWidth; // ドラッグ開始時に1回だけ測定
         isDragging = true;
         viewer.classList.add('dragging');
         startX = e.pageX || e.touches[0].pageX;
         startImageIndex = current;
-        
         document.addEventListener('mousemove', onDragMove);
         document.addEventListener('touchmove', onDragMove);
         document.addEventListener('mouseup', endDrag);
@@ -2214,23 +2207,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function onDragMove(e) {
         if (!isDragging) return;
-        
         const currentX = e.pageX || e.touches[0].pageX;
-        const diffX = currentX - startX; 
-        
-        // --- 修正ポイント：保存した viewerWidth を使う（リフローが発生しない） ---
+        const diffX = currentX - startX;
         const dragAmountPerImage = (viewerWidth / totalImages) * SENSITIVITY;
         const imageDelta = Math.round(diffX / dragAmountPerImage);
-        
-        const newIndex = startImageIndex - imageDelta; 
-
-        if (newIndex !== current) {
-            showImage(newIndex);
-        }
+        showImage(startImageIndex - imageDelta);
     }
 
     function endDrag() {
-        if (!isDragging) return;
         isDragging = false;
         viewer.classList.remove('dragging');
         document.removeEventListener('mousemove', onDragMove);
@@ -2240,95 +2224,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     viewer.addEventListener('mousedown', startDrag);
-    viewer.addEventListener('touchstart', startDrag, { passive: false }); 
+    viewer.addEventListener('touchstart', startDrag, { passive: false });
     showImage(0);
 });
-</script>
-<script>
-    // ----------------------------------------------------
-    // ナビゲーションバーのスクロールに応じた透明化切り替え
-    // ----------------------------------------------------
-    document.addEventListener('DOMContentLoaded', () => {
-        const navbar = document.querySelector('.navbar');
-        const heroHeight = document.querySelector('.hero').offsetHeight;
 
-        // ページ読み込み時に一度チェックし、ナビバーの初期状態を設定
-        if (window.scrollY < 20) {
-            navbar.classList.add('transparent');
-        }
+// 5. ナビゲーションバー（リフロー対策・最適化版）
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.querySelector('.navbar');
+    const hero = document.querySelector('.hero');
+    if (!navbar || !hero) return;
 
-        window.addEventListener('scroll', () => {
-            // ヒーローセクションの高さの約1/3、または50pxスクロールしたら色を付ける
-            const scrollThreshold = Math.min(heroHeight / 3, 50); 
-            
-            if (window.scrollY > scrollThreshold) {
-                // スクロール量がしきい値を超えたら透明クラスを削除（黒背景に戻す）
-                navbar.classList.remove('transparent');
-            } else {
-                // スクロール量がしきい値未満なら透明クラスを付与
-                navbar.classList.add('transparent');
-            }
-        });
+    let heroHeight = hero.offsetHeight; // 最初に測る
+    
+    // リサイズ時のみ高さを測り直す
+    window.addEventListener('resize', () => {
+        heroHeight = hero.offsetHeight;
     });
-</script>
 
-<script>    
-// FAQアコーディオンの制御
+    window.addEventListener('scroll', () => {
+        const scrollThreshold = Math.min(heroHeight / 3, 50);
+        // classList.toggleの第二引数を使うとif文より高速です
+        navbar.classList.toggle('transparent', window.scrollY <= scrollThreshold);
+    }, { passive: true }); // スクロール性能を向上させる
+});
+
+// 6. FAQアコーディオン
 document.querySelectorAll('.accordion-button').forEach(button => {
     button.addEventListener('click', () => {
         const expanded = button.getAttribute('aria-expanded') === 'true';
-        
-        // 他のアコーディオンを閉じたい場合はここを有効化（オプション）
-        // document.querySelectorAll('.accordion-button').forEach(btn => {
-        //     btn.setAttribute('aria-expanded', 'false');
-        //     btn.nextElementSibling.style.maxHeight = '0';
-        // });
-
         button.setAttribute('aria-expanded', !expanded);
         const content = button.nextElementSibling;
-        
-        if (!expanded) {
-            content.style.maxHeight = content.scrollHeight + "px";
-        } else {
-            content.style.maxHeight = "0";
-        }
+        content.style.maxHeight = !expanded ? content.scrollHeight + "px" : "0";
     });
 });
-</script>
 
-<script>    
+// 7. スプラッシュ画面
 window.addEventListener("load", () => {
     const splash = document.getElementById("splash");
     const mainContent = document.getElementById("main-content");
-    
-    // スクロール禁止
     document.body.classList.add("no-scroll");
-
-    // 2500ミリ秒（2.5秒）後に実行
     setTimeout(() => {
-        // スプラッシュを非表示にする
-        splash.classList.add("is-hidden");
-        // メインコンテンツを表示する
-        mainContent.classList.add("is-visible");
-        // スクロール禁止を解除
+        if (splash) splash.classList.add("is-hidden");
+        if (mainContent) mainContent.classList.add("is-visible");
         document.body.classList.remove("no-scroll");
     }, 2500);
-});   
-</script>
-
-<script> 
-// PCでもハンバーガーボタンを動かすための記述
-const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-
-menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('active'); // メニューの開閉
-    menuToggle.classList.toggle('is-active'); // ボタンのアニメーション
 });
 </script>    
     
 </body>
 </html>
+
 
 
 
