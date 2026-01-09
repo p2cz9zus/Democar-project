@@ -1940,6 +1940,125 @@ void loop() {
                 <source src="./test_run_1.mp4" type="video/mp4">
             </video>
     </div>
+
+    <div class="step animate-on-scroll">
+            <span class="step-number">最終フェーズ（方針転換後）</span>
+            <h4>⑫ 制御コードの調整（金属ピースへの対応）</h4>
+            <p>12/18の試走で動作が確認されたArduino (C++) コードを調整しました。後輪モータのトルク変更に合わせたプログラムとなっています。</p>
+            <div class="code-display">
+                <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino、1/8試走版)</h5>
+                <div class="code-block-wrapper">
+                    <div class="code-block">
+<pre><code>#include &lt;Arduino.h&gt;
+#include &lt;Servo.h&gt;
+
+// ******************************************************
+// ① ピン設定
+// ******************************************************
+const int PIN_MOTOR_PWM = 5;
+const int PIN_MOTOR_DIR = 7;
+const int PIN_SERVO     = 9;
+const int PIN_SENSOR    = 2; // 金属センサー
+
+// ******************************************************
+// ② 動きの設定
+// ******************************************************
+const int SPEED          = 255;
+const int ANGLE_STRAIGHT = 90;
+const int ANGLE_TURN     = 45;
+
+// ******************************************************
+// ③ 時間の設定
+// ******************************************************
+const int TIME_RUN_1  = 3100; // 行きの時間
+const int TIME_TURN   = 2400; // Uターン時間
+const int TIME_RUN_2  = 3100; // 帰りの時間
+
+// *****************************************************
+// プログラム本体
+// ******************************************************
+
+Servo myServo;
+int stage = 0; // 今どの段階か？ (0:スタート前, 1:行き完了, 2:全部終了)
+
+// ■ モーターON
+void motorOn() {
+  analogWrite(PIN_MOTOR_PWM, SPEED);
+  digitalWrite(PIN_MOTOR_DIR, LOW);
+}
+
+// ■ モーターOFF
+void motorOff() {
+  analogWrite(PIN_MOTOR_PWM, 0);
+  digitalWrite(PIN_MOTOR_DIR, LOW);
+}
+
+void setup() {
+  pinMode(PIN_MOTOR_PWM, OUTPUT);
+  pinMode(PIN_MOTOR_DIR, OUTPUT);
+  pinMode(PIN_SENSOR, INPUT); 
+  
+  myServo.attach(PIN_SERVO);
+
+  // 初期化
+  motorOff();
+  myServo.write(ANGLE_STRAIGHT);
+
+  delay(1000);
+}
+
+void loop() {
+  // センサーが反応しているか確認 (LOWで反応するタイプと仮定)
+  // もし反応しない場合は == LOW を == HIGH に変えてください
+  bool isDetected = (digitalRead(PIN_SENSOR) == LOW);
+
+  // ---------------------------------------------------
+  // ★ 第1段階：最初のスタート (直進して止まる)
+  // ---------------------------------------------------
+  if (stage == 0 && isDetected) {
+    
+    // 1. 直進 (行き)
+    myServo.write(ANGLE_STRAIGHT);
+    motorOn();
+    delay(TIME_RUN_1);
+
+    // 2. 停止
+    motorOff();
+    
+    // 次の段階へ進むために番号を増やす
+    stage = 1;
+
+    // ★重要：すぐに2回目が反応しないように、少し休憩時間を挟む
+    delay(2000); 
+  }
+
+  // ---------------------------------------------------
+  // ★ 第2段階：2回目のスタート (Uターンして帰る)
+  // ---------------------------------------------------
+  else if (stage == 1 && isDetected) {
+    
+    // 3. 旋回 (Uターン)
+    myServo.write(ANGLE_TURN);
+    motorOn();
+    delay(TIME_TURN);
+
+    // 4. 直進 (帰り)
+    myServo.write(ANGLE_STRAIGHT);
+    motorOn();
+    delay(TIME_RUN_2);
+
+    // 5. 完全停止
+    motorOff();
+
+    // 完了フラグ (これ以上は動かない)
+    stage = 2;
+  }
+}
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>    
     
 </section>
 
@@ -2369,6 +2488,7 @@ window.addEventListener("load", () => {
     
 </body>
 </html>
+
 
 
 
