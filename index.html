@@ -2058,7 +2058,111 @@ void loop() {
                     </div>
                 </div>
             </div>
-        </div>    
+        </div> 
+    <div class="step animate-on-scroll">
+            <span class="step-number">最終フェーズ（方針転換後）</span>
+            <h4>⑬ 制御コードの再調整（1/15）</h4>
+            <p>1/15の10回以上の試走を踏まえ、直進時間・旋回時間・直進角度を調整しました。金属ピースを取り去ることで車体が停止するシステムとなっています。</p>
+            <div class="code-display">
+                <h5 class="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">全制御コード (C++ Arduino、1/15調整版)</h5>
+                <div class="code-block-wrapper">
+                    <div class="code-block">
+<pre><code>#include &lt;Arduino.h&gt;
+#include &lt;Servo.h&gt;
+
+// ① ピン設定
+const int PIN_MOTOR_PWM = 5;
+const int PIN_MOTOR_DIR = 7;
+const int PIN_SERVO     = 9;
+const int PIN_SENSOR    = 2;
+
+// ② 動きの設定
+const int SPEED          = 255;
+const int ANGLE_STRAIGHT = 86; 
+const int ANGLE_TURN     = 45;
+
+// ③ 時間の設定（Uターンだけは角度制御のために時間を使用）
+const int TIME_TURN      = 5850; 
+
+Servo myServo;
+int stage = -1; 
+
+void motorOn()  { analogWrite(PIN_MOTOR_PWM, SPEED); digitalWrite(PIN_MOTOR_DIR, LOW); }
+void motorOff() { analogWrite(PIN_MOTOR_PWM, 0); digitalWrite(PIN_MOTOR_DIR, LOW); }
+
+void setup() {
+  pinMode(PIN_MOTOR_PWM, OUTPUT);
+  pinMode(PIN_MOTOR_DIR, OUTPUT);
+  pinMode(PIN_SENSOR, INPUT_PULLUP);
+  myServo.attach(PIN_SERVO);
+
+  motorOff();
+  myServo.write(ANGLE_STRAIGHT); 
+  delay(1000); 
+}
+
+void loop() {
+  // ---------------------------------------------------
+  // ステージ -1：出発待ち（金属を載せたらスタート）
+  // ---------------------------------------------------
+  if (stage == -1) {
+    if (digitalRead(PIN_SENSOR) == LOW) {
+      delay(500); // 安定待ち
+      stage = 0;
+    }
+  }
+
+  // ---------------------------------------------------
+  // ステージ 0：行き（金属を外すまで走り続ける）
+  // ---------------------------------------------------
+  else if (stage == 0) {
+    myServo.write(ANGLE_STRAIGHT);
+    motorOn();
+
+    // ★修正ポイント：金属が載っている間(LOW)はずっとループして待つ
+    // 金属を外した(HIGHになった)瞬間にループを抜ける
+    while(digitalRead(PIN_SENSOR) == LOW) {
+      delay(10); 
+    }
+
+    motorOff(); // 金属が外れたので即停止
+    delay(1000); // 念のための停止時間
+    stage = 1;
+  }
+
+  // ---------------------------------------------------
+  // ステージ 1：帰り（再度金属を載せたらUターンして帰る）
+  // ---------------------------------------------------
+  else if (stage == 1) {
+    // 金属が再度載るのを待つ
+    if (digitalRead(PIN_SENSOR) == LOW) {
+      delay(500);
+
+      // 1. Uターン（ここだけは回転角度を決めるために時間が必要）
+      myServo.write(ANGLE_TURN);
+      motorOn();
+      delay(TIME_TURN);
+
+      // 2. 帰りの走行（直進に戻し、金属を外すまで走り続ける）
+      myServo.write(ANGLE_STRAIGHT);
+      // motorOnは継続中
+      
+      while(digitalRead(PIN_SENSOR) == LOW) {
+        delay(10); // 金属が載っている間は走り続ける
+      }
+
+      // 3. 停止
+      motorOff();
+      delay(1000);
+      stage = -1; // 最初に戻る
+    }
+  }
+}
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>        
     
 </section>
 
@@ -2488,6 +2592,7 @@ window.addEventListener("load", () => {
     
 </body>
 </html>
+
 
 
 
