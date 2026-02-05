@@ -1708,16 +1708,6 @@ body.no-scroll {
             <div class="diagram-placeholder">最終仕様のイメージ図</div>
         </div>
     </div>
-    <div class="viewer-section-wrapper">
-        <h4>🔄 360° 車体ビューア</h4>
-        <div class="viewer" id="viewer">
-            <img src="car_01.jpg" class="active" alt="A1班モビリティ">
-            <img src="car_02.jpg" alt="A1班モビリティ">
-            <img src="car_03.jpg" alt="A1班モビリティ">
-            <img src="car_04.jpg" alt="A1班モビリティ">
-            <p class="image-placeholder-text">画像ファイル（car_01.jpg, car_02.jpg など）を配置してください。</p>
-        </div>
-    </div>
 </section>
 <section id="process" class="section dark-bg">
     <h3>製作ヒストリー</h3>
@@ -2308,7 +2298,7 @@ void loop() {
                 </span>
             </button>
             <div class="accordion-content">
-                <p>サーボモータの設置位置や前輪の動きを考慮し、初期設計から再度車体を改良しました。また、配線の色分けにより視認性を高め、再設計や修正が容易になるよう工夫しています。</p>
+                <p>サーボモータの設置位置や前輪の動きを考慮し、初期設計から再度車体を改良しました。また、配線の色分けにより視認性を高め、再設計や修正が容易になるよう工夫しています。詳しくは、工夫点をご覧ください。</p>
             </div>
         </div>
 
@@ -2320,7 +2310,7 @@ void loop() {
                 </span>
             </button>
             <div class="accordion-content">
-                <p>ファン駆動からタイヤ駆動への方針転換、サーボ角度の調整、電源構成の安定化など、 試走を重ねながら問題点を一つずつ解決していくプロセスに時間を要しました。</p>
+                <p>ファン駆動からタイヤ駆動への方針転換、サーボ角度の調整、電源構成の安定化など、 試走を重ねながら問題点を一つずつ解決していくプロセスに時間を要したことです。</p>
             </div>
         </div>
 
@@ -2332,7 +2322,7 @@ void loop() {
                 </span>
             </button>
             <div class="accordion-content">
-                <p>12/18 の試走では、直進 → 停止 → Uターン → 再直進という一連の動作が正常に実行され、自律走行が成功しました。</p>
+                <p>1/29 の試走では、直進 → 停止 → Uターン → 再直進の一連の動作を正常に実行でき、当初の目標であった「成功率90%」を大きく上回る結果をたたき出すことに成功しました。</p>
             </div>
         </div>
 
@@ -2633,6 +2623,7 @@ window.addEventListener('click', (e) => {
     
 </body>
 </html>
+
 
 
 
