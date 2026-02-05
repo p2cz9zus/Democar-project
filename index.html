@@ -2440,6 +2440,22 @@ void loop() {
     </div>
 </footer>
 
+<div id="pp-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
+    <div style="background: #fff; color: #333; padding: 30px; border-radius: 10px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; position: relative;">
+        <span id="pp-close" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #999;">&times;</span>
+        <h2 style="margin-top: 0; border-bottom: 2px solid #007bff; padding-bottom: 10px;">プライバシーポリシー</h2>
+        <p style="font-size: 0.9rem; line-height: 1.6;">
+            本サイトは、大学の講義におけるプロジェクト発表を目的として公開されています。
+        </p>
+        <ul style="font-size: 0.9rem; line-height: 1.6;">
+            <li><strong>情報の収集について：</strong> 本サイトでは、氏名、メールアドレス等の個人情報を取得するフォームなどは設置しておりません。</li>
+            <li><strong>アクセス解析について：</strong> サイトの改善のため、標準的なアクセスログ（IPアドレス、ブラウザ種類等）がホスティングサービス（GitHub Pages）側で記録される場合がありますが、特定の個人を識別するものではありません。</li>
+            <li><strong>免責事項：</strong> 本サイトに掲載されている情報の正確性には万全を期していますが、利用者が本サイトの情報を用いて行う一切の行為について、当チームは何ら責任を負うものではありません。</li>
+        </ul>
+        <button id="pp-close-btn" style="background: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto 0;">閉じる</button>
+    </div>
+</div>
+    
 </div> 
 <script>
 // 1. スクロール連動アニメーション
@@ -2617,6 +2633,7 @@ window.addEventListener('click', (e) => {
     
 </body>
 </html>
+
 
 
 
