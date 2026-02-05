@@ -2589,10 +2589,35 @@ window.addEventListener("load", () => {
         document.body.classList.remove("no-scroll");
     }, 2500);
 });
+
+// プライバシーポリシーの開閉制御
+const ppModal = document.getElementById('pp-modal');
+const ppOpen = document.getElementById('pp-open');
+const ppClose = document.getElementById('pp-close');
+const ppCloseBtn = document.getElementById('pp-close-btn');
+
+ppOpen.addEventListener('click', (e) => {
+    e.preventDefault();
+    ppModal.style.display = 'flex';
+});
+
+[ppClose, ppCloseBtn].forEach(el => {
+    el.addEventListener('click', () => {
+        ppModal.style.display = 'none';
+    });
+});
+
+// モーダルの外側をクリックしたら閉じる
+window.addEventListener('click', (e) => {
+    if (e.target === ppModal) {
+        ppModal.style.display = 'none';
+    }
+});    
 </script>    
     
 </body>
 </html>
+
 
 
 
